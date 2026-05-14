@@ -1,11 +1,13 @@
 import io
 import json
+import math
 import re
 import time
 import base64
 from pathlib import Path
 
 import torch
+import torch.nn.functional as F
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 from PIL import Image
@@ -88,7 +90,24 @@ def parse_output(raw: str) -> dict | None:
         return None
 
 
-def run_inference(img: Image.Image) -> tuple[dict | None, str, float]:
+def _compute_confidence(scores: tuple, sequences: torch.Tensor, prompt_len: int) -> float:
+    """생성된 토큰들의 로그확률 기하평균 → 0–1 confidence score.
+
+    scores : model.generate(..., output_scores=True) 반환값 (토큰별 logit tuple)
+    높을수록 모델이 자신의 출력에 확신하고 있음을 의미한다.
+    """
+    if not scores:
+        return 0.0
+    gen_tokens = sequences[0, prompt_len:]
+    log_probs = [
+        F.log_softmax(s[0], dim=-1)[t].item()
+        for s, t in zip(scores, gen_tokens)
+    ]
+    return math.exp(sum(log_probs) / len(log_probs))
+
+
+def run_inference(img: Image.Image) -> tuple[dict | None, str, float, float]:
+    """이미지 추론 → (parsed, raw_text, elapsed_sec, confidence 0–1)"""
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {
@@ -104,18 +123,21 @@ def run_inference(img: Image.Image) -> tuple[dict | None, str, float]:
         text=[text], images=[img], return_tensors="pt", padding=True
     ).to(model.device)
 
+    prompt_len = inputs["input_ids"].shape[1]
     t0 = time.time()
     with torch.no_grad():
-        out_ids = model.generate(
+        out = model.generate(
             **inputs, max_new_tokens=256, do_sample=False,
             temperature=None, top_p=None,
+            output_scores=True, return_dict_in_generate=True,
         )
     elapsed = time.time() - t0
 
-    generated = out_ids[:, inputs["input_ids"].shape[1]:]
+    confidence = _compute_confidence(out.scores, out.sequences, prompt_len)
+    generated = out.sequences[:, prompt_len:]
     raw = processor.batch_decode(generated, skip_special_tokens=True)[0].strip()
     parsed = parse_output(raw)
-    return parsed, raw, elapsed
+    return parsed, raw, elapsed, confidence
 
 
 # ── 엔드포인트 ────────────────────────────────────────
@@ -124,7 +146,7 @@ class InspectResponse(BaseModel):
     type_ko: str | None
     severity: str | None
     description: str | None
-    confidence: str
+    confidence: float          # 0.0–1.0 (생성 토큰 로그확률 기하평균)
     elapsed_ms: float
     raw_output: str
     model: str
@@ -152,7 +174,7 @@ async def inspect(file: UploadFile = File(...)):
     except Exception:
         raise HTTPException(status_code=400, detail="이미지 파일을 읽을 수 없습니다")
 
-    parsed, raw, elapsed = run_inference(img)
+    parsed, raw, elapsed, confidence = run_inference(img)
 
     pred_type = None
     if parsed:
@@ -165,7 +187,7 @@ async def inspect(file: UploadFile = File(...)):
         type_ko=parsed.get("type_ko") if parsed else None,
         severity=parsed.get("severity") if parsed else None,
         description=parsed.get("description") if parsed else None,
-        confidence="high" if pred_type else "low",
+        confidence=round(confidence, 4),
         elapsed_ms=round(elapsed * 1000, 1),
         raw_output=raw,
         model=f"{MODEL_ID} {'+ QLoRA' if USE_LORA else '(zero-shot)'}",
@@ -181,7 +203,7 @@ async def inspect_base64(payload: dict):
     except Exception:
         raise HTTPException(status_code=400, detail="유효하지 않은 base64 이미지")
 
-    parsed, raw, elapsed = run_inference(img)
+    parsed, raw, elapsed, confidence = run_inference(img)
     pred_type = None
     if parsed:
         pred_type = parsed.get("type", "").strip().lower()
@@ -193,6 +215,7 @@ async def inspect_base64(payload: dict):
         "type_ko": parsed.get("type_ko") if parsed else None,
         "severity": parsed.get("severity") if parsed else None,
         "description": parsed.get("description") if parsed else None,
+        "confidence": round(confidence, 4),
         "elapsed_ms": round(elapsed * 1000, 1),
         "raw_output": raw,
     }

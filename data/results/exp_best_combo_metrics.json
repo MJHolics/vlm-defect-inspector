@@ -1,0 +1,21 @@
+{
+  "exp_id": "D",
+  "name": "best_combo",
+  "description": "rank32 + 증강 + 레이블스무딩 + 얼리스토핑  (종합)",
+  "best_val_loss": 0.1046,
+  "train_losses": [
+    2.0071410197114186,
+    1.5293353841418311,
+    1.5272144062178477
+  ],
+  "val_losses": [
+    0.10459549890624152,
+    0.1127087124519878,
+    0.10978992029472634
+  ],
+  "elapsed_min": 63.5,
+  "lora_rank": 32,
+  "augmentation": true,
+  "label_smoothing": 0.1,
+  "early_stopping": true
+}

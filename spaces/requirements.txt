@@ -1,0 +1,8 @@
+torch>=2.1.0
+transformers>=4.45.0
+accelerate>=0.26.0
+peft>=0.8.0
+bitsandbytes>=0.42.0
+Pillow>=10.0.0
+gradio>=4.44.0
+huggingface_hub>=0.24.0

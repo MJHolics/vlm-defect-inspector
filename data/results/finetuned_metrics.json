@@ -1,0 +1,8 @@
+{
+  "model": "Qwen2.5-VL-7B-Instruct (QLoRA fine-tuned)",
+  "json_parse_rate": 1.0,
+  "type_accuracy": 0.7667,
+  "severity_accuracy": 0.9037,
+  "avg_latency_sec": 6.432,
+  "n_test": 270
+}

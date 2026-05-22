@@ -1,0 +1,2161 @@
+id,image,gt_type,gt_severity,pred_type,pred_severity,json_ok,elapsed,raw
+patches_0639,data/NEU-DET/train/images/patches/patches_26.jpg,patches,low,patches,medium,True,2.807450771331787,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_1611,data/NEU-DET/validation/images/patches/patches_292.jpg,patches,low,patches,medium,True,3.146624565124512,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+scratches_1224,data/NEU-DET/train/images/scratches/scratches_120.jpg,scratches,high,scratches,medium,True,3.4356515407562256,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+pitted_surface_0859,data/NEU-DET/train/images/pitted_surface/pitted_surface_224.jpg,pitted_surface,high,pitted_surface,low,True,4.983950853347778,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 미세한 손상으로 인해 발생합니다.""
+}
+```"
+scratches_1417,data/NEU-DET/train/images/scratches/scratches_79.jpg,scratches,high,scratches,medium,True,3.689316749572754,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+scratches_1271,data/NEU-DET/train/images/scratches/scratches_163.jpg,scratches,high,scratches,medium,True,3.555088996887207,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊고 긴 긁힘들이 보입니다.""
+}
+```"
+inclusion_0288,data/NEU-DET/train/images/inclusion/inclusion_142.jpg,inclusion,medium,patches,low,True,3.1874241828918457,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0708,data/NEU-DET/train/images/patches/patches_89.jpg,patches,low,patches,low,True,3.2176783084869385,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0596,data/NEU-DET/train/images/patches/patches_203.jpg,patches,low,patches,medium,True,3.37943172454834,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 검은색의 점상이 보입니다.""
+}
+```"
+scratches_1237,data/NEU-DET/train/images/scratches/scratches_132.jpg,scratches,high,patches,low,True,3.1817336082458496,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_1672,data/NEU-DET/validation/images/pitted_surface/pitted_surface_293.jpg,pitted_surface,high,pitted_surface,low,True,4.3136796951293945,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 미세한 손상으로 인해 발생합니다.""
+}
+```"
+crazing_1476,data/NEU-DET/validation/images/crazing/crazing_277.jpg,crazing,low,patches,low,True,3.191956758499145,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0720,data/NEU-DET/train/images/pitted_surface/pitted_surface_1.jpg,pitted_surface,high,patches,low,True,3.308325290679932,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0130,data/NEU-DET/train/images/crazing/crazing_216.jpg,crazing,low,patches,low,True,3.4291412830352783,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1740,data/NEU-DET/validation/images/scratches/scratches_241.jpg,scratches,high,patches,low,True,3.2980258464813232,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1156,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_6.jpg,rolled-in_scale,medium,patches,low,True,3.357452154159546,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+crazing_0091,data/NEU-DET/train/images/crazing/crazing_181.jpg,crazing,low,patches,low,True,3.442639112472534,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1344,data/NEU-DET/train/images/scratches/scratches_229.jpg,scratches,high,patches,low,True,3.446082592010498,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0462,data/NEU-DET/train/images/inclusion/inclusion_83.jpg,inclusion,medium,patches,low,True,3.4768106937408447,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1742,data/NEU-DET/validation/images/scratches/scratches_243.jpg,scratches,high,scratches,medium,True,3.70362401008606,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+scratches_1394,data/NEU-DET/train/images/scratches/scratches_58.jpg,scratches,high,scratches,low,True,3.8705785274505615,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+pitted_surface_0917,data/NEU-DET/train/images/pitted_surface/pitted_surface_60.jpg,pitted_surface,high,pitted_surface,low,True,4.245893239974976,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면 불량의 형태입니다.""
+}
+```"
+rolled-in_scale_0995,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_130.jpg,rolled-in_scale,medium,pitted_surface,medium,True,4.229733467102051,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 부식이나 오염의 결과일 수 있습니다.""
+}
+```"
+scratches_1760,data/NEU-DET/validation/images/scratches/scratches_261.jpg,scratches,high,patches,low,True,3.3520610332489014,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0400,data/NEU-DET/train/images/inclusion/inclusion_27.jpg,inclusion,medium,patches,low,True,3.3924672603607178,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0750,data/NEU-DET/train/images/pitted_surface/pitted_surface_126.jpg,pitted_surface,high,pitted_surface,medium,True,4.215283632278442,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 점상 불량을 나타냅니다.""
+}
+```"
+crazing_0106,data/NEU-DET/train/images/crazing/crazing_195.jpg,crazing,low,patches,low,True,3.385333776473999,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0049,data/NEU-DET/train/images/crazing/crazing_143.jpg,crazing,low,patches,low,True,3.6088497638702393,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1041,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_172.jpg,rolled-in_scale,medium,patches,low,True,3.5804102420806885,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0712,data/NEU-DET/train/images/patches/patches_92.jpg,patches,low,patches,medium,True,3.882138967514038,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1193,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_93.jpg,rolled-in_scale,medium,patches,low,True,3.569992780685425,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0174,data/NEU-DET/train/images/crazing/crazing_4.jpg,crazing,low,patches,low,True,3.605244636535645,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1267,data/NEU-DET/train/images/scratches/scratches_16.jpg,scratches,high,scratches,low,True,4.121429443359375,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+inclusion_0343,data/NEU-DET/train/images/inclusion/inclusion_192.jpg,inclusion,medium,patches,low,True,3.693290233612061,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1414,data/NEU-DET/train/images/scratches/scratches_76.jpg,scratches,high,patches,low,True,3.608820915222168,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1044,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_175.jpg,rolled-in_scale,medium,patches,low,True,3.585422277450561,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1768,data/NEU-DET/validation/images/scratches/scratches_269.jpg,scratches,high,patches,low,True,3.588392734527588,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0285,data/NEU-DET/train/images/inclusion/inclusion_14.jpg,inclusion,medium,scratches,low,True,4.17106556892395,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로 세로로 긴 긁힘들이 보입니다.""
+}
+```"
+rolled-in_scale_1110,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_234.jpg,rolled-in_scale,medium,patches,low,True,3.5293099880218506,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+rolled-in_scale_1014,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_148.jpg,rolled-in_scale,medium,pitted_surface,low,True,3.6495962142944336,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보입니다.""
+}
+```"
+rolled-in_scale_1047,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_178.jpg,rolled-in_scale,medium,patches,low,True,3.604226589202881,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0759,data/NEU-DET/train/images/pitted_surface/pitted_surface_134.jpg,pitted_surface,high,patches,low,True,3.6147658824920654,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+scratches_1415,data/NEU-DET/train/images/scratches/scratches_77.jpg,scratches,high,scratches,medium,True,3.959979772567749,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+rolled-in_scale_1154,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_58.jpg,rolled-in_scale,medium,scratches,low,True,3.74188756942749,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+scratches_1298,data/NEU-DET/train/images/scratches/scratches_188.jpg,scratches,high,scratches,medium,True,3.771378755569458,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+pitted_surface_1656,data/NEU-DET/validation/images/pitted_surface/pitted_surface_277.jpg,pitted_surface,high,patches,low,True,3.585291147232056,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1359,data/NEU-DET/train/images/scratches/scratches_26.jpg,scratches,high,scratches,medium,True,3.744454145431519,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 긴 긁힘 현상이 있습니다.""
+}
+```"
+crazing_0088,data/NEU-DET/train/images/crazing/crazing_179.jpg,crazing,low,patches,low,True,3.543381452560425,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0149,data/NEU-DET/train/images/crazing/crazing_233.jpg,crazing,low,patches,low,True,3.605845451354981,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1323,data/NEU-DET/train/images/scratches/scratches_21.jpg,scratches,high,scratches,medium,True,3.8427734375,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+patches_0628,data/NEU-DET/train/images/patches/patches_232.jpg,patches,low,patches,low,True,3.3250699043273926,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_1601,data/NEU-DET/validation/images/patches/patches_282.jpg,patches,low,patches,low,True,3.0135254859924316,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1079,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_206.jpg,rolled-in_scale,medium,patches,low,True,3.1668286323547363,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_1561,data/NEU-DET/validation/images/patches/patches_242.jpg,patches,low,patches,medium,True,3.7952628135681152,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 흩어져 있는 검은색 점들이 보입니다.""
+}
+```"
+scratches_1204,data/NEU-DET/train/images/scratches/scratches_102.jpg,scratches,high,patches,low,True,3.178813934326172,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1198,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_98.jpg,rolled-in_scale,medium,pitted_surface,low,True,4.67298698425293,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 마모나 오래된 사용으로 인한 것으로 보입니다.""
+}
+```"
+patches_0549,data/NEU-DET/train/images/patches/patches_161.jpg,patches,low,patches,low,True,4.97722053527832,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0880,data/NEU-DET/train/images/pitted_surface/pitted_surface_27.jpg,pitted_surface,high,patches,medium,True,3.3516690731048584,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_1622,data/NEU-DET/validation/images/pitted_surface/pitted_surface_243.jpg,pitted_surface,high,patches,low,True,2.952505350112915,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+inclusion_0459,data/NEU-DET/train/images/inclusion/inclusion_80.jpg,inclusion,medium,patches,low,True,2.9694666862487793,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0626,data/NEU-DET/train/images/patches/patches_230.jpg,patches,low,patches,medium,True,3.269824504852295,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+crazing_0188,data/NEU-DET/train/images/crazing/crazing_52.jpg,crazing,low,patches,low,True,2.8369929790496826,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0837,data/NEU-DET/train/images/pitted_surface/pitted_surface_204.jpg,pitted_surface,high,pitted_surface,low,True,3.9852726459503174,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 마모나 오염으로 인한 것으로 보입니다.""
+}
+```"
+pitted_surface_0942,data/NEU-DET/train/images/pitted_surface/pitted_surface_83.jpg,pitted_surface,high,patches,low,True,2.8602538108825684,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1137,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_42.jpg,rolled-in_scale,medium,pitted_surface,low,True,4.126067161560059,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 미세한 손상으로 인해 발생합니다.""
+}
+```"
+scratches_1319,data/NEU-DET/train/images/scratches/scratches_206.jpg,scratches,high,scratches,medium,True,3.124652147293091,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+crazing_0021,data/NEU-DET/train/images/crazing/crazing_118.jpg,crazing,low,patches,low,True,3.090106964111328,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0413,data/NEU-DET/train/images/inclusion/inclusion_39.jpg,inclusion,medium,patches,low,True,3.2057902812957764,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0646,data/NEU-DET/train/images/patches/patches_32.jpg,patches,low,patches,low,True,3.4237372875213623,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1288,data/NEU-DET/train/images/scratches/scratches_179.jpg,scratches,high,scratches,medium,True,3.212825298309326,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+crazing_1499,data/NEU-DET/validation/images/crazing/crazing_300.jpg,crazing,low,patches,low,True,3.7062785625457764,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면 불량의 형태로 볼 수 있습니다.""
+}
+```"
+inclusion_0431,data/NEU-DET/train/images/inclusion/inclusion_55.jpg,inclusion,medium,patches,low,True,3.2421021461486816,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0922,data/NEU-DET/train/images/pitted_surface/pitted_surface_65.jpg,pitted_surface,high,pitted_surface,low,True,4.7884509563446045,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 미세한 흔적이거나 작은 파손을 나타냅니다.""
+}
+```"
+inclusion_0297,data/NEU-DET/train/images/inclusion/inclusion_150.jpg,inclusion,medium,patches,low,True,2.9718990325927734,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1012,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_146.jpg,rolled-in_scale,medium,patches,low,True,2.9298956394195557,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_1542,data/NEU-DET/validation/images/inclusion/inclusion_283.jpg,inclusion,medium,scratches,medium,True,3.2369918823242188,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+rolled-in_scale_1703,data/NEU-DET/validation/images/rolled-in_scale/rolled-in_scale_264.jpg,rolled-in_scale,medium,patches,low,True,2.98797607421875,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+rolled-in_scale_1120,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_27.jpg,rolled-in_scale,medium,patches,low,True,2.9394824504852295,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+inclusion_1543,data/NEU-DET/validation/images/inclusion/inclusion_284.jpg,inclusion,medium,scratches,low,True,3.398634195327759,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로 세로로 긴 긁힘들이 보입니다.""
+}
+```"
+inclusion_0465,data/NEU-DET/train/images/inclusion/inclusion_86.jpg,inclusion,medium,patches,low,True,3.048619031906128,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1185,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_86.jpg,rolled-in_scale,medium,patches,low,True,3.071603775024414,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0020,data/NEU-DET/train/images/crazing/crazing_117.jpg,crazing,low,patches,low,True,2.9688024520874023,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_1592,data/NEU-DET/validation/images/patches/patches_273.jpg,patches,low,patches,medium,True,3.3636314868927,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+crazing_0054,data/NEU-DET/train/images/crazing/crazing_148.jpg,crazing,low,patches,low,True,3.0792272090911865,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0386,data/NEU-DET/train/images/inclusion/inclusion_230.jpg,inclusion,medium,scratches,low,True,3.4850056171417236,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+inclusion_1515,data/NEU-DET/validation/images/inclusion/inclusion_256.jpg,inclusion,medium,scratches,low,True,3.468621015548706,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+inclusion_0266,data/NEU-DET/train/images/inclusion/inclusion_122.jpg,inclusion,medium,patches,low,True,3.0841317176818848,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1124,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_30.jpg,rolled-in_scale,medium,patches,low,True,3.123222827911377,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0102,data/NEU-DET/train/images/crazing/crazing_191.jpg,crazing,low,patches,medium,True,2.926161766052246,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1246,data/NEU-DET/train/images/scratches/scratches_140.jpg,scratches,high,scratches,medium,True,3.0126707553863525,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+rolled-in_scale_0967,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_105.jpg,rolled-in_scale,medium,patches,low,True,2.9506449699401855,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_1487,data/NEU-DET/validation/images/crazing/crazing_288.jpg,crazing,low,patches,low,True,3.065488815307617,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0080,data/NEU-DET/train/images/crazing/crazing_171.jpg,crazing,low,patches,low,True,3.2943005561828613,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1013,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_147.jpg,rolled-in_scale,medium,patches,low,True,3.1341183185577393,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0814,data/NEU-DET/train/images/pitted_surface/pitted_surface_184.jpg,pitted_surface,high,patches,low,True,3.09065580368042,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0526,data/NEU-DET/train/images/patches/patches_140.jpg,patches,low,patches,medium,True,3.257678985595703,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1727,data/NEU-DET/validation/images/rolled-in_scale/rolled-in_scale_288.jpg,rolled-in_scale,medium,pitted_surface,medium,True,4.137501001358032,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 부식이나 오염을 나타낼 수 있습니다.""
+}
+```"
+rolled-in_scale_1051,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_181.jpg,rolled-in_scale,medium,pitted_surface,low,True,4.014850616455078,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점들이 보이며, 이는 표면의 미세한 파손을 나타냅니다.""
+}
+```"
+inclusion_0256,data/NEU-DET/train/images/inclusion/inclusion_113.jpg,inclusion,medium,patches,low,True,3.1220710277557373,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_0979,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_116.jpg,rolled-in_scale,medium,patches,low,True,3.108964443206787,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0151,data/NEU-DET/train/images/crazing/crazing_235.jpg,crazing,low,patches,low,True,3.1072182655334473,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0013,data/NEU-DET/train/images/crazing/crazing_110.jpg,crazing,low,patches,low,True,3.0729801654815674,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0058,data/NEU-DET/train/images/crazing/crazing_151.jpg,crazing,low,patches,low,True,3.1984009742736816,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+scratches_1219,data/NEU-DET/train/images/scratches/scratches_116.jpg,scratches,high,scratches,medium,True,3.4580864906311035,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+rolled-in_scale_1010,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_144.jpg,rolled-in_scale,medium,pitted_surface,medium,True,3.9776999950408936,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 점상 불량을 나타냅니다.""
+}
+```"
+inclusion_0427,data/NEU-DET/train/images/inclusion/inclusion_51.jpg,inclusion,medium,patches,low,True,3.304619073867798,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 미세한 점상이 보입니다.""
+}
+```"
+pitted_surface_1657,data/NEU-DET/validation/images/pitted_surface/pitted_surface_278.jpg,pitted_surface,high,patches,low,True,3.1460793018341064,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+patches_0620,data/NEU-DET/train/images/patches/patches_225.jpg,patches,low,inclusion,low,True,3.442082643508911,"```json
+{
+  ""type"": ""inclusion"",
+  ""type_ko"": ""포집물"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 검은 포집물이 보입니다.""
+}
+```"
+rolled-in_scale_1182,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_83.jpg,rolled-in_scale,medium,patches,low,True,3.2240445613861084,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0871,data/NEU-DET/train/images/pitted_surface/pitted_surface_235.jpg,pitted_surface,high,patches,low,True,3.133948802947998,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+inclusion_0367,data/NEU-DET/train/images/inclusion/inclusion_213.jpg,inclusion,medium,patches,low,True,3.0935637950897217,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_0970,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_108.jpg,rolled-in_scale,medium,pitted_surface,medium,True,4.163801193237305,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 금속 표면의 점상 불량을 나타냅니다.""
+}
+```"
+patches_1594,data/NEU-DET/validation/images/patches/patches_275.jpg,patches,low,patches,low,True,3.0822696685791016,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1786,data/NEU-DET/validation/images/scratches/scratches_287.jpg,scratches,high,patches,low,True,3.0341594219207764,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0931,data/NEU-DET/train/images/pitted_surface/pitted_surface_73.jpg,pitted_surface,high,pitted_surface,low,True,3.171448230743408,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보입니다.""
+}
+```"
+patches_0699,data/NEU-DET/train/images/patches/patches_80.jpg,patches,low,inclusion,medium,True,3.7579429149627686,"```json
+{
+  ""type"": ""inclusion"",
+  ""type_ko"": ""포집물"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 검은색 포집물이 보이며, 표면 전체에 걸쳐 있습니다.""
+}
+```"
+crazing_1443,data/NEU-DET/validation/images/crazing/crazing_244.jpg,crazing,low,patches,low,True,3.0769433975219727,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0103,data/NEU-DET/train/images/crazing/crazing_192.jpg,crazing,low,patches,low,True,3.2206544876098633,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1425,data/NEU-DET/train/images/scratches/scratches_86.jpg,scratches,high,scratches,medium,True,3.387291193008423,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+crazing_0235,data/NEU-DET/train/images/crazing/crazing_95.jpg,crazing,low,patches,low,True,3.034343957901001,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0087,data/NEU-DET/train/images/crazing/crazing_178.jpg,crazing,low,patches,low,True,2.9898927211761475,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0355,data/NEU-DET/train/images/inclusion/inclusion_202.jpg,inclusion,medium,patches,low,True,2.986886739730835,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1078,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_205.jpg,rolled-in_scale,medium,patches,low,True,3.032635450363159,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0052,data/NEU-DET/train/images/crazing/crazing_146.jpg,crazing,low,patches,low,True,3.048506498336792,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1141,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_46.jpg,rolled-in_scale,medium,pitted_surface,low,True,2.892317771911621,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보입니다.""
+}
+```"
+inclusion_0472,data/NEU-DET/train/images/inclusion/inclusion_92.jpg,inclusion,medium,patches,low,True,2.8139185905456543,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1026,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_159.jpg,rolled-in_scale,medium,patches,low,True,2.7829930782318115,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0813,data/NEU-DET/train/images/pitted_surface/pitted_surface_183.jpg,pitted_surface,high,patches,low,True,2.8127055168151855,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+crazing_1452,data/NEU-DET/validation/images/crazing/crazing_253.jpg,crazing,low,patches,low,True,2.9643499851226807,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1055,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_185.jpg,rolled-in_scale,medium,patches,low,True,3.3429930210113525,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0739,data/NEU-DET/train/images/pitted_surface/pitted_surface_116.jpg,pitted_surface,high,pitted_surface,low,True,3.6622512340545654,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점들이 분포되어 있습니다.""
+}
+```"
+rolled-in_scale_1056,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_186.jpg,rolled-in_scale,medium,patches,low,True,3.235013723373413,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1147,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_51.jpg,rolled-in_scale,medium,pitted_surface,low,True,4.626829385757446,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 마모나 오래된 사용으로 인한 것으로 보입니다.""
+}
+```"
+inclusion_0293,data/NEU-DET/train/images/inclusion/inclusion_147.jpg,inclusion,medium,patches,low,True,3.333608627319336,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0191,data/NEU-DET/train/images/crazing/crazing_55.jpg,crazing,low,patches,low,True,3.2039692401885986,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1758,data/NEU-DET/validation/images/scratches/scratches_259.jpg,scratches,high,patches,low,True,3.2651891708374023,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1239,data/NEU-DET/train/images/scratches/scratches_134.jpg,scratches,high,patches,low,True,3.2070250511169434,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1376,data/NEU-DET/train/images/scratches/scratches_41.jpg,scratches,high,scratches,low,True,3.6016814708709717,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+rolled-in_scale_1702,data/NEU-DET/validation/images/rolled-in_scale/rolled-in_scale_263.jpg,rolled-in_scale,medium,patches,low,True,3.200108051300049,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+scratches_1304,data/NEU-DET/train/images/scratches/scratches_193.jpg,scratches,high,scratches,medium,True,3.4513401985168457,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+pitted_surface_0858,data/NEU-DET/train/images/pitted_surface/pitted_surface_223.jpg,pitted_surface,high,pitted_surface,medium,True,3.3840770721435547,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 많이 생겼습니다.""
+}
+```"
+rolled-in_scale_1071,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_2.jpg,rolled-in_scale,medium,patches,low,True,3.2815849781036377,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+pitted_surface_0852,data/NEU-DET/train/images/pitted_surface/pitted_surface_218.jpg,pitted_surface,high,patches,low,True,3.1937100887298584,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+patches_0493,data/NEU-DET/train/images/patches/patches_110.jpg,patches,low,patches,low,True,3.175152540206909,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1795,data/NEU-DET/validation/images/scratches/scratches_296.jpg,scratches,high,scratches,medium,True,3.555408239364624,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+patches_0669,data/NEU-DET/train/images/patches/patches_53.jpg,patches,low,patches,medium,True,3.3518741130828857,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+crazing_1457,data/NEU-DET/validation/images/crazing/crazing_258.jpg,crazing,low,patches,low,True,3.20595383644104,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0134,data/NEU-DET/train/images/crazing/crazing_22.jpg,crazing,low,patches,low,True,3.1643640995025635,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1377,data/NEU-DET/train/images/scratches/scratches_42.jpg,scratches,high,scratches,low,True,3.508995532989502,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+inclusion_1541,data/NEU-DET/validation/images/inclusion/inclusion_282.jpg,inclusion,medium,patches,low,True,3.1213808059692383,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0121,data/NEU-DET/train/images/crazing/crazing_208.jpg,crazing,low,patches,low,True,3.169156074523926,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_1512,data/NEU-DET/validation/images/inclusion/inclusion_253.jpg,inclusion,medium,scratches,low,True,3.5450313091278076,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+pitted_surface_0948,data/NEU-DET/train/images/pitted_surface/pitted_surface_89.jpg,pitted_surface,high,pitted_surface,low,True,4.22590970993042,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 마모나 오염으로 인한 것으로 보입니다.""
+}
+```"
+scratches_1228,data/NEU-DET/train/images/scratches/scratches_124.jpg,scratches,high,scratches,medium,True,3.3832268714904785,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+pitted_surface_0789,data/NEU-DET/train/images/pitted_surface/pitted_surface_161.jpg,pitted_surface,high,pitted_surface,medium,True,4.010717391967773,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 점상 불량을 나타냅니다.""
+}
+```"
+patches_0670,data/NEU-DET/train/images/patches/patches_54.jpg,patches,low,patches,low,True,3.15366268157959,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0853,data/NEU-DET/train/images/pitted_surface/pitted_surface_219.jpg,pitted_surface,high,patches,low,True,3.2073240280151367,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점들이 분포되어 있습니다.""
+}
+```"
+inclusion_0274,data/NEU-DET/train/images/inclusion/inclusion_13.jpg,inclusion,medium,patches,medium,True,3.147923469543457,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0627,data/NEU-DET/train/images/patches/patches_231.jpg,patches,low,patches,medium,True,3.3704493045806885,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+inclusion_0338,data/NEU-DET/train/images/inclusion/inclusion_188.jpg,inclusion,medium,scratches,low,True,3.3914849758148193,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘이 있습니다.""
+}
+```"
+inclusion_0245,data/NEU-DET/train/images/inclusion/inclusion_103.jpg,inclusion,medium,patches,low,True,3.149819850921631,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0869,data/NEU-DET/train/images/pitted_surface/pitted_surface_233.jpg,pitted_surface,high,patches,low,True,3.1309635639190674,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1336,data/NEU-DET/train/images/scratches/scratches_221.jpg,scratches,high,patches,medium,True,3.3405845165252686,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0696,data/NEU-DET/train/images/patches/patches_78.jpg,patches,low,patches,low,True,3.1614181995391846,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0205,data/NEU-DET/train/images/crazing/crazing_68.jpg,crazing,low,patches,low,True,3.1643643379211426,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1121,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_28.jpg,rolled-in_scale,medium,patches,low,True,3.2485511302948,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1188,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_89.jpg,rolled-in_scale,medium,patches,low,True,3.2093124389648438,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0781,data/NEU-DET/train/images/pitted_surface/pitted_surface_154.jpg,pitted_surface,high,pitted_surface,low,True,4.346377849578857,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 마모나 오염으로 인한 것으로 보입니다.""
+}
+```"
+pitted_surface_0766,data/NEU-DET/train/images/pitted_surface/pitted_surface_140.jpg,pitted_surface,high,pitted_surface,medium,True,4.023489475250244,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 점상 불량을 나타냅니다.""
+}
+```"
+pitted_surface_0892,data/NEU-DET/train/images/pitted_surface/pitted_surface_38.jpg,pitted_surface,high,patches,low,True,3.1833722591400146,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+pitted_surface_0939,data/NEU-DET/train/images/pitted_surface/pitted_surface_80.jpg,pitted_surface,high,patches,low,True,3.1683247089385986,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0397,data/NEU-DET/train/images/inclusion/inclusion_240.jpg,inclusion,medium,patches,low,True,3.167635917663574,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+patches_0682,data/NEU-DET/train/images/patches/patches_65.jpg,patches,low,inclusion,low,True,3.369647264480591,"```json
+{
+  ""type"": ""inclusion"",
+  ""type_ko"": ""포집물"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 검은색 포집물이 보입니다.""
+}
+```"
+rolled-in_scale_1181,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_82.jpg,rolled-in_scale,medium,patches,low,True,3.1481034755706787,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0499,data/NEU-DET/train/images/patches/patches_116.jpg,patches,low,patches,medium,True,3.3274929523468018,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+inclusion_0366,data/NEU-DET/train/images/inclusion/inclusion_212.jpg,inclusion,medium,patches,low,True,3.1708319187164307,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_1606,data/NEU-DET/validation/images/patches/patches_287.jpg,patches,low,patches,low,True,3.1619882583618164,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0415,data/NEU-DET/train/images/inclusion/inclusion_40.jpg,inclusion,medium,patches,low,True,3.1438100337982178,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0913,data/NEU-DET/train/images/pitted_surface/pitted_surface_57.jpg,pitted_surface,high,pitted_surface,low,True,3.3261001110076904,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점들이 분포되어 있습니다.""
+}
+```"
+scratches_1253,data/NEU-DET/train/images/scratches/scratches_147.jpg,scratches,high,scratches,medium,True,3.5521490573883057,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘과 흔적이 보입니다.""
+}
+```"
+patches_0480,data/NEU-DET/train/images/patches/patches_1.jpg,patches,low,patches,low,True,3.150221347808838,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1688,data/NEU-DET/validation/images/rolled-in_scale/rolled-in_scale_249.jpg,rolled-in_scale,medium,patches,low,True,3.1698832511901855,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0276,data/NEU-DET/train/images/inclusion/inclusion_131.jpg,inclusion,medium,patches,low,True,3.140024185180664,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_1494,data/NEU-DET/validation/images/crazing/crazing_295.jpg,crazing,low,patches,low,True,3.17773175239563,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0460,data/NEU-DET/train/images/inclusion/inclusion_81.jpg,inclusion,medium,patches,low,True,3.1486778259277344,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_1626,data/NEU-DET/validation/images/pitted_surface/pitted_surface_247.jpg,pitted_surface,high,patches,low,True,3.1484053134918213,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_1498,data/NEU-DET/validation/images/crazing/crazing_299.jpg,crazing,low,patches,low,True,3.1535656452178955,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1695,data/NEU-DET/validation/images/rolled-in_scale/rolled-in_scale_256.jpg,rolled-in_scale,medium,pitted_surface,medium,True,4.0088560581207275,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 점상 불량을 나타냅니다.""
+}
+```"
+rolled-in_scale_1037,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_169.jpg,rolled-in_scale,medium,patches,low,True,3.1671652793884277,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1694,data/NEU-DET/validation/images/rolled-in_scale/rolled-in_scale_255.jpg,rolled-in_scale,medium,pitted_surface,medium,True,3.9610934257507324,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 점상 불량을 나타냅니다.""
+}
+```"
+pitted_surface_1676,data/NEU-DET/validation/images/pitted_surface/pitted_surface_297.jpg,pitted_surface,high,patches,low,True,3.177611827850342,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+pitted_surface_0861,data/NEU-DET/train/images/pitted_surface/pitted_surface_226.jpg,pitted_surface,high,pitted_surface,medium,True,3.948887586593628,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 점상 불량을 나타냅니다.""
+}
+```"
+inclusion_0278,data/NEU-DET/train/images/inclusion/inclusion_133.jpg,inclusion,medium,patches,low,True,3.150754690170288,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0723,data/NEU-DET/train/images/pitted_surface/pitted_surface_101.jpg,pitted_surface,high,patches,low,True,3.1383056640625,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+inclusion_0353,data/NEU-DET/train/images/inclusion/inclusion_200.jpg,inclusion,medium,patches,low,True,3.1161513328552246,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0166,data/NEU-DET/train/images/crazing/crazing_32.jpg,crazing,low,patches,low,True,3.1823394298553467,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1686,data/NEU-DET/validation/images/rolled-in_scale/rolled-in_scale_247.jpg,rolled-in_scale,medium,patches,low,True,3.1535115242004395,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+patches_0537,data/NEU-DET/train/images/patches/patches_150.jpg,patches,low,patches,low,True,3.161191463470459,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0638,data/NEU-DET/train/images/patches/patches_25.jpg,patches,low,inclusion,medium,True,3.4600234031677246,"```json
+{
+  ""type"": ""inclusion"",
+  ""type_ko"": ""포집물"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 크기의 포집물이 보입니다.""
+}
+```"
+inclusion_0430,data/NEU-DET/train/images/inclusion/inclusion_54.jpg,inclusion,medium,patches,low,True,3.1807312965393066,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0944,data/NEU-DET/train/images/pitted_surface/pitted_surface_85.jpg,pitted_surface,high,pitted_surface,low,True,3.225144624710083,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보입니다.""
+}
+```"
+patches_1607,data/NEU-DET/validation/images/patches/patches_288.jpg,patches,low,patches,medium,True,3.262697219848633,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 점상 형태의 불량이 있습니다.""
+}
+```"
+pitted_surface_0755,data/NEU-DET/train/images/pitted_surface/pitted_surface_130.jpg,pitted_surface,high,pitted_surface,low,True,4.284532308578491,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 마모나 오염으로 인한 것으로 보입니다.""
+}
+```"
+patches_1615,data/NEU-DET/validation/images/patches/patches_296.jpg,patches,low,patches,medium,True,3.35274076461792,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0832,data/NEU-DET/train/images/pitted_surface/pitted_surface_20.jpg,pitted_surface,high,patches,low,True,3.1383726596832275,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0034,data/NEU-DET/train/images/crazing/crazing_13.jpg,crazing,low,patches,low,True,3.1520652770996094,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0160,data/NEU-DET/train/images/crazing/crazing_27.jpg,crazing,low,patches,low,True,3.1634514331817627,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_1441,data/NEU-DET/validation/images/crazing/crazing_242.jpg,crazing,low,patches,low,True,3.1590280532836914,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1797,data/NEU-DET/validation/images/scratches/scratches_298.jpg,scratches,high,scratches,medium,True,3.3441460132598877,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+scratches_1261,data/NEU-DET/train/images/scratches/scratches_154.jpg,scratches,high,scratches,medium,True,3.345653533935547,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+crazing_0189,data/NEU-DET/train/images/crazing/crazing_53.jpg,crazing,low,patches,low,True,3.156655788421631,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0745,data/NEU-DET/train/images/pitted_surface/pitted_surface_121.jpg,pitted_surface,high,pitted_surface,low,True,3.189424991607666,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보입니다.""
+}
+```"
+patches_0559,data/NEU-DET/train/images/patches/patches_170.jpg,patches,low,patches,low,True,3.3517098426818848,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 검은색의 점상이 보입니다.""
+}
+```"
+inclusion_0243,data/NEU-DET/train/images/inclusion/inclusion_101.jpg,inclusion,medium,patches,low,True,3.1641671657562256,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0643,data/NEU-DET/train/images/patches/patches_3.jpg,patches,low,patches,medium,True,3.3816564083099365,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+crazing_0050,data/NEU-DET/train/images/crazing/crazing_144.jpg,crazing,low,patches,low,True,3.1778106689453125,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1297,data/NEU-DET/train/images/scratches/scratches_187.jpg,scratches,high,patches,low,True,3.166306257247925,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1763,data/NEU-DET/validation/images/scratches/scratches_264.jpg,scratches,high,patches,low,True,3.1595776081085205,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1322,data/NEU-DET/train/images/scratches/scratches_209.jpg,scratches,high,scratches,medium,True,3.340482473373413,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+patches_0613,data/NEU-DET/train/images/patches/patches_219.jpg,patches,low,patches,low,True,3.186234951019287,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1202,data/NEU-DET/train/images/scratches/scratches_100.jpg,scratches,high,patches,low,True,3.1625654697418213,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1306,data/NEU-DET/train/images/scratches/scratches_195.jpg,scratches,high,scratches,medium,True,3.3370561599731445,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+crazing_0048,data/NEU-DET/train/images/crazing/crazing_142.jpg,crazing,low,patches,low,True,3.1930294036865234,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_0961,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_10.jpg,rolled-in_scale,medium,patches,low,True,3.2014291286468506,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0622,data/NEU-DET/train/images/patches/patches_227.jpg,patches,low,patches,medium,True,3.5277466773986816,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 흩어져 있는 작은 점상이 보입니다.""
+}
+```"
+patches_0661,data/NEU-DET/train/images/patches/patches_46.jpg,patches,low,patches,medium,True,3.3265774250030518,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 점상 형태의 불량이 있습니다.""
+}
+```"
+scratches_1260,data/NEU-DET/train/images/scratches/scratches_153.jpg,scratches,high,scratches,medium,True,3.4127719402313232,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 깊은 긁힘들이 보입니다.""
+}
+```"
+patches_0692,data/NEU-DET/train/images/patches/patches_74.jpg,patches,low,patches,low,True,3.1727681159973145,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0757,data/NEU-DET/train/images/pitted_surface/pitted_surface_132.jpg,pitted_surface,high,pitted_surface,low,True,3.1983602046966553,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보입니다.""
+}
+```"
+crazing_1470,data/NEU-DET/validation/images/crazing/crazing_271.jpg,crazing,low,patches,low,True,3.1857497692108154,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0187,data/NEU-DET/train/images/crazing/crazing_51.jpg,crazing,low,patches,low,True,3.146942138671875,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+patches_0570,data/NEU-DET/train/images/patches/patches_180.jpg,patches,low,patches,low,True,3.1872403621673584,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0831,data/NEU-DET/train/images/pitted_surface/pitted_surface_2.jpg,pitted_surface,high,patches,low,True,3.1970059871673584,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0336,data/NEU-DET/train/images/inclusion/inclusion_186.jpg,inclusion,medium,patches,low,True,3.1625232696533203,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0394,data/NEU-DET/train/images/inclusion/inclusion_238.jpg,inclusion,medium,patches,low,True,3.1567275524139404,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1426,data/NEU-DET/train/images/scratches/scratches_87.jpg,scratches,high,scratches,medium,True,3.528991937637329,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+pitted_surface_0794,data/NEU-DET/train/images/pitted_surface/pitted_surface_166.jpg,pitted_surface,high,patches,medium,True,3.2349510192871094,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 점들이 분포되어 있습니다.""
+}
+```"
+patches_0706,data/NEU-DET/train/images/patches/patches_87.jpg,patches,low,patches,low,True,3.178729772567749,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0071,data/NEU-DET/train/images/crazing/crazing_163.jpg,crazing,low,patches,medium,True,3.1738433837890625,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_1571,data/NEU-DET/validation/images/patches/patches_252.jpg,patches,low,patches,low,True,3.392469644546509,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_1668,data/NEU-DET/validation/images/pitted_surface/pitted_surface_289.jpg,pitted_surface,high,patches,low,True,3.160837173461914,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점疤"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점疤가 보입니다.""
+}
+```"
+scratches_1761,data/NEU-DET/validation/images/scratches/scratches_262.jpg,scratches,high,patches,low,True,3.1926450729370117,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0605,data/NEU-DET/train/images/patches/patches_211.jpg,patches,low,patches,medium,True,3.3746540546417236,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+inclusion_0390,data/NEU-DET/train/images/inclusion/inclusion_234.jpg,inclusion,medium,scratches,low,True,3.6332340240478516,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로 세로로 긴 긁힘들이 보입니다.""
+}
+```"
+inclusion_1545,data/NEU-DET/validation/images/inclusion/inclusion_286.jpg,inclusion,medium,scratches,low,True,3.4286863803863525,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘이 있습니다.""
+}
+```"
+scratches_1208,data/NEU-DET/train/images/scratches/scratches_106.jpg,scratches,high,patches,low,True,3.338148355484009,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 미세한 점상이 보입니다.""
+}
+```"
+pitted_surface_0725,data/NEU-DET/train/images/pitted_surface/pitted_surface_103.jpg,pitted_surface,high,pitted_surface,low,True,3.383181571960449,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점들이 분포되어 있습니다.""
+}
+```"
+pitted_surface_0809,data/NEU-DET/train/images/pitted_surface/pitted_surface_18.jpg,pitted_surface,high,pitted_surface,low,True,4.396818161010742,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 표면의 미세한 손상으로 인해 발생합니다.""
+}
+```"
+inclusion_1505,data/NEU-DET/validation/images/inclusion/inclusion_246.jpg,inclusion,medium,patches,low,True,3.160682439804077,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1369,data/NEU-DET/train/images/scratches/scratches_35.jpg,scratches,high,scratches,medium,True,3.5081522464752197,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 가로로 긴 긁힘 현상이 있습니다.""
+}
+```"
+pitted_surface_1679,data/NEU-DET/validation/images/pitted_surface/pitted_surface_300.jpg,pitted_surface,high,pitted_surface,low,True,3.3310298919677734,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점들이 분포되어 있습니다.""
+}
+```"
+inclusion_0420,data/NEU-DET/train/images/inclusion/inclusion_45.jpg,inclusion,medium,patches,low,True,3.188511610031128,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+inclusion_0334,data/NEU-DET/train/images/inclusion/inclusion_184.jpg,inclusion,medium,patches,low,True,3.249385356903076,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0169,data/NEU-DET/train/images/crazing/crazing_35.jpg,crazing,low,patches,low,True,3.1607375144958496,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+scratches_1766,data/NEU-DET/validation/images/scratches/scratches_267.jpg,scratches,high,patches,low,True,3.2915420532226562,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1046,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_177.jpg,rolled-in_scale,medium,patches,low,True,3.187842607498169,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0523,data/NEU-DET/train/images/patches/patches_138.jpg,patches,low,patches,low,True,3.2831108570098877,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 검은색 점상이 보입니다.""
+}
+```"
+patches_0681,data/NEU-DET/train/images/patches/patches_64.jpg,patches,low,inclusion,low,True,3.4087703227996826,"```json
+{
+  ""type"": ""inclusion"",
+  ""type_ko"": ""포집물"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 검은 포집물이 보입니다.""
+}
+```"
+inclusion_0257,data/NEU-DET/train/images/inclusion/inclusion_114.jpg,inclusion,medium,scratches,low,True,3.6346237659454346,"```json
+{
+  ""type"": ""scratches"",
+  ""type_ko"": ""긁힘"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 가로 세로로 긴 긁힘들이 보입니다.""
+}
+```"
+inclusion_0411,data/NEU-DET/train/images/inclusion/inclusion_37.jpg,inclusion,medium,patches,low,True,3.16855525970459,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_0966,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_104.jpg,rolled-in_scale,medium,patches,low,True,3.3340775966644287,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+rolled-in_scale_1106,data/NEU-DET/train/images/rolled-in_scale/rolled-in_scale_230.jpg,rolled-in_scale,medium,pitted_surface,medium,True,4.101806402206421,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 보이며, 이는 점상 불량을 나타냅니다.""
+}
+```"
+patches_0611,data/NEU-DET/train/images/patches/patches_217.jpg,patches,low,patches,medium,True,3.541480541229248,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 흩어진 작은 점상이 보입니다.""
+}
+```"
+inclusion_1536,data/NEU-DET/validation/images/inclusion/inclusion_277.jpg,inclusion,medium,patches,low,True,3.153883934020996,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+crazing_0099,data/NEU-DET/train/images/crazing/crazing_189.jpg,crazing,low,patches,low,True,3.1780447959899902,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0518,data/NEU-DET/train/images/patches/patches_133.jpg,patches,low,patches,low,True,3.2038676738739014,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+pitted_surface_0856,data/NEU-DET/train/images/pitted_surface/pitted_surface_221.jpg,pitted_surface,high,pitted_surface,medium,True,3.5385220050811768,"```json
+{
+  ""type"": ""pitted_surface"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 작은 구멍들이 많이 생겼습니다.""
+}
+```"
+crazing_0214,data/NEU-DET/train/images/crazing/crazing_76.jpg,crazing,low,patches,low,True,3.3993587493896484,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""low"",
+  ""description"": ""금속 표면에 작은 점상이 보입니다.""
+}
+```"
+patches_0498,data/NEU-DET/train/images/patches/patches_115.jpg,patches,low,patches,medium,True,3.639061212539673,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"
+patches_0652,data/NEU-DET/train/images/patches/patches_38.jpg,patches,low,patches,medium,True,3.412015676498413,"```json
+{
+  ""type"": ""patches"",
+  ""type_ko"": ""점상"",
+  ""severity"": ""medium"",
+  ""description"": ""금속 표면에 여러 개의 작은 점상이 보입니다.""
+}
+```"

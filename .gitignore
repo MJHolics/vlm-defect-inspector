@@ -33,6 +33,13 @@ logs/
 wandb/
 runs/
 
+# Runtime audit DB (감사 추적 — 운영 데이터)
+data/audit/
+
+# 개인 문서 (repo에 두지 않음)
+이력서_*.pdf
+공부_로드맵_*.md
+
 # OS
 .DS_Store
 Thumbs.db

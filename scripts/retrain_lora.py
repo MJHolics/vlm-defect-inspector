@@ -140,6 +140,8 @@ def main():
     ap.add_argument("--grad-accum", type=int, default=8)
     ap.add_argument("--max-extra", type=int, default=None,
                     help="교정 하드샘플 사용 상한(디버그용)")
+    ap.add_argument("--limit-train", type=int, default=None,
+                    help="원본 train 사용 상한(스모크 테스트용)")
     args = ap.parse_args()
 
     import bitsandbytes as bnb
@@ -150,9 +152,14 @@ def main():
 
     MODEL_ID = "Qwen/Qwen2.5-VL-7B-Instruct"
     records = build_records(args.manifest)
+    base = len(json.loads((DATA / "train.json").read_text(encoding="utf-8")))
+    train_part, extra_part = records[:base], records[base:]
+    if args.limit_train is not None:
+        train_part = train_part[: args.limit_train]
     if args.max_extra is not None:
-        base = len(json.loads((DATA / "train.json").read_text(encoding="utf-8")))
-        records = records[:base + args.max_extra]
+        extra_part = extra_part[: args.max_extra]
+    records = train_part + extra_part
+    print(f"사용: train {len(train_part)} + 교정 {len(extra_part)} = {len(records)}건")
 
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True, bnb_4bit_quant_type="nf4",

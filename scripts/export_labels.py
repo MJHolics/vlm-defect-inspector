@@ -44,10 +44,12 @@ def main():
     # 클래스별 분포
     dist: dict[str, int] = {}
     for x in usable:
-        dist[x["label"]] = dist.get(x["label"], 0) + 1
+        dist[x["true_type"]] = dist.get(x["true_type"], 0) + 1
     if dist:
         print("클래스별:", dict(sorted(dist.items(), key=lambda x: -x[1])))
-    print(f"매니페스트: {args.out.relative_to(ROOT)}")
+    out_abs = args.out.resolve()
+    shown = out_abs.relative_to(ROOT) if out_abs.is_relative_to(ROOT) else out_abs
+    print(f"매니페스트: {shown}")
 
 
 if __name__ == "__main__":

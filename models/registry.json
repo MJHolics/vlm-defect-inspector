@@ -17,6 +17,24 @@
       "gate_reasons": [
         "현행 모델 없음 → 첫 모델로 등록"
       ]
+    },
+    {
+      "version": "v2",
+      "created_at": "2026-06-15T07:59:56+00:00",
+      "metrics": {
+        "type_accuracy": 0.7259,
+        "risk_score": 0.147,
+        "severity_accuracy": 0.7296,
+        "n_samples": 270,
+        "verdict": "FAIL"
+      },
+      "data_ref": "retrain_manifest.jsonl",
+      "adapter_path": "models/checkpoints/cand_v2",
+      "status": "rejected",
+      "gate_reasons": [
+        "[불충족] 위험점수 악화 0.147 > 0.0196",
+        "[불충족] 유형정확도 퇴보 0.7259 < 0.8259-0.01"
+      ]
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "current": "v1-bootstrap",
+  "current": "v4",
   "models": [
     {
       "version": "v1-bootstrap",
@@ -12,8 +12,8 @@
         "verdict": "PASS"
       },
       "data_ref": "retrain_manifest.jsonl",
-      "adapter_path": "models/checkpoints/best_exp/best",
-      "status": "active",
+      "adapter_path": "models/checkpoints/best_exp",
+      "status": "archived",
       "gate_reasons": [
         "현행 모델 없음 → 첫 모델로 등록"
       ]
@@ -34,6 +34,42 @@
       "gate_reasons": [
         "[불충족] 위험점수 악화 0.147 > 0.0196",
         "[불충족] 유형정확도 퇴보 0.7259 < 0.8259-0.01"
+      ]
+    },
+    {
+      "version": "v3",
+      "created_at": "2026-06-17T05:53:00+00:00",
+      "metrics": {
+        "type_accuracy": 0.7407,
+        "risk_score": 0.0996,
+        "severity_accuracy": 0.8037,
+        "n_samples": 270,
+        "verdict": "FAIL"
+      },
+      "data_ref": "retrain_manifest.jsonl",
+      "adapter_path": "models/checkpoints/cand_v3",
+      "status": "rejected",
+      "gate_reasons": [
+        "[불충족] 위험점수 악화 0.0996 > 0.0196",
+        "[불충족] 유형정확도 퇴보 0.7407 < 0.8259-0.01"
+      ]
+    },
+    {
+      "version": "v4",
+      "created_at": "2026-06-17T14:10:27+00:00",
+      "metrics": {
+        "type_accuracy": 0.9593,
+        "risk_score": 0.0041,
+        "severity_accuracy": 0.9593,
+        "n_samples": 270,
+        "verdict": "PASS"
+      },
+      "data_ref": "retrain_manifest.jsonl",
+      "adapter_path": "models/checkpoints/cand_v4",
+      "status": "active",
+      "gate_reasons": [
+        "[통과] 위험점수 개선/유지 0.0041 <= 0.0196",
+        "[통과] 유형정확도 비퇴보 0.9593 >= 0.8259-0.01"
       ]
     }
   ]

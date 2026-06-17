@@ -22,7 +22,7 @@
     # 노트북에서 학습/추론을 끝낸 뒤, 후보 산출물로 루프 이어서 실행
     python scripts/retrain_pipeline.py \
         --candidate-version v2 \
-        --adapter-path models/checkpoints/best_exp/best \
+        --adapter-path models/checkpoints/cand_v4 \
         --candidate-csv data/results/exp_best_eval_results.csv
 
     # 트리거 미충족이어도 강제로 진행
@@ -32,6 +32,14 @@
 import argparse
 import sys
 from pathlib import Path
+
+# 윈도우 콘솔(cp949)은 em-dash(—) 등 일부 유니코드를 인코딩하지 못해 print에서
+# UnicodeEncodeError로 죽는다. 출력 스트림을 UTF-8로 고정해 어디서든 안전하게 찍는다.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except (AttributeError, ValueError):
+        pass
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -82,7 +90,7 @@ def run(args) -> int:
             "   다음을 실행해 어댑터와 고정 평가셋 추론 CSV를 만든 뒤 이 명령을 재실행하세요:\n"
             f"     1) notebooks/03_finetune.ipynb (또는 05_experiments.ipynb) 실행\n"
             f"        → 매니페스트({manifest.relative_to(ROOT)})를 원본 train에 합쳐 재학습\n"
-            f"        → 어댑터 저장 (예: models/checkpoints/best_exp/best)\n"
+            f"        → 어댑터 저장 (예: models/checkpoints/cand_v4)\n"
             f"     2) 04_evaluation 방식으로 고정 test 셋 추론 → CSV 저장\n"
             f"        (컬럼: gt_type, gt_severity, pred_type, pred_severity)\n"
             f"     3) python scripts/retrain_pipeline.py --candidate-version <v> \\\n"

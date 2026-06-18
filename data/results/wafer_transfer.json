@@ -1,0 +1,86 @@
+{
+  "dataset": "WM-811K (MIR-WM811K)",
+  "task": "8-class 웨이퍼맵 결함패턴 분류",
+  "classes": [
+    "Center",
+    "Donut",
+    "Edge-Loc",
+    "Edge-Ring",
+    "Loc",
+    "Near-full",
+    "Random",
+    "Scratch"
+  ],
+  "backbone": "ResNet18",
+  "image_size": 64,
+  "epochs": 20,
+  "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+  "data_efficiency": [
+    {
+      "label_frac": 0.05,
+      "init": "pretrained",
+      "n_train": 1022,
+      "accuracy": 0.815,
+      "macro_f1": 0.7236
+    },
+    {
+      "label_frac": 0.05,
+      "init": "scratch",
+      "n_train": 1022,
+      "accuracy": 0.7849,
+      "macro_f1": 0.6624
+    },
+    {
+      "label_frac": 0.1,
+      "init": "pretrained",
+      "n_train": 2041,
+      "accuracy": 0.8623,
+      "macro_f1": 0.7973
+    },
+    {
+      "label_frac": 0.1,
+      "init": "scratch",
+      "n_train": 2041,
+      "accuracy": 0.8133,
+      "macro_f1": 0.7022
+    },
+    {
+      "label_frac": 0.25,
+      "init": "pretrained",
+      "n_train": 5104,
+      "accuracy": 0.873,
+      "macro_f1": 0.7744
+    },
+    {
+      "label_frac": 0.25,
+      "init": "scratch",
+      "n_train": 5104,
+      "accuracy": 0.8476,
+      "macro_f1": 0.7556
+    },
+    {
+      "label_frac": 1.0,
+      "init": "pretrained",
+      "n_train": 20415,
+      "accuracy": 0.9165,
+      "macro_f1": 0.8749
+    },
+    {
+      "label_frac": 1.0,
+      "init": "scratch",
+      "n_train": 20415,
+      "accuracy": 0.9028,
+      "macro_f1": 0.8579
+    }
+  ],
+  "inference": {
+    "batch1_latency_ms": {
+      "mean": 3.322,
+      "p50": 2.961,
+      "p99": 6.068
+    },
+    "throughput_img_per_sec": 301.0,
+    "n_samples": 200
+  },
+  "vlm_latency_sec_ref": 14.681
+}

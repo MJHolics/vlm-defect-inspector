@@ -16,6 +16,7 @@ build/
 data/raw/
 data/NEU-DET/
 data/cache/
+data/wm811k/
 models/checkpoints/
 models/merged/
 *.bin
@@ -26,6 +27,7 @@ models/merged/
 # Environment
 .env
 *.env.local
+kaggle.json
 
 # Logs
 logs/

@@ -1,0 +1,14 @@
+{
+  "adapter": "models/checkpoints/ood_no_inclusion",
+  "novel_class": "inclusion",
+  "n_test": 270,
+  "n_novel": 45,
+  "n_known": 225,
+  "confidence_threshold": 0.8,
+  "auroc_confidence_separates_novel": 0.6795,
+  "mean_confidence_novel": 0.8163,
+  "mean_confidence_known": 0.8272,
+  "novel_detection_rate_at_thr": 0.3333,
+  "known_false_flag_rate_at_thr": 0.0267,
+  "known_class_accuracy": 0.9956
+}

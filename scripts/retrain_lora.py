@@ -90,6 +90,17 @@ def build_splits(manifest: Path) -> tuple[list[dict], list[dict]]:
     return train + extra, es_val
 
 
+def _rec_type(rec: dict) -> str:
+    """레코드(conversations)에서 정답 결함유형 추출 (없으면 '')."""
+    for t in rec.get("conversations", []):
+        if t.get("role") == "assistant":
+            try:
+                return (json.loads(t["content"]).get("type") or "").lower()
+            except Exception:
+                return ""
+    return ""
+
+
 class _Rotate90:
     """0/90/180/270도 랜덤 회전 (정사각 NEU 이미지에 라벨 보존)."""
 
@@ -223,6 +234,9 @@ def main():
                     help="교정 하드샘플 사용 상한(디버그용)")
     ap.add_argument("--limit-train", type=int, default=None,
                     help="원본 train 사용 상한(스모크 테스트용)")
+    ap.add_argument("--holdout-class", default=None,
+                    help="이 결함유형을 train/val에서 제외(open-set OOD 실험용). "
+                         "제외된 클래스는 학습에 한 번도 안 쓰여 '신규 결함'이 된다.")
     args = ap.parse_args()
 
     random.seed(42)
@@ -236,7 +250,15 @@ def main():
 
     MODEL_ID = "Qwen/Qwen2.5-VL-7B-Instruct"
     train_records, es_val = build_splits(args.manifest)
-    base = len(json.loads((DATA / "train.json").read_text(encoding="utf-8")))
+    if args.holdout_class:
+        hc = args.holdout_class.lower()
+        n0t, n0v = len(train_records), len(es_val)
+        train_records = [r for r in train_records if _rec_type(r) != hc]
+        es_val = [r for r in es_val if _rec_type(r) != hc]
+        print(f"[holdout] '{hc}' 제외: train {n0t}→{len(train_records)}, "
+              f"val {n0v}→{len(es_val)} (이 클래스는 학습에 안 쓰임 = 신규 결함)")
+    base = len([r for r in json.loads((DATA / "train.json").read_text(encoding="utf-8"))
+                if not args.holdout_class or _rec_type(r) != args.holdout_class.lower()])
     train_part, extra_part = train_records[:base], train_records[base:]
     if args.limit_train is not None:
         train_part = train_part[: args.limit_train]

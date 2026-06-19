@@ -98,8 +98,18 @@ VLM은 신규결함·콜드스타트·설명 트리아지에, 경량 CNN은 100%
 """
 
 
+_SCOPE = """
+> ⚠️ **적용 범위·한계 (꼭 읽어주세요).** 이 모델은 **NEU-DET**(연구용 데이터셋 — 200×200 흑백,
+> 균일 조명의 *미세 표면 텍스처*) 6개 결함만 학습했습니다. 웹에서 가져온 일반 사진(컬러·다른 배율/조명,
+> 거시 균열, 6클래스 밖 결함)은 **학습 분포 밖(OOD)** 이라 라벨이 부정확할 수 있습니다 — 예: 큰 균열
+> 사진을 `scratches`로 오판. 측정상 같은 NEU 분포에선 정확도 **99.6%**지만, 낯선 도메인 입력은 신뢰도가
+> 떨어져 **confidence < 0.80이면 사람 검토 큐로** 보냅니다. 이 데모는 *폐쇄셋 성능과 안전 게이트 동작*을
+> 보이기 위한 것이며, 임의 현장 이미지의 진단을 보장하지 않습니다.
+"""
+
 with gr.Blocks(title="Metal Defect Inspector — Edge CNN") as demo:
     gr.Markdown(_DESC)
+    gr.Markdown(_SCOPE)
     with gr.Row():
         with gr.Column(scale=1):
             img_in = gr.Image(type="pil", label="금속 표면 이미지", height=300)

@@ -1,0 +1,35 @@
+{
+  "model": "space/model.onnx (MobileNetV3-S)",
+  "gate": 0.8,
+  "buckets": {
+    "A_neu_clean": {
+      "n": 270,
+      "accuracy": 0.9963,
+      "mean_conf": 0.8806,
+      "median_conf": 0.8927,
+      "pct_pass_gate": 0.9481
+    },
+    "B_neu_corrupted": {
+      "n": 270,
+      "accuracy": 0.5074,
+      "mean_conf": 0.3426,
+      "median_conf": 0.3261,
+      "pct_pass_gate": 0.0
+    },
+    "C_wafer_ood": {
+      "n": 2000,
+      "accuracy": null,
+      "mean_conf": 0.7196,
+      "median_conf": 0.7611,
+      "pct_pass_gate": 0.4005,
+      "pred_distribution": {
+        "crazing": 0,
+        "inclusion": 1,
+        "patches": 0,
+        "pitted_surface": 1892,
+        "rolled-in_scale": 0,
+        "scratches": 107
+      }
+    }
+  }
+}

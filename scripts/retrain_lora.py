@@ -237,6 +237,11 @@ def main():
     ap.add_argument("--holdout-class", default=None,
                     help="이 결함유형을 train/val에서 제외(open-set OOD 실험용). "
                          "제외된 클래스는 학습에 한 번도 안 쓰여 '신규 결함'이 된다.")
+    ap.add_argument("--oversample-class", default=None,
+                    help="이 결함유형을 학습셋에서 N배로 오버샘플(진단된 약한 클래스 보강). "
+                         "증강과 결합되어 매 복제본이 다른 뷰로 들어가 경계를 강화한다.")
+    ap.add_argument("--oversample-factor", type=int, default=1,
+                    help="--oversample-class 총 등장 배수(1=변화 없음, 3=원본 포함 3배)")
     args = ap.parse_args()
 
     random.seed(42)
@@ -265,11 +270,20 @@ def main():
     if args.max_extra is not None:
         extra_part = extra_part[: args.max_extra]
     train_records = train_part + extra_part
+    oversampled = 0
+    if args.oversample_class and args.oversample_factor > 1:
+        oc = args.oversample_class.lower()
+        base_recs = [r for r in train_records if _rec_type(r) == oc]
+        extra_copies = base_recs * (args.oversample_factor - 1)
+        train_records = train_records + extra_copies
+        oversampled = len(extra_copies)
+        print(f"[oversample] '{oc}' {len(base_recs)}건 × {args.oversample_factor} "
+              f"→ +{oversampled}건 (증강이 매 복제본을 다른 뷰로 만듦)")
     if args.val_limit is not None:
         es_val = es_val[: args.val_limit]
-    print(f"사용: train {len(train_part)} + 교정 {len(extra_part)} = {len(train_records)}건 "
-          f"| 검증 {len(es_val)}건 | rank={args.rank} smoothing={args.label_smoothing} "
-          f"augment={args.augment}")
+    print(f"사용: train {len(train_part)} + 교정 {len(extra_part)} + 오버샘플 {oversampled} "
+          f"= {len(train_records)}건 | 검증 {len(es_val)}건 | rank={args.rank} "
+          f"smoothing={args.label_smoothing} augment={args.augment}")
 
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True, bnb_4bit_quant_type="nf4",

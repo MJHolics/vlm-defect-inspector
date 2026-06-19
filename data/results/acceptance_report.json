@@ -1,16 +1,16 @@
 {
-  "csv": "data\\results\\exp_best_eval_results.csv",
+  "csv": "data\\results\\cand_v5_eval_results.csv",
   "n_samples": 270,
-  "type_accuracy": 0.8259,
-  "severity_accuracy": 0.9037,
+  "type_accuracy": 0.9926,
+  "severity_accuracy": 0.9926,
   "severity_scored": 270,
-  "misses_underestimate": 3,
-  "false_alarms_overestimate": 23,
+  "misses_underestimate": 2,
+  "false_alarms_overestimate": 0,
   "cost_weights": {
     "miss": 10.0,
     "false_alarm": 1.0
   },
-  "risk_score": 0.0196,
+  "risk_score": 0.0074,
   "gates": {
     "max_risk": 0.15,
     "min_type_accuracy": 0.8,
@@ -18,7 +18,7 @@
     "passed_type_accuracy": true
   },
   "per_class_dangerous_miss": {
-    "inclusion": 3
+    "rolled-in_scale": 2
   },
   "verdict": "PASS"
 }

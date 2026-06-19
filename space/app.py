@@ -98,7 +98,7 @@ VLM은 신규결함·콜드스타트·설명 트리아지에, 경량 CNN은 100%
 """
 
 
-with gr.Blocks(title="Metal Defect Inspector — Edge CNN", theme=gr.themes.Soft()) as demo:
+with gr.Blocks(title="Metal Defect Inspector — Edge CNN") as demo:
     gr.Markdown(_DESC)
     with gr.Row():
         with gr.Column(scale=1):

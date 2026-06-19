@@ -1,4 +1,3 @@
 onnxruntime>=1.17
 pillow>=10.0
 numpy>=1.24
-audioop-lts; python_version >= "3.13"

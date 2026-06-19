@@ -1,0 +1,41 @@
+{
+  "adapter": "models/checkpoints/ood_no_inclusion",
+  "novel_class": "inclusion",
+  "n_test": 270,
+  "n_novel": 45,
+  "n_known": 225,
+  "fit_per_class": 40,
+  "pca_dim": 64,
+  "detectors": {
+    "confidence": {
+      "auroc": 0.6794,
+      "tpr_at_fpr5": 0.3778,
+      "fpr95": 0.6133
+    },
+    "energy": {
+      "auroc": 0.3933,
+      "tpr_at_fpr5": 0.1111,
+      "fpr95": 0.8044
+    },
+    "entropy": {
+      "auroc": 0.6039,
+      "tpr_at_fpr5": 0.3778,
+      "fpr95": 0.8089
+    },
+    "mahalanobis": {
+      "auroc": 0.968,
+      "tpr_at_fpr5": 0.8444,
+      "fpr95": 0.0756
+    },
+    "ensemble": {
+      "auroc": 0.6898,
+      "tpr_at_fpr5": 0.4889,
+      "fpr95": 0.7911
+    }
+  },
+  "confidence_threshold_baseline": {
+    "threshold": 0.8,
+    "novel_detection_rate": 0.3333,
+    "known_false_alarm_rate": 0.0311
+  }
+}

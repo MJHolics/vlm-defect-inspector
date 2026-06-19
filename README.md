@@ -6,6 +6,9 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-blue)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1+-ee4c2c)](https://pytorch.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![🤗 Live Demo](https://img.shields.io/badge/🤗_Live_Demo-HF_Spaces-yellow)](https://huggingface.co/spaces/appleholics/metal-defect-inspector)
+
+▶ **[라이브 데모 (Hugging Face Spaces)](https://huggingface.co/spaces/appleholics/metal-defect-inspector)** — 결함 이미지를 올리면 CPU에서 수 ms 만에 유형·심각도·신뢰도를 판정합니다 (엣지 CNN).
 
 ---
 
@@ -365,7 +368,7 @@ Windows 재현성을 위해 여기선 ONNX Runtime로 측정했다. 산출물 `d
 **라이브 데모:** 이 경량 CNN(MobileNetV3-S fp32 ONNX, 6 MB)을 그대로 Gradio로 띄운 데모가 `space/`에
 있다 — CPU만으로 도는 덕에 무료 Hugging Face Spaces에 배포 가능하다(7B VLM은 6 GB라 불가). 이미지를
 올리면 결함유형·심각도·신뢰도와 추론시간(ms)을 즉시 보여주고, confidence < 0.80이면 운영 게이트가
-사람 검토 큐로 보낸다. <!-- 배포 후: [▶ 라이브 데모](HF_SPACE_URL) -->`python space/app.py`로 로컬 실행.
+사람 검토 큐로 보낸다. **[▶ 라이브 데모](https://huggingface.co/spaces/appleholics/metal-defect-inspector)** (HF Spaces, CPU) 또는 `python space/app.py`로 로컬 실행.
 
 ---
 

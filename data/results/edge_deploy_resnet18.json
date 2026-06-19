@@ -1,0 +1,59 @@
+{
+  "arch": "resnet18",
+  "img_size": 224,
+  "runs": 200,
+  "device_gpu": "NVIDIA GeForce RTX 4080 SUPER",
+  "variants": {
+    "torch_fp32_gpu": {
+      "accuracy": 0.9963,
+      "latency_ms": {
+        "mean": 3.101,
+        "p50": 2.743,
+        "p99": 5.275
+      },
+      "throughput_img_per_sec": 364.6,
+      "size_mb": 44.8
+    },
+    "torch_fp32_cpu": {
+      "accuracy": 0.9963,
+      "latency_ms": {
+        "mean": 11.256,
+        "p50": 11.178,
+        "p99": 12.222
+      },
+      "throughput_img_per_sec": 89.5,
+      "size_mb": 44.8
+    },
+    "onnx_fp32_cpu": {
+      "accuracy": 0.9963,
+      "latency_ms": {
+        "mean": 27.725,
+        "p50": 27.689,
+        "p99": 30.467
+      },
+      "throughput_img_per_sec": 36.1,
+      "size_mb": 44.71
+    },
+    "onnx_int8_cpu": {
+      "accuracy": 0.9963,
+      "latency_ms": {
+        "mean": 22.286,
+        "p50": 22.308,
+        "p99": 25.07
+      },
+      "throughput_img_per_sec": 44.8,
+      "size_mb": 11.3
+    }
+  },
+  "compression_summary": {
+    "cpu_int8_speedup_vs_fp32": 1.24,
+    "size_reduction_x": 3.96,
+    "accuracy_drop": 0.0
+  },
+  "vlm_reference": {
+    "latency_sec_mean": 14.681,
+    "peak_mem_gb": 6.03,
+    "throughput_img_per_sec": 0.068,
+    "test_accuracy": 0.9593
+  }
+}

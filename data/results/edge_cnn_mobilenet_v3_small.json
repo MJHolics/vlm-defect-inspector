@@ -1,0 +1,22 @@
+{
+  "arch": "mobilenet_v3_small",
+  "pretrained": true,
+  "img_size": 224,
+  "n_params_M": 1.524,
+  "fp32_size_mb": 6.23,
+  "best_epoch": 8,
+  "val_accuracy": 1.0,
+  "test_accuracy": 0.9963,
+  "test_per_class": {
+    "crazing": 1.0,
+    "inclusion": 1.0,
+    "patches": 0.9778,
+    "pitted_surface": 1.0,
+    "rolled-in_scale": 1.0,
+    "scratches": 1.0
+  },
+  "vlm_v4_test_accuracy": 0.9593,
+  "train_seconds": 169.8,
+  "device": "cuda",
+  "checkpoint": "models\\checkpoints\\edge_cnn\\mobilenet_v3_small.pt"
+}

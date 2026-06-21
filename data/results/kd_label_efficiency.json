@@ -1,0 +1,174 @@
+{
+  "arch": "mobilenet_v3_small",
+  "teacher": "Qwen2.5-VL v4 (cand_v4)",
+  "teacher_argmax_accuracy_train": 0.9556,
+  "alpha": 0.5,
+  "temperature": 4.0,
+  "seed": 42,
+  "device": "cuda",
+  "vlm_v4_test_accuracy": 0.9593,
+  "cnn_fulldata_test_accuracy": 0.9963,
+  "runs": [
+    {
+      "val_accuracy": 0.8333,
+      "test_accuracy": 0.8519,
+      "best_epoch": 11,
+      "test_per_class": {
+        "crazing": 0.8889,
+        "inclusion": 0.7333,
+        "patches": 0.8444,
+        "pitted_surface": 0.9333,
+        "rolled-in_scale": 1.0,
+        "scratches": 0.7111
+      },
+      "n_per_class": 5,
+      "n_train": 30,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 0.8481,
+      "test_accuracy": 0.8704,
+      "best_epoch": 40,
+      "test_per_class": {
+        "crazing": 0.8222,
+        "inclusion": 0.7556,
+        "patches": 0.8889,
+        "pitted_surface": 0.9111,
+        "rolled-in_scale": 1.0,
+        "scratches": 0.8444
+      },
+      "n_per_class": 5,
+      "n_train": 30,
+      "mode": "kd"
+    },
+    {
+      "val_accuracy": 0.9778,
+      "test_accuracy": 0.9519,
+      "best_epoch": 34,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 0.9778,
+        "patches": 0.9333,
+        "pitted_surface": 0.9111,
+        "rolled-in_scale": 1.0,
+        "scratches": 0.8889
+      },
+      "n_per_class": 10,
+      "n_train": 60,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 0.9444,
+      "test_accuracy": 0.9296,
+      "best_epoch": 27,
+      "test_per_class": {
+        "crazing": 0.9111,
+        "inclusion": 0.9556,
+        "patches": 1.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 0.8667,
+        "scratches": 0.8444
+      },
+      "n_per_class": 10,
+      "n_train": 60,
+      "mode": "kd"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 0.9889,
+      "best_epoch": 40,
+      "test_per_class": {
+        "crazing": 0.9778,
+        "inclusion": 0.9556,
+        "patches": 1.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 25,
+      "n_train": 150,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 0.9593,
+      "test_accuracy": 0.9407,
+      "best_epoch": 9,
+      "test_per_class": {
+        "crazing": 0.9333,
+        "inclusion": 0.7556,
+        "patches": 1.0,
+        "pitted_surface": 0.9778,
+        "rolled-in_scale": 0.9778,
+        "scratches": 1.0
+      },
+      "n_per_class": 25,
+      "n_train": 150,
+      "mode": "kd"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 0.9963,
+      "best_epoch": 15,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 0.9778,
+        "patches": 1.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 50,
+      "n_train": 300,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 0.9889,
+      "best_epoch": 11,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 0.9778,
+        "patches": 0.9556,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 50,
+      "n_train": 300,
+      "mode": "kd"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 0.9778,
+      "best_epoch": 4,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 0.9333,
+        "patches": 0.9333,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 210,
+      "n_train": 1260,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 0.9926,
+      "best_epoch": 7,
+      "test_per_class": {
+        "crazing": 0.9778,
+        "inclusion": 0.9778,
+        "patches": 1.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 210,
+      "n_train": 1260,
+      "mode": "kd"
+    }
+  ],
+  "total_seconds": 1952.5
+}

@@ -1,0 +1,112 @@
+{
+  "arch": "mobilenet_v3_small",
+  "teacher": "Qwen2.5-VL v4 (cand_v4)",
+  "teacher_argmax_accuracy_train": 0.9556,
+  "alpha": 0.5,
+  "temperature": 4.0,
+  "seeds": [
+    42,
+    1,
+    2
+  ],
+  "n_seeds": 3,
+  "vlm_v4_test_accuracy": 0.9593,
+  "cnn_fulldata_test_accuracy": 0.9963,
+  "by_n": [
+    {
+      "n_per_class": 5,
+      "n_seeds": 3,
+      "hard_mean": 0.6988,
+      "hard_std": 0.2218,
+      "kd_mean": 0.6568,
+      "kd_std": 0.1739,
+      "delta_mean": -0.042,
+      "hard_runs": [
+        0.8519,
+        0.3852,
+        0.8593
+      ],
+      "kd_runs": [
+        0.8704,
+        0.4444,
+        0.6556
+      ]
+    },
+    {
+      "n_per_class": 10,
+      "n_seeds": 3,
+      "hard_mean": 0.9395,
+      "hard_std": 0.0175,
+      "kd_mean": 0.9407,
+      "kd_std": 0.0132,
+      "delta_mean": 0.0012,
+      "hard_runs": [
+        0.9519,
+        0.9148,
+        0.9519
+      ],
+      "kd_runs": [
+        0.9296,
+        0.9333,
+        0.9593
+      ]
+    },
+    {
+      "n_per_class": 25,
+      "n_seeds": 3,
+      "hard_mean": 0.9864,
+      "hard_std": 0.0017,
+      "kd_mean": 0.9704,
+      "kd_std": 0.0212,
+      "delta_mean": -0.0161,
+      "hard_runs": [
+        0.9889,
+        0.9852,
+        0.9852
+      ],
+      "kd_runs": [
+        0.9407,
+        0.9815,
+        0.9889
+      ]
+    },
+    {
+      "n_per_class": 50,
+      "n_seeds": 3,
+      "hard_mean": 0.9938,
+      "hard_std": 0.0063,
+      "kd_mean": 0.9901,
+      "kd_std": 0.0017,
+      "delta_mean": -0.0037,
+      "hard_runs": [
+        0.9963,
+        1.0,
+        0.9852
+      ],
+      "kd_runs": [
+        0.9889,
+        0.9926,
+        0.9889
+      ]
+    },
+    {
+      "n_per_class": 210,
+      "n_seeds": 3,
+      "hard_mean": 0.9914,
+      "hard_std": 0.0097,
+      "kd_mean": 0.9975,
+      "kd_std": 0.0035,
+      "delta_mean": 0.0062,
+      "hard_runs": [
+        0.9778,
+        0.9963,
+        1.0
+      ],
+      "kd_runs": [
+        0.9926,
+        1.0,
+        1.0
+      ]
+    }
+  ]
+}

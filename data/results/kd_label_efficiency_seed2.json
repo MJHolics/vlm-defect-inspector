@@ -1,0 +1,174 @@
+{
+  "arch": "mobilenet_v3_small",
+  "teacher": "Qwen2.5-VL v4 (cand_v4)",
+  "teacher_argmax_accuracy_train": 0.9556,
+  "alpha": 0.5,
+  "temperature": 4.0,
+  "seed": 2,
+  "device": "cuda",
+  "vlm_v4_test_accuracy": 0.9593,
+  "cnn_fulldata_test_accuracy": 0.9963,
+  "runs": [
+    {
+      "val_accuracy": 0.8889,
+      "test_accuracy": 0.8593,
+      "best_epoch": 40,
+      "test_per_class": {
+        "crazing": 0.8,
+        "inclusion": 0.9333,
+        "patches": 0.8889,
+        "pitted_surface": 0.9111,
+        "rolled-in_scale": 1.0,
+        "scratches": 0.6222
+      },
+      "n_per_class": 5,
+      "n_train": 30,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 0.6667,
+      "test_accuracy": 0.6556,
+      "best_epoch": 4,
+      "test_per_class": {
+        "crazing": 0.8667,
+        "inclusion": 1.0,
+        "patches": 0.5333,
+        "pitted_surface": 0.4667,
+        "rolled-in_scale": 0.9778,
+        "scratches": 0.0889
+      },
+      "n_per_class": 5,
+      "n_train": 30,
+      "mode": "kd"
+    },
+    {
+      "val_accuracy": 0.937,
+      "test_accuracy": 0.9519,
+      "best_epoch": 24,
+      "test_per_class": {
+        "crazing": 0.9333,
+        "inclusion": 0.8667,
+        "patches": 0.9111,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 10,
+      "n_train": 60,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 0.9667,
+      "test_accuracy": 0.9593,
+      "best_epoch": 40,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 0.8889,
+        "patches": 0.9333,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 0.9333
+      },
+      "n_per_class": 10,
+      "n_train": 60,
+      "mode": "kd"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 0.9852,
+      "best_epoch": 18,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 0.9111,
+        "patches": 1.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 25,
+      "n_train": 150,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 0.9889,
+      "best_epoch": 20,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 0.9333,
+        "patches": 1.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 25,
+      "n_train": 150,
+      "mode": "kd"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 0.9852,
+      "best_epoch": 13,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 1.0,
+        "patches": 0.9111,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 50,
+      "n_train": 300,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 0.9889,
+      "best_epoch": 16,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 0.9556,
+        "patches": 0.9778,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 50,
+      "n_train": 300,
+      "mode": "kd"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "best_epoch": 3,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 1.0,
+        "patches": 1.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 210,
+      "n_train": 1260,
+      "mode": "hard"
+    },
+    {
+      "val_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "best_epoch": 4,
+      "test_per_class": {
+        "crazing": 1.0,
+        "inclusion": 1.0,
+        "patches": 1.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "n_per_class": 210,
+      "n_train": 1260,
+      "mode": "kd"
+    }
+  ],
+  "total_seconds": 1767.6
+}

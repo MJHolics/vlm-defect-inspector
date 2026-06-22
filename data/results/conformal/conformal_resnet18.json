@@ -1,0 +1,221 @@
+{
+  "arch": "resnet18",
+  "test_n": 270,
+  "top1_accuracy": 0.9963,
+  "repeats": 100,
+  "alpha": 0.1,
+  "main": {
+    "lac": {
+      "coverage": 0.9023,
+      "coverage_std": 0.039,
+      "avg_set_size": 0.9023,
+      "avg_set_size_std": 0.039,
+      "singleton_rate": 0.9023,
+      "singleton_rate_std": 0.039,
+      "ambiguous_rate": 0.0,
+      "ambiguous_rate_std": 0.0,
+      "empty_rate": 0.0977,
+      "empty_rate_std": 0.039,
+      "per_class_coverage": {
+        "crazing": 0.9204,
+        "inclusion": 0.9296,
+        "patches": 0.7913,
+        "pitted_surface": 0.923,
+        "rolled-in_scale": 0.91,
+        "scratches": 0.9395
+      }
+    },
+    "aps": {
+      "coverage": 1.0,
+      "coverage_std": 0.0,
+      "avg_set_size": 2.5068,
+      "avg_set_size_std": 0.1498,
+      "singleton_rate": 0.0984,
+      "singleton_rate_std": 0.0334,
+      "ambiguous_rate": 0.9016,
+      "ambiguous_rate_std": 0.0334,
+      "empty_rate": 0.0,
+      "empty_rate_std": 0.0,
+      "per_class_coverage": {
+        "crazing": 1.0,
+        "inclusion": 1.0,
+        "patches": 1.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      }
+    }
+  },
+  "sweep": {
+    "0.01": {
+      "lac": {
+        "coverage": 0.9927,
+        "coverage_std": 0.0084,
+        "avg_set_size": 0.9961,
+        "avg_set_size_std": 0.0103,
+        "singleton_rate": 0.993,
+        "singleton_rate_std": 0.0085,
+        "ambiguous_rate": 0.0015,
+        "ambiguous_rate_std": 0.003,
+        "empty_rate": 0.0054,
+        "empty_rate_std": 0.009,
+        "per_class_coverage": {
+          "crazing": 1.0,
+          "inclusion": 0.9635,
+          "patches": 0.9943,
+          "pitted_surface": 1.0,
+          "rolled-in_scale": 1.0,
+          "scratches": 0.9983
+        }
+      },
+      "aps": {
+        "coverage": 1.0,
+        "coverage_std": 0.0,
+        "avg_set_size": 4.8042,
+        "avg_set_size_std": 0.6922,
+        "singleton_rate": 0.0078,
+        "singleton_rate_std": 0.0101,
+        "ambiguous_rate": 0.9922,
+        "ambiguous_rate_std": 0.0101,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "crazing": 1.0,
+          "inclusion": 1.0,
+          "patches": 1.0,
+          "pitted_surface": 1.0,
+          "rolled-in_scale": 1.0,
+          "scratches": 1.0
+        }
+      }
+    },
+    "0.05": {
+      "lac": {
+        "coverage": 0.9594,
+        "coverage_std": 0.0268,
+        "avg_set_size": 0.9594,
+        "avg_set_size_std": 0.0268,
+        "singleton_rate": 0.9594,
+        "singleton_rate_std": 0.0268,
+        "ambiguous_rate": 0.0,
+        "ambiguous_rate_std": 0.0,
+        "empty_rate": 0.0406,
+        "empty_rate_std": 0.0268,
+        "per_class_coverage": {
+          "crazing": 0.9839,
+          "inclusion": 0.9539,
+          "patches": 0.8935,
+          "pitted_surface": 0.9856,
+          "rolled-in_scale": 0.9774,
+          "scratches": 0.9622
+        }
+      },
+      "aps": {
+        "coverage": 1.0,
+        "coverage_std": 0.0,
+        "avg_set_size": 3.2031,
+        "avg_set_size_std": 0.3391,
+        "singleton_rate": 0.0424,
+        "singleton_rate_std": 0.022,
+        "ambiguous_rate": 0.9576,
+        "ambiguous_rate_std": 0.022,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "crazing": 1.0,
+          "inclusion": 1.0,
+          "patches": 1.0,
+          "pitted_surface": 1.0,
+          "rolled-in_scale": 1.0,
+          "scratches": 1.0
+        }
+      }
+    },
+    "0.1": {
+      "lac": {
+        "coverage": 0.9023,
+        "coverage_std": 0.039,
+        "avg_set_size": 0.9023,
+        "avg_set_size_std": 0.039,
+        "singleton_rate": 0.9023,
+        "singleton_rate_std": 0.039,
+        "ambiguous_rate": 0.0,
+        "ambiguous_rate_std": 0.0,
+        "empty_rate": 0.0977,
+        "empty_rate_std": 0.039,
+        "per_class_coverage": {
+          "crazing": 0.9204,
+          "inclusion": 0.9296,
+          "patches": 0.7913,
+          "pitted_surface": 0.923,
+          "rolled-in_scale": 0.91,
+          "scratches": 0.9395
+        }
+      },
+      "aps": {
+        "coverage": 1.0,
+        "coverage_std": 0.0,
+        "avg_set_size": 2.5068,
+        "avg_set_size_std": 0.1498,
+        "singleton_rate": 0.0984,
+        "singleton_rate_std": 0.0334,
+        "ambiguous_rate": 0.9016,
+        "ambiguous_rate_std": 0.0334,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "crazing": 1.0,
+          "inclusion": 1.0,
+          "patches": 1.0,
+          "pitted_surface": 1.0,
+          "rolled-in_scale": 1.0,
+          "scratches": 1.0
+        }
+      }
+    },
+    "0.2": {
+      "lac": {
+        "coverage": 0.8039,
+        "coverage_std": 0.0483,
+        "avg_set_size": 0.8039,
+        "avg_set_size_std": 0.0483,
+        "singleton_rate": 0.8039,
+        "singleton_rate_std": 0.0483,
+        "ambiguous_rate": 0.0,
+        "ambiguous_rate_std": 0.0,
+        "empty_rate": 0.1961,
+        "empty_rate_std": 0.0483,
+        "per_class_coverage": {
+          "crazing": 0.8865,
+          "inclusion": 0.8322,
+          "patches": 0.6178,
+          "pitted_surface": 0.6931,
+          "rolled-in_scale": 0.8604,
+          "scratches": 0.9335
+        }
+      },
+      "aps": {
+        "coverage": 1.0,
+        "coverage_std": 0.0,
+        "avg_set_size": 2.0955,
+        "avg_set_size_std": 0.0879,
+        "singleton_rate": 0.1911,
+        "singleton_rate_std": 0.045,
+        "ambiguous_rate": 0.8089,
+        "ambiguous_rate_std": 0.045,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "crazing": 1.0,
+          "inclusion": 1.0,
+          "patches": 1.0,
+          "pitted_surface": 1.0,
+          "rolled-in_scale": 1.0,
+          "scratches": 1.0
+        }
+      }
+    }
+  },
+  "plot": "data\\results\\conformal\\conformal_resnet18.png",
+  "note": "test를 stratified 반분(calib/eval)해 보정·평가, N회 반복 평균. test는 학습·모델선택에 미사용(교환성 충족)."
+}

@@ -105,6 +105,9 @@ def main() -> None:
     matplotlib.use("Agg")
     import matplotlib.cm as cm
     import matplotlib.pyplot as plt
+
+    plt.rcParams["font.family"] = "Malgun Gothic"  # 한글 라벨 렌더(Windows)
+    plt.rcParams["axes.unicode_minus"] = False
     from PIL import Image
 
     device = "cuda" if torch.cuda.is_available() else "cpu"

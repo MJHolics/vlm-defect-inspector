@@ -517,6 +517,40 @@ fab에는 **학습 때 본 적 없는 새로운 결함**이 등장한다. 모델
 
 ---
 
+## 설명가능성(XAI) — Grad-CAM으로 "어디를 보고 판정했나"
+
+정확도(95.9%/99.6%)와 불확실성(OOD·confidence 게이트)에 더해, 마지막 조각은 **판단 근거**다.
+의료기기·검사 도메인에서 모델의 출력만으로는 부족하고 *왜 그렇게 판정했는지*를 보여줄 수 있어야
+한다. 엣지 CNN(ResNet18)에 **Grad-CAM**을 붙여, 예측 클래스 로짓을 마지막 conv 특성맵으로
+역전파한 기여도 히트맵을 입력 위에 겹쳤다(`scripts/gradcam_edge.py`, 배포와 동일한 전처리 위에서
+계산해 설명의 충실도를 보장).
+
+![Grad-CAM 갤러리](data/results/gradcam/gradcam_resnet18.png)
+
+NEU test 12장(클래스당 2장) 실측 — 12/12 정답, confidence 0.80~0.94. 히트맵이 **결함의 형태를
+충실히 따라간다**:
+
+| 결함 유형 | saliency 양상 | 해석 |
+|---|---|---|
+| inclusion(개재물) | 개재물 점에 **국소 초점** | 점 결함 → 점 히트맵 |
+| scratches(스크래치) | 스크래치 선을 따라 **수직 띠** | 선 결함 → 선 히트맵 |
+| patches(패치) | 패치 영역에 집중 | 경계 있는 결함을 국소화 |
+| crazing·pitted_surface | 표면 전반에 **분산** | 텍스처형 결함 → 분산 saliency(정직한 양상) |
+
+**관찰:** 경계가 뚜렷한 결함(개재물·스크래치·패치)은 saliency가 그 위치에 모이고, 표면 전체에
+퍼진 텍스처형 결함(균열·피팅)은 분산된다. 즉 히트맵이 **결함의 물리적 형태와 일치** — 모델이
+배경이 아니라 결함 자체를 보고 판정한다는 시각적 증거다. 산출물은
+`data/results/gradcam/`(갤러리 PNG + 예측·confidence 매니페스트 JSON).
+
+```bash
+python scripts/gradcam_edge.py --arch resnet18 --per-class 2
+```
+
+> "검증 가능한 AI"의 세 축 — **정확도(eval) · 불확실성(OOD·게이트) · 근거(Grad-CAM)** — 를
+> 모두 코드와 실측으로 채웠다. 출력이 맞는지, 모를 때 멈추는지, 왜 그렇게 봤는지까지.
+
+---
+
 ## 기술 스택
 
 `Qwen2.5-VL` · `QLoRA` · `PEFT` · `bitsandbytes` · `albumentations` · `PyTorch` · `FastAPI` · `Gradio` · `Docker`

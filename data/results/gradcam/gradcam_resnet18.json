@@ -1,0 +1,93 @@
+{
+  "arch": "resnet18",
+  "n_samples": 12,
+  "correct": 12,
+  "accuracy_on_samples": 1.0,
+  "gallery": "data\\results\\gradcam\\gradcam_gallery_resnet18.png",
+  "samples": [
+    {
+      "image": "data\\NEU-DET\\validation\\images\\crazing\\crazing_277.jpg",
+      "gt": "crazing",
+      "pred": "crazing",
+      "confidence": 0.9173,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\train\\images\\crazing\\crazing_216.jpg",
+      "gt": "crazing",
+      "pred": "crazing",
+      "confidence": 0.929,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\train\\images\\inclusion\\inclusion_142.jpg",
+      "gt": "inclusion",
+      "pred": "inclusion",
+      "confidence": 0.9014,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\train\\images\\inclusion\\inclusion_83.jpg",
+      "gt": "inclusion",
+      "pred": "inclusion",
+      "confidence": 0.9215,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\train\\images\\patches\\patches_26.jpg",
+      "gt": "patches",
+      "pred": "patches",
+      "confidence": 0.8907,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\validation\\images\\patches\\patches_292.jpg",
+      "gt": "patches",
+      "pred": "patches",
+      "confidence": 0.8035,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\train\\images\\pitted_surface\\pitted_surface_224.jpg",
+      "gt": "pitted_surface",
+      "pred": "pitted_surface",
+      "confidence": 0.9278,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\validation\\images\\pitted_surface\\pitted_surface_293.jpg",
+      "gt": "pitted_surface",
+      "pred": "pitted_surface",
+      "confidence": 0.9313,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\train\\images\\rolled-in_scale\\rolled-in_scale_6.jpg",
+      "gt": "rolled-in_scale",
+      "pred": "rolled-in_scale",
+      "confidence": 0.8605,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\train\\images\\rolled-in_scale\\rolled-in_scale_130.jpg",
+      "gt": "rolled-in_scale",
+      "pred": "rolled-in_scale",
+      "confidence": 0.9151,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\train\\images\\scratches\\scratches_120.jpg",
+      "gt": "scratches",
+      "pred": "scratches",
+      "confidence": 0.9369,
+      "correct": true
+    },
+    {
+      "image": "data\\NEU-DET\\train\\images\\scratches\\scratches_79.jpg",
+      "gt": "scratches",
+      "pred": "scratches",
+      "confidence": 0.8735,
+      "correct": true
+    }
+  ]
+}

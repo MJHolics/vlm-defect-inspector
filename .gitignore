@@ -42,6 +42,12 @@ data/audit/
 이력서_*.pdf
 공부_로드맵_*.md
 
+# 루트에 임시로 떨군 스크린샷·이미지 (공고 캡처 등 — repo에 두지 않음)
+# space/examples/ 의 샘플 이미지는 영향받지 않는다(루트만 무시).
+/*.jpg
+/*.jpeg
+/*.png
+
 # OS
 .DS_Store
 Thumbs.db

@@ -12,6 +12,12 @@ import sys
 import tempfile
 from pathlib import Path
 
+# Windows 기본 콘솔(cp949)에서도 유니코드 출력이 깨지지 않게 한다.
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 

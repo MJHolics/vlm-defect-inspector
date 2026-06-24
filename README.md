@@ -12,6 +12,46 @@
 
 ---
 
+## 한눈에 — 하나의 논지, 열 개의 트랙
+
+> **하나의 논지:** 검사 AI는 "정확도 한 숫자"가 아니다. **태스크에 맞는 모델 크기를 고르고
+> (7B VLM ↔ 1.5M CNN), 모든 선택을 공개 데이터·고정 평가셋으로 검증하며, 음성 결과와 한계까지
+> 정직하게 보고**해야 규제·고위험 현장(제조·의료)에 올릴 수 있다. 이 repo는 그 논지를 한 데이터셋
+> (NEU)에서 끝까지 밀어붙인 **end-to-end 시스템**이다 — 데이터 → 학습 → 평가 → 불확실성 → 설명 →
+> 서빙 → 배포 → 자가개선.
+
+흩어져 보이는 트랙들은 **세 기둥**으로 읽으면 하나로 모인다.
+
+**① 적정 모델 크기 (Right-sizing) — 역할 분담을 말이 아니라 숫자로**
+
+| 트랙 | 핵심 결과 | 코드 |
+|------|-----------|------|
+| QLoRA 파인튜닝 | zero-shot 33.7% → **82.6%** (소비자 GPU, 64분) | `notebooks/03_finetune` |
+| 양산 지연 진단 | 7B VLM 단건 **14.7 s** → 인라인 부적합을 정량 진단 | `scripts/benchmark_latency.py` |
+| 엣지 경량화 | MobileNetV3-S **99.6 % / CPU 1.8 ms / 6 MB** — 폐쇄셋서 VLM 압도 | `scripts/{train_edge_cnn,benchmark_edge}.py` |
+| 반도체 전이 | WM-811K, 라벨 10 %서 사전학습 전이로 **+9.5 %p** macro-F1 | `scripts/train_wafer_cnn.py` |
+
+**② 검증 가능한 신뢰 (Trustworthy) — 정확도 + 불확실성 + 근거 + 운영안전**
+
+| 트랙 | 핵심 결과 | 코드 |
+|------|-----------|------|
+| 운영 신뢰 레이어 | audit · HITL · drift · 수용기준 위험점수 **0.0196 PASS** | `app/`, `scripts/acceptance_eval.py` |
+| 자가개선 루프 | v4 승격(95.9 %/0.0041) · **v5 거부**(정확도 최고치인데 안전 회귀) | `app/registry.py`, `scripts/retrain_*.py` |
+| OOD(신규결함) 탐지 | 생성 confidence 0.68(한계) → **Mahalanobis 0.97**(해법) | `scripts/ood_scores.py` |
+| Conformal Prediction | LAC 커버리지 **1−α 보장 실측**(목표 .90 → 경험 .902) | `scripts/conformal_edge.py` |
+| 설명가능성(XAI) | Grad-CAM 12/12, saliency가 결함의 물리적 형태와 일치 | `scripts/gradcam_edge.py` |
+
+**③ 정직성 (Honesty) — 꾸미지 않고, 한계를 드러내고, 그 한계를 메운다**
+- **지식증류**: "교사(VLM)가 학생(CNN)보다 약하면 증류는 정확도를 못 올린다"는 **음성 결과**를
+  3-seed로 보고 — 단일 seed의 가짜 양성(+1.85%p)을 회피.
+- **OOD**: 생성 confidence의 한계(AUROC 0.68)를 먼저 드러내고, 전용 특징공간 점수로 메운다(0.97).
+- **Conformal**: 주변 커버리지는 보장하되 *클래스별*은 아님(patches 0.79)을 명시하고 다음 단계를 가리킨다.
+- 모든 수치는 **공개 데이터 · 고정 test(270건, 누수 0) · 실측**이다 — 자체 임의 수치 없음.
+
+> 세 기둥의 공통 원칙: **"태스크에 맞는 모델을 고르고, 그 선택을 데이터로 검증하고, 결과를 꾸미지 않는다."**
+
+---
+
 ## 핵심 성과 — 3단계 개선
 
 | 단계 | Type Accuracy | Severity Acc | JSON Parse | 비고 |

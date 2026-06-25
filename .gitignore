@@ -18,6 +18,7 @@ data/NEU-DET/
 data/cache/
 data/wm811k/
 data/mvtec/
+data/results/_*
 models/checkpoints/
 models/merged/
 *.bin

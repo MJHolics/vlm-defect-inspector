@@ -255,6 +255,15 @@ class PatchCore:
     def bank_size(self) -> int:
         return 0 if self.bank is None else len(self.bank)
 
+    def save_bank(self, path):
+        """적합된 memory bank를 .npy로 저장(데모 콜드스타트 캐시용)."""
+        np.save(path, self.bank)
+
+    def load_bank(self, path):
+        """저장된 memory bank를 불러와 fit을 건너뛴다."""
+        self.bank = np.load(path).astype(np.float32)
+        return self
+
 
 class PaDiM:
     """패치 위치별 가우시안 + Mahalanobis. 무작위 차원축소로 공분산을 가볍게."""

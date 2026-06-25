@@ -238,8 +238,9 @@ def main():
                     help="이 결함유형을 train/val에서 제외(open-set OOD 실험용). "
                          "제외된 클래스는 학습에 한 번도 안 쓰여 '신규 결함'이 된다.")
     ap.add_argument("--oversample-class", default=None,
-                    help="이 결함유형을 학습셋에서 N배로 오버샘플(진단된 약한 클래스 보강). "
-                         "증강과 결합되어 매 복제본이 다른 뷰로 들어가 경계를 강화한다.")
+                    help="이 결함유형(들)을 학습셋에서 N배로 오버샘플(진단된 약한 클래스 보강). "
+                         "쉼표로 여러 클래스 지정 가능(예: inclusion,rolled-in_scale) — 각 클래스에 "
+                         "같은 배수 적용. 증강과 결합되어 매 복제본이 다른 뷰로 들어가 경계를 강화한다.")
     ap.add_argument("--oversample-factor", type=int, default=1,
                     help="--oversample-class 총 등장 배수(1=변화 없음, 3=원본 포함 3배)")
     args = ap.parse_args()
@@ -272,13 +273,16 @@ def main():
     train_records = train_part + extra_part
     oversampled = 0
     if args.oversample_class and args.oversample_factor > 1:
-        oc = args.oversample_class.lower()
-        base_recs = [r for r in train_records if _rec_type(r) == oc]
-        extra_copies = base_recs * (args.oversample_factor - 1)
-        train_records = train_records + extra_copies
-        oversampled = len(extra_copies)
-        print(f"[oversample] '{oc}' {len(base_recs)}건 × {args.oversample_factor} "
-              f"→ +{oversampled}건 (증강이 매 복제본을 다른 뷰로 만듦)")
+        classes = [c.strip().lower() for c in args.oversample_class.split(",") if c.strip()]
+        all_copies = []
+        for oc in classes:
+            base_recs = [r for r in train_records if _rec_type(r) == oc]
+            extra_copies = base_recs * (args.oversample_factor - 1)
+            all_copies += extra_copies
+            print(f"[oversample] '{oc}' {len(base_recs)}건 × {args.oversample_factor} "
+                  f"→ +{len(extra_copies)}건 (증강이 매 복제본을 다른 뷰로 만듦)")
+        train_records = train_records + all_copies
+        oversampled = len(all_copies)
     if args.val_limit is not None:
         es_val = es_val[: args.val_limit]
     print(f"사용: train {len(train_part)} + 교정 {len(extra_part)} + 오버샘플 {oversampled} "

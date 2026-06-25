@@ -18,7 +18,7 @@ NEU 금속 표면 결함 6-class(`crazing`·`inclusion`·`patches`·`pitted_surf
 
 이 Space는 7B VLM이 아니라, 같은 데이터로 학습한 **경량 CNN(MobileNetV3-Small · 1.52M 파라미터 ·
 6 MB)** 을 ONNX Runtime으로 띄운 것입니다. 폐쇄형 6-class에서 **test 정확도 99.6%**(같은 분할에서 7B
-VLM 95.9%보다 높음)를 내면서 **CPU 단일코어 수 ms**에 돌아, 라인 인라인 검사에 실제로 올릴 수 있는
+VLM 98.9%보다 높음)를 내면서 **CPU 단일코어 수 ms**에 돌아, 라인 인라인 검사에 실제로 올릴 수 있는
 모델입니다. confidence < 0.80이면 운영 게이트가 사람 검토 큐로 보냅니다.
 
 > ⚠️ **적용 범위·한계.** NEU-DET(200×200 흑백, 균일 조명의 미세 표면 텍스처) 6개 결함만 학습했습니다.

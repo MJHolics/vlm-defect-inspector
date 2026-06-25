@@ -1,0 +1,4 @@
+config,method,backbone,image_auroc,pixel_auroc,latency_ms,bank_size,fit_sec
+patchcore_heavy,PatchCore,wide_resnet50_2,0.8182,0.9755,56.1,2000,131.5
+patchcore_light,PatchCore,resnet18,0.6809,0.9385,5.4,200,7.2
+padim,PaDiM,resnet18,0.7975,0.9761,4.2,7918400,9.0

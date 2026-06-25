@@ -17,6 +17,7 @@ data/raw/
 data/NEU-DET/
 data/cache/
 data/wm811k/
+data/mvtec/
 models/checkpoints/
 models/merged/
 *.bin

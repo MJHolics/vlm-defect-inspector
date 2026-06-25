@@ -12,7 +12,7 @@
 
 ---
 
-## 한눈에 — 하나의 논지, 열 개의 트랙
+## 한눈에 — 하나의 논지, 열한 개의 트랙
 
 > **하나의 논지:** 검사 AI는 "정확도 한 숫자"가 아니다. **태스크에 맞는 모델 크기를 고르고
 > (7B VLM ↔ 1.5M CNN), 모든 선택을 공개 데이터·고정 평가셋으로 검증하며, 음성 결과와 한계까지
@@ -30,6 +30,7 @@
 | 양산 지연 진단 | 7B VLM 단건 **14.7 s** → 인라인 부적합을 정량 진단 | `scripts/benchmark_latency.py` |
 | 엣지 경량화 | MobileNetV3-S **99.6 % / CPU 1.8 ms / 6 MB** — 폐쇄셋서 VLM 압도 | `scripts/{train_edge_cnn,benchmark_edge}.py` |
 | 반도체 전이 | WM-811K, 라벨 10 %서 사전학습 전이로 **+9.5 %p** macro-F1 | `scripts/train_wafer_cnn.py` |
+| 무지도 이상탐지 | 정상만 학습→결함 위치화 **pixel AUROC 0.98**, PatchCore heavy↔light·PaDiM right-sizing | `scripts/anomaly_detect.py` |
 
 **② 검증 가능한 신뢰 (Trustworthy) — 정확도 + 불확실성 + 근거 + 운영안전**
 
@@ -658,6 +659,69 @@ python scripts/gradcam_edge.py --arch resnet18 --per-class 2
 > "검증 가능한 AI"의 세 축 — **정확도(eval) · 불확실성(OOD · conformal 보장 · 게이트) ·
 > 근거(Grad-CAM)** — 를 모두 코드와 실측으로 채웠다. 출력이 맞는지, 모를 때 멈추는지(얼마나
 > 확실히 모르는지까지), 왜 그렇게 봤는지까지.
+
+---
+
+## 무지도 이상탐지 — 정상만 학습해 결함을 탐지 (지도분류와 다른 풀)
+
+지금까지의 트랙은 전부 **지도학습 분류**(VLM/CNN)다. 그런데 실제 제조 검사에선 결함 라벨이
+귀해서, **정상(양품) 이미지만 학습하고 그로부터의 이탈을 탐지**하는 무지도 이상탐지(AD)가
+지배적이다. NEU엔 정상 이미지가 없어(6클래스 전부 결함) 이 패러다임을 못 하므로, 표준 산업
+AD 벤치 **MVTec AD**의 `screw`(금속 나사) 카테고리로 트랙을 추가했다 — 정상 320장만 학습,
+결함은 평가에서 처음 본다. 새 무거운 패키지(anomalib·faiss) 없이 **torchvision 백본 + sklearn
+kNN + numpy**로 직접 구현(`scripts/anomaly_detect.py`).
+
+같은 패러다임 안에서 **무거움↔가벼움을 노브로 조율**해 비교했다(고객 자원 제약에 맞추는 조율):
+
+| 구성 | 백본 | image AUROC | pixel AUROC | 점수계산 지연 | 메모리 | fit |
+|------|------|:---:|:---:|:---:|:---:|:---:|
+| PatchCore (heavy) | wide_resnet50_2 | **0.818** | 0.976 | 55.8 ms | ~11.7 MB (패치 2000) | 129 s |
+| PatchCore (light) | resnet18 + 강한 coreset | 0.681 | 0.939 | **5.4 ms** | **~0.3 MB** (패치 200) | 8 s |
+| PaDiM | resnet18 | 0.798 | **0.976** | 3.9 ms | ~63 MB (위치별 공분산) | 10 s |
+
+![이상맵 갤러리](data/results/anomaly/patchcore_heavy.png)
+
+*(점수계산 지연 = kNN/Mahalanobis 단계만; 백본 forward는 별도이며 wide_resnet50_2가 resnet18보다
+훨씬 무겁다 → end-to-end론 heavy가 더 느리다. 산출물 `data/results/anomaly_screw.csv` + 갤러리.)*
+
+**무엇을 배웠나 (이 비교에서):**
+- **결함 라벨 0개로도 픽셀 단위 결함 위치를 0.98로 잡는다** — 정상만 학습해서. 지도분류엔 없는 능력.
+- **"빠름"과 "가벼움(메모리)"은 다른 축이다.** PaDiM은 추론이 가장 빠른데(3.9 ms) 위치별 공분산
+  때문에 메모리는 가장 무겁다(63 MB). PatchCore-light는 가장 가볍지만(0.3 MB) 정확도를 내준다.
+  하나의 "경량" 라벨로 뭉뚱그릴 수 없고, **고객이 무엇(지연·메모리·정확도)에 민감한지**로 고른다.
+- **image AUROC ≪ pixel AUROC** (0.68~0.82 vs 0.94~0.98): 모델이 결함 *위치*는 잘 짚지만 이미지
+  단위 정상/이상 *판정*은 더 어렵다. `screw`는 결함이 작고 나사가 회전·이동해 image-level이 어려운
+  카테고리다(공개 PatchCore도 상대적 약점). 카테고리 난이도가 패러다임 선택만큼 결과를 가른다.
+- **정직한 구현 한계:** CPU 친화로 무거운 패키지 없이 짜며 patch pool을 2만으로 캡하고 greedy
+  coreset도 근사 → 공개 SOTA(screw image ~0.94)보다 낮다. 트레이드오프를 숨기지 않는다.
+- **시도했다 버린 것(음성 결과):** PatchCore의 국소 이웃평균(locally aware features)은 `screw`처럼
+  작은 결함에선 신호를 흐려 image AUROC가 0.818→0.803으로 *떨어져* 미적용했다.
+
+```bash
+python scripts/fetch_mvtec.py --category screw      # 정상320 + 결함test (Kaggle)
+python scripts/eval_anomaly.py --category screw     # heavy/light/PaDiM 비교 실측
+```
+
+---
+
+## 모델 선택 플레이북 — 어떤 상황에 어떤 모델을 왜
+
+이 repo의 트랙들은 흩어진 자랑이 아니라 **모델 선택 판단의 근거**다. "정답 모델"은 하나가 아니라
+*데이터 상황(라벨 유무·분포)·자원·설명 요구·비용 구조*가 정한다. 그 결정을 같은 검사 문제 위에서
+직접 구현·실측해 표로 못박는다.
+
+| 상황 | 권장 모델 | 왜 (실측 근거) | 트랙 |
+|------|-----------|----------------|------|
+| 폐쇄셋·라벨 충분·고물량 인라인 | 경량 CNN (MobileNetV3-S) | CPU 1.8 ms·99.6%·6 MB — 7B VLM보다 빠르고 정확 | 엣지 경량화 |
+| 결함 유형·심각도 + 자연어 근거 설명 필요 | 7B VLM (QLoRA) | 구조화 JSON 리포트·설명·콜드스타트 | QLoRA · XAI |
+| **결함 라벨이 없거나 극소수(정상만 풍부)** | **무지도 AD (PatchCore/PaDiM)** | 정상만 학습해 결함 위치화 (pixel AUROC 0.98) | **이상탐지** |
+| 학습 분포 밖 신규 결함을 걸러야 함 (open-set) | OOD 점수 + confidence 게이트 | Mahalanobis AUROC 0.97, 낯선 입력은 사람 검토로 | OOD |
+| 오탐 비용 큼·통계적 보장 필요 | Conformal Prediction | 1−α 커버리지 보장 예측집합 | Conformal |
+| 자원 빡빡 (엣지-CPU·메모리 한정) | right-sizing 노브 | 백본·coreset·INT8로 정확도↔자원 연속 조절 | 경량화 · AD coreset · INT8 |
+
+> 한 데이터셋(NEU/MVTec)을 끝까지 밀어붙이며 **지도분류 · 경량화 · 무지도 이상탐지 · OOD ·
+> Conformal**까지 *직접 만들어 비교*했기에, "왜 이 상황엔 이 모델인가"를 말이 아니라 숫자로 답한다.
+> 결과 하나가 아니라 **그 차이를 아는 과정**이 이 프로젝트의 산출물이다.
 
 ---
 

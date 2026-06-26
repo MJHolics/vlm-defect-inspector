@@ -1,0 +1,8 @@
+paradigm,n_labels,auroc_mean,auroc_std,acc_mean,acc_std
+unsupervised,0,0.7601,0.0553,0.74,0.0659
+supervised,2,0.5866,0.0844,0.54,0.0764
+supervised,5,0.6477,0.0427,0.57,0.0269
+supervised,10,0.7472,0.0444,0.6825,0.0562
+supervised,20,0.8291,0.0593,0.7325,0.0551
+supervised,40,0.8682,0.0151,0.74,0.0429
+supervised,79,0.9247,0.0113,0.825,0.0274

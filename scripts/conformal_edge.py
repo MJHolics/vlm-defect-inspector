@@ -59,6 +59,28 @@ def lac_sets(probs: np.ndarray, qhat: float) -> np.ndarray:
     return probs >= (1.0 - qhat)
 
 
+def lac_calibrate_mondrian(cal_probs: np.ndarray, cal_labels: np.ndarray, alpha: float) -> np.ndarray:
+    """Mondrian(클래스조건부) LAC 보정: 각 클래스를 **자기 표본의 점수로만** 보정한다.
+
+    표준(주변) LAC는 전체 커버리지 1-α만 보장하고 클래스별로는 쏠릴 수 있다(어려운 클래스가
+    쉬운 클래스에 가려 미달 — README의 patches 0.79). 클래스별 분위수를 따로 잡으면
+    각 클래스의 커버리지가 1-α 이상으로 보장된다. 표본 없는 클래스는 +∞(안전측: 전체 포함).
+    """
+    n_classes = cal_probs.shape[1]
+    qhat = np.full(n_classes, np.inf)
+    for c in range(n_classes):
+        m = cal_labels == c
+        if m.any():
+            qhat[c] = conformal_quantile(1.0 - cal_probs[m, c], alpha)
+    return qhat
+
+
+def lac_sets_mondrian(probs: np.ndarray, qhat_by_class: np.ndarray) -> np.ndarray:
+    """클래스별 임계로 집합 구성: y 포함 ⇔ softmax(y) ≥ 1 - q̂_y (q̂=∞이면 항상 포함)."""
+    thresh = 1.0 - np.asarray(qhat_by_class, dtype=float)  # (C,), q̂=∞ → -∞
+    return probs >= thresh[None, :]
+
+
 def aps_scores_true(probs: np.ndarray, labels: np.ndarray) -> np.ndarray:
     """각 표본의 APS 비순응점수 = 내림차순으로 true 클래스까지의 확률 누적합."""
     order = np.argsort(-probs, axis=1)
@@ -143,13 +165,16 @@ def _stratified_halves(labels: np.ndarray, rng: np.random.Generator):
 def _repeated(probs, labels, alpha, repeats, seed):
     """N회 stratified 반분 반복 → LAC/APS 커버리지·집합크기 평균±표준편차."""
     rng = np.random.default_rng(seed)
-    acc = {"lac": [], "aps": []}
+    acc = {"lac": [], "aps": [], "lac_mondrian": []}
     for _ in range(repeats):
         cal, ev = _stratified_halves(labels, rng)
         cp, cl = probs[cal], labels[cal]
         ep, el = probs[ev], labels[ev]
         acc["lac"].append(evaluate_sets(lac_sets(ep, lac_calibrate(cp, cl, alpha)), el))
         acc["aps"].append(evaluate_sets(aps_sets(ep, aps_calibrate(cp, cl, alpha)), el))
+        acc["lac_mondrian"].append(
+            evaluate_sets(lac_sets_mondrian(ep, lac_calibrate_mondrian(cp, cl, alpha)), el)
+        )
 
     def agg(key):
         out = {}
@@ -166,7 +191,7 @@ def _repeated(probs, labels, alpha, repeats, seed):
         out["per_class_coverage"] = pc
         return out
 
-    return {"lac": agg("lac"), "aps": agg("aps")}
+    return {"lac": agg("lac"), "aps": agg("aps"), "lac_mondrian": agg("lac_mondrian")}
 
 
 def main() -> None:
@@ -194,11 +219,22 @@ def main() -> None:
     # 주 결과(α 지정) — N회 반복
     main_res = _repeated(probs, labels, args.alpha, args.repeats, args.seed)
     print(f"\n=== α={args.alpha} (목표 커버리지 {1-args.alpha:.0%}) · {args.repeats}회 반복 ===")
-    for name in ("lac", "aps"):
+    for name in ("lac", "lac_mondrian", "aps"):
         r = main_res[name]
-        print(f" {name.upper():4s} 커버리지 {r['coverage']:.3f}±{r['coverage_std']:.3f}"
+        print(f" {name.upper():12s} 커버리지 {r['coverage']:.3f}±{r['coverage_std']:.3f}"
               f" · 평균집합크기 {r['avg_set_size']:.2f}"
               f" · 단일{r['singleton_rate']:.0%}/애매{r['ambiguous_rate']:.0%}")
+
+    # 클래스별 커버리지: 주변 LAC는 일부 클래스가 미달할 수 있다(조건부 보장 X).
+    # Mondrian은 클래스별로 보정해 각 클래스를 1-α 이상으로 끌어올린다.
+    mc = main_res["lac"]["per_class_coverage"]
+    mm = main_res["lac_mondrian"]["per_class_coverage"]
+    print(f"\n--- 클래스별 커버리지: LAC 주변 → Mondrian 클래스조건부 (목표 ≥ {1-args.alpha:.2f}) ---")
+    for c in CLASSES:
+        flag = "  ← 주변 미달" if mc.get(c, 0) < (1 - args.alpha) - 0.01 else ""
+        print(f"  {c:<16} {mc.get(c, 0):.3f} → {mm.get(c, 0):.3f}{flag}")
+    if mc and mm:
+        print(f"  최소 클래스 커버리지: 주변 {min(mc.values()):.3f} → Mondrian {min(mm.values()):.3f}")
 
     # α 스윕 — 보장(커버리지가 1-α를 추종하는지) 검증
     sweep = {}

@@ -86,6 +86,67 @@ def test_aps_is_conservative():
     print("  ✓ test_aps_is_conservative")
 
 
+def _synthetic_uneven_difficulty(n_per: int, seed: int):
+    """클래스 0만 '어려운'(모델이 자신 없는) 데이터. 나머지 5클래스는 쉽다.
+
+    주변(marginal) LAC는 쉬운 다수 클래스에 가려 어려운 클래스 0을 과소 커버한다.
+    클래스 내부에서는 (prob, label=c) 쌍이 교환 가능하므로 Mondrian은 클래스별 보장을 회복한다.
+    """
+    rng = np.random.default_rng(seed)
+    probs_list, labels_list = [], []
+    for c in range(C):
+        for _ in range(n_per):
+            ptrue = rng.uniform(0.20, 0.55) if c == 0 else rng.uniform(0.85, 0.98)
+            others = [j for j in range(C) if j != c]
+            w = rng.dirichlet(np.ones(len(others))) * (1.0 - ptrue)
+            p = np.empty(C)
+            p[c] = ptrue
+            for j, wj in zip(others, w):
+                p[j] = wj
+            probs_list.append(p)
+            labels_list.append(c)
+    return np.array(probs_list), np.array(labels_list)
+
+
+def test_lac_mondrian_fixes_per_class_undercoverage():
+    """Mondrian(클래스조건부) LAC가 주변 LAC의 클래스별 미달을 회복하는지.
+
+    주변 LAC: 어려운 클래스 0이 1-α 미달. Mondrian: 클래스별 보정으로 0도 1-α 이상.
+    """
+    probs, labels = _synthetic_uneven_difficulty(n_per=400, seed=3)
+    alpha = 0.1
+    rng = np.random.default_rng(11)
+    # 클래스별 커버리지를 split에 걸쳐 누적 → 각 클래스의 평균 커버리지로 집계.
+    # (Mondrian 보장은 클래스별 E[coverage]≥1-α이지 split별 최소의 평균이 아니다.)
+    marg_pc = {c: [] for c in cp.CLASSES}
+    mond_pc = {c: [] for c in cp.CLASSES}
+    for _ in range(80):
+        cal, ev = cp._stratified_halves(labels, rng)
+        cpb, clb = probs[cal], labels[cal]
+        epb, elb = probs[ev], labels[ev]
+        marg = cp.evaluate_sets(cp.lac_sets(epb, cp.lac_calibrate(cpb, clb, alpha)), elb)
+        mond = cp.evaluate_sets(
+            cp.lac_sets_mondrian(epb, cp.lac_calibrate_mondrian(cpb, clb, alpha)), elb
+        )
+        for c in cp.CLASSES:
+            marg_pc[c].append(marg["per_class_coverage"][c])
+            mond_pc[c].append(mond["per_class_coverage"][c])
+    marg_mean = {c: float(np.mean(v)) for c, v in marg_pc.items()}
+    mond_mean = {c: float(np.mean(v)) for c, v in mond_pc.items()}
+    hard = cp.CLASSES[0]
+    # 주변 LAC는 어려운 클래스 0을 과소 커버한다(< 1-α).
+    assert marg_mean[hard] < (1 - alpha), f"주변 LAC가 클래스0을 미달시키지 않음: {marg_mean[hard]:.3f}"
+    # Mondrian은 클래스 0을 보장 수준으로 끌어올린다.
+    assert mond_mean[hard] >= marg_mean[hard], (marg_mean[hard], mond_mean[hard])
+    assert mond_mean[hard] >= (1 - alpha) - 0.03, f"Mondrian 클래스0 커버리지 부족: {mond_mean[hard]:.3f}"
+    # Mondrian은 모든 클래스의 평균 커버리지를 보장 근처로 끌어올린다.
+    assert min(mond_mean.values()) >= (1 - alpha) - 0.03, (
+        f"Mondrian 최소 클래스(평균) 커버리지 부족: {min(mond_mean.values()):.3f}"
+    )
+    print(f"  ✓ test_lac_mondrian_fixes_per_class_undercoverage "
+          f"(클래스0: 주변 {marg_mean[hard]:.3f} → Mondrian {mond_mean[hard]:.3f})")
+
+
 def test_evaluate_sets_arithmetic():
     """집합 마스크 → 커버리지/집합크기/싱글톤/공집합 회계가 정확한지 (손계산 대조)."""
     # 3표본 × 6클래스. 정답 = [0, 1, 2]
@@ -108,5 +169,6 @@ if __name__ == "__main__":
     test_conformal_quantile_finite_sample()
     test_lac_marginal_coverage_guarantee()
     test_aps_is_conservative()
+    test_lac_mondrian_fixes_per_class_undercoverage()
     test_evaluate_sets_arithmetic()
     print("전체 통과 ✅")

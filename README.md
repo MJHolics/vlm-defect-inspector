@@ -614,16 +614,69 @@ Prediction은 한 걸음 더 나가, **분포 가정 없이 유한 표본에서 
 - **LAC는 효율적, APS는 보수적** — LAC는 99.6% 정확한 모델에서 90%가 단일 예측이고 평균 집합이
   1 미만(α만큼은 *빈 집합* = "기권→사람검토"로 나타남). 결정적(비랜덤) APS는 항상 덮지만 집합이 커
   과보호적이다. 안전 여유 vs 효율의 트레이드오프를 수치로 보여준다.
-- **정직한 한계 — 주변 커버리지 ≠ 조건부 커버리지**: α=0.1에서 클래스별 커버리지를 보면 대부분
-  ~0.90이지만 **patches는 0.79로 미달**한다. 표준(주변) conformal은 *전체* 90%만 보장할 뿐 *클래스별*은
-  아니다 — 어려운 클래스가 손해를 본다. 이는 class-conditional(Mondrian) conformal로 가는 다음 단계를
-  가리킨다(드러내고, 방향을 제시).
+- **주변 커버리지 ≠ 조건부 커버리지 → Mondrian으로 닫았다.** α=0.1에서 주변(표준) LAC는 *전체* 90%만
+  보장할 뿐 *클래스별*은 아니다 — 어려운 **patches가 0.79로 미달**(다른 클래스에 가려 손해). 그래서
+  **class-conditional(Mondrian) LAC**를 구현했다(`lac_calibrate_mondrian`): 각 클래스를 *자기 표본의
+  점수로만* 보정해 클래스별 커버리지를 1−α 이상으로 끌어올린다. 결과(아래 표) — 최소 클래스 커버리지
+  **0.791 → 0.909**, patches **0.79 → 0.92**, 전체 커버리지는 0.902→0.918 유지, 집합크기 0.90→0.92로
+  소폭만 증가. 순수 numpy라 합성 데이터로 단위테스트된다(`test_conformal.py`: 주변이 미달시키는
+  클래스를 Mondrian이 보장 수준으로 회복).
+
+| 클래스 | 주변 LAC | Mondrian |
+|---|:---:|:---:|
+| patches | **0.791** | **0.920** |
+| inclusion | 0.930 | 0.912 |
+| crazing | 0.920 | 0.911 |
+| pitted_surface | 0.923 | 0.933 |
+| rolled-in_scale | 0.910 | 0.909 |
+| scratches | 0.940 | 0.925 |
+| **최소 클래스** | **0.791** | **0.909** |
 
 **운영 연결**: 예측집합 크기 > 1 = "후보를 못 좁힘 → 사람검토", 빈 집합 = "기권"을 **1−α 보장 아래**
-라우팅한다. 기존 confidence·OOD 게이트의 통계적 상위호환이다.
+라우팅한다. Mondrian이면 *클래스별*로도 보장돼, 어려운 결함이 조용히 미검토로 빠지지 않는다. 기존
+confidence·OOD 게이트의 통계적 상위호환이다.
 
 ```bash
-python scripts/conformal_edge.py --arch resnet18 --alpha 0.1 --repeats 100
+python scripts/conformal_edge.py --arch resnet18 --alpha 0.1 --repeats 100  # LAC/Mondrian/APS + 클래스별
+```
+
+---
+
+## 확률 자체의 정직성 — Calibration (ECE + Temperature Scaling)
+
+Conformal이 *커버리지*(정답이 집합에 있음)를 보장한다면, 남은 질문은 **softmax 확률값 자체가
+믿을 만한가**이다. "confidence 0.95"라 찍었는데 실제 95%만 맞는가? 임계 라우팅·사람검토 판단이
+이 확률에 기대므로, 확률의 정직성이 곧 신뢰다. 이를 **ECE(Expected Calibration Error)** =
+confidence 구간별 `|정확도 − 평균confidence|` 가중합으로 재고, **Temperature Scaling**(Guo+2017,
+로짓을 스칼라 T로 나눠 NLL 최소화)으로 교정한다(`scripts/calibrate_edge.py`, 핵심은 순수 numpy).
+
+**왜 Temperature Scaling인가(장단점):** 단일 파라미터라 과적합 위험이 최소이고 **argmax 불변 →
+정확도가 그대로**다(확률의 정직성만 손댄다). Platt/isotonic 같은 대안은 파라미터가 많아 작은
+보정셋에서 과적합·단조성 붕괴 위험이 있다 → *안정·재현*을 기본층으로 택했다. 교환성: test(270)를
+stratified 반분해 calib로 T를 적합, eval로 ECE를 측정, **100회 반복** 평균.
+
+![신뢰성 다이어그램](data/results/calibration/calibration_resnet18.png)
+
+| 모델 | 정확도(불변) | ECE 보정 전 → 후 | NLL 전→후 | Brier 전→후 | 적합 T |
+|---|:---:|:---:|:---:|:---:|:---:|
+| resnet18 | 99.6% | **0.086 → 0.006** | 0.094 → 0.040 | 0.014 → 0.009 | 0.22 |
+| mobilenet_v3_small | 99.6% | **0.118 → 0.006** | 0.135 → 0.088 | 0.026 → 0.008 | 0.25 |
+
+**관찰(정직):**
+- **정설과 반대 — 이 엣지 CNN은 과신이 아니라 *과소확신*이었다.** 딥넷은 보통 과신(T>1로 완화)이라지만,
+  KD 소프트라벨로 학습한 이 소형망은 99.6% 맞히면서 confidence는 그보다 낮았다 → 적합 **T≈0.22(<1)**로
+  확률을 *날카롭게* 해 ECE를 **0.086→0.006**으로 낮췄다. 더 작은 mobilenet이 더 과소확신(ECE 0.118).
+- **정확도는 한 자릿수도 안 변한다** — temperature는 argmax를 보존하므로 99.6% 그대로. 신뢰도만 정직해진다.
+- **한계를 숨기지 않는다:** test 270장을 반분(≈135)한 데다 정확도가 99.6%라 *오답 표본이 매우 적어*
+  ECE/NLL 추정 분산이 크다(T std가 평균만큼 큼). 그래서 calibration은 *보조* 신호로 두고, **유한표본
+  보장이 있는 Conformal을 1차 신뢰 기제**로 삼는다 — 둘은 상보적이다(정직성 vs 커버리지 보장).
+
+**운영 연결:** 보정된 확률은 임계 라우팅(자동승인 vs 사람검토)의 컷을 *의미 있는* 값으로 만든다 —
+"0.9 이상 자동" 같은 규칙이 실제 90% 정확도에 대응하게 된다. 순수함수라 합성 과신 데이터로 단위테스트됨
+(`test_calibration.py`: 과신→ECE↑→temperature가 낮춤·T>1, argmax 불변, 결정적 T).
+
+```bash
+python scripts/calibrate_edge.py --arch resnet18 --repeats 100   # ECE/NLL/Brier 전후 + 신뢰성 다이어그램
 ```
 
 ---

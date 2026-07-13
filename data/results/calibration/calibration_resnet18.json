@@ -1,0 +1,54 @@
+{
+  "arch": "resnet18",
+  "test_n": 270,
+  "repeats": 100,
+  "n_bins": 15,
+  "temperature": {
+    "mean": 0.2168,
+    "std": 0.1833
+  },
+  "metrics": {
+    "ece": {
+      "before": [
+        0.086,
+        0.0031
+      ],
+      "after": [
+        0.0059,
+        0.0036
+      ]
+    },
+    "nll": {
+      "before": [
+        0.0943,
+        0.0056
+      ],
+      "after": [
+        0.0399,
+        0.0334
+      ]
+    },
+    "brier": {
+      "before": [
+        0.0144,
+        0.0034
+      ],
+      "after": [
+        0.0093,
+        0.0071
+      ]
+    },
+    "acc": {
+      "before": [
+        0.996,
+        0.0036
+      ],
+      "after": [
+        0.996,
+        0.0036
+      ]
+    }
+  },
+  "plot": "data\\results\\calibration\\calibration_resnet18.png",
+  "note": "test stratified 반분(calib 적합/eval 측정), N회 반복 평균±표준편차. Temperature Scaling은 argmax 불변 → 정확도 그대로, 확률의 정직성(ECE)만 개선."
+}

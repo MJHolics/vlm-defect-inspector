@@ -1,0 +1,54 @@
+{
+  "arch": "mobilenet_v3_small",
+  "test_n": 270,
+  "repeats": 100,
+  "n_bins": 15,
+  "temperature": {
+    "mean": 0.2457,
+    "std": 0.1955
+  },
+  "metrics": {
+    "ece": {
+      "before": [
+        0.1184,
+        0.0031
+      ],
+      "after": [
+        0.006,
+        0.0017
+      ]
+    },
+    "nll": {
+      "before": [
+        0.1348,
+        0.0065
+      ],
+      "after": [
+        0.0879,
+        0.0829
+      ]
+    },
+    "brier": {
+      "before": [
+        0.0263,
+        0.0043
+      ],
+      "after": [
+        0.0077,
+        0.0068
+      ]
+    },
+    "acc": {
+      "before": [
+        0.9964,
+        0.0036
+      ],
+      "after": [
+        0.9964,
+        0.0036
+      ]
+    }
+  },
+  "plot": "data\\results\\calibration\\calibration_mobilenet_v3_small.png",
+  "note": "test stratified 반분(calib 적합/eval 측정), N회 반복 평균±표준편차. Temperature Scaling은 argmax 불변 → 정확도 그대로, 확률의 정직성(ECE)만 개선."
+}

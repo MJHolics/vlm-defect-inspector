@@ -24,9 +24,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DEST_ROOT = ROOT / "data" / "mvtec"
 
-# 카테고리 → (Kaggle ref, 압축 해제 후 카테고리 폴더가 들어있는지). screw=금속, 캐노니컬 구조.
+# 카테고리 → Kaggle ref. 둘 다 금속 카테고리(나사·너트)로 "금속 결" 일관성 유지.
+# screw=하드(무지도 image AUROC 낮음), metal_nut=쉬움(무지도 강함) → head-to-head 교차점이
+# 카테고리 난이도에 따라 어떻게 이동하는지 일반화 비교에 쓴다.
 DEFAULT_REFS = {
     "screw": "thomasdubail/screwanomalies-detection",
+    "metal_nut": "dangvankhai/mvtec-metal-nut",
 }
 
 

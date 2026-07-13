@@ -1,0 +1,55 @@
+{
+  "arch": "mobilenet_v3_small",
+  "backend": "onednn",
+  "img_size": 224,
+  "test_n": 270,
+  "variants": {
+    "fp32": {
+      "accuracy": 0.9963,
+      "per_class": {
+        "crazing": 1.0,
+        "inclusion": 1.0,
+        "patches": 0.9778,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 1.0,
+        "scratches": 1.0
+      },
+      "size_mb": 6.23,
+      "latency_ms_p50": 5.138
+    },
+    "ptq_int8": {
+      "accuracy": 0.4,
+      "per_class": {
+        "crazing": 0.0,
+        "inclusion": 0.2,
+        "patches": 0.0,
+        "pitted_surface": 1.0,
+        "rolled-in_scale": 0.3111,
+        "scratches": 0.8889
+      },
+      "size_mb": 1.85,
+      "latency_ms_p50": 8.714
+    },
+    "qat_int8": {
+      "accuracy": 0.6593,
+      "per_class": {
+        "crazing": 0.7111,
+        "inclusion": 0.9333,
+        "patches": 0.3333,
+        "pitted_surface": 0.8222,
+        "rolled-in_scale": 0.2667,
+        "scratches": 0.8889
+      },
+      "size_mb": 1.85,
+      "latency_ms_p50": 8.575,
+      "qat_epochs": 4,
+      "qat_seconds": 22.6
+    }
+  },
+  "summary": {
+    "ptq_drop_from_fp32": 0.5963,
+    "qat_drop_from_fp32": 0.337,
+    "qat_recovery_over_ptq": 0.2593,
+    "size_reduction_x": 3.37
+  }
+}

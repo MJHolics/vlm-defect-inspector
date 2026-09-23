@@ -24,10 +24,26 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from app import config  # noqa: E402
 
-SPLIT_DIR = ROOT / "data" / "processed"
-CKPT_DIR = ROOT / "models" / "checkpoints" / "edge_cnn"
-CLASSES = config.DEFECT_CLASSES
+import os
+
+# 도메인 전이 트랙(WM-811K 웨이퍼맵·GDXray X-ray)이 같은 학습·검증 코드를 그대로 쓰도록
+# 데이터 경로·체크포인트·클래스를 환경변수로 연다. 미설정 시 기존 NEU 경로 그대로 —
+# conformal_edge/calibrate_edge가 이 모듈에서 CLASSES·_load_split을 import하므로
+# 여기만 바꾸면 신뢰성 스택 전체가 새 도메인을 따라온다.
+SPLIT_DIR = Path(os.environ.get("EDGE_SPLIT_DIR") or (ROOT / "data" / "processed"))
+CKPT_DIR = Path(os.environ.get("EDGE_CKPT_DIR") or (ROOT / "models" / "checkpoints" / "edge_cnn"))
+CLASSES = ([c for c in os.environ["EDGE_CLASSES"].split(",") if c]
+           if os.environ.get("EDGE_CLASSES") else config.DEFECT_CLASSES)
 CLS2IDX = {c: i for i, c in enumerate(CLASSES)}
+
+# 결과 파일 접미사. 다른 도메인 데이터를 쓰면서 태그를 안 주면 NEU 결과 파일
+# (edge_cnn_resnet18.json·calibration_/conformal_resnet18.*)을 덮어쓴다 — 실제로 X-ray 실행이
+# NEU 플래그십 수치를 덮어쓴 적이 있어(2026-09-24 발견) 태그 없는 도메인 전환은 거부한다.
+RESULT_TAG = os.environ.get("EDGE_RESULT_TAG", "")
+if os.environ.get("EDGE_SPLIT_DIR") and not RESULT_TAG:
+    raise SystemExit("EDGE_SPLIT_DIR를 쓸 때는 EDGE_RESULT_TAG(예: xray_clahe)도 지정하세요 — "
+                     "안 그러면 NEU 결과 파일을 덮어씁니다.")
+RESULT_SUFFIX = f"_{RESULT_TAG}" if RESULT_TAG else ""
 
 
 def _load_split(name):
@@ -202,7 +218,7 @@ def main():
     print(" 클래스별:", per_class)
     print("=" * 56)
 
-    out = ROOT / "data" / "results" / f"edge_cnn_{args.arch}.json"
+    out = ROOT / "data" / "results" / f"edge_cnn_{args.arch}{RESULT_SUFFIX}.json"
     out.write_text(json.dumps({
         "arch": args.arch,
         "pretrained": not args.no_pretrained,

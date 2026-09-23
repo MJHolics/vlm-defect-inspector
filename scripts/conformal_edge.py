@@ -29,9 +29,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from scripts.train_edge_cnn import CLASSES, _build_model, _load_split  # noqa: E402
-
-CKPT_DIR = ROOT / "models" / "checkpoints" / "edge_cnn"
+from scripts.train_edge_cnn import CKPT_DIR, CLASSES, RESULT_SUFFIX, _build_model, _load_split  # noqa: E402,F401
 OUT_DIR = ROOT / "data" / "results" / "conformal"
 _MEAN = [0.485, 0.456, 0.406]
 _STD = [0.229, 0.224, 0.225]
@@ -267,11 +265,11 @@ def main() -> None:
     ax2.set_title("효율(집합이 작을수록 유용)"); ax2.legend(); ax2.grid(alpha=0.3)
     fig.suptitle(f"Conformal Prediction · {args.arch} (NEU test, {args.repeats}회 반복)")
     fig.tight_layout(rect=(0, 0, 1, 0.95))
-    plot_path = OUT_DIR / f"conformal_{args.arch}.png"
+    plot_path = OUT_DIR / f"conformal_{args.arch}{RESULT_SUFFIX}.png"
     fig.savefig(plot_path, dpi=120)
     plt.close(fig)
 
-    out = OUT_DIR / f"conformal_{args.arch}.json"
+    out = OUT_DIR / f"conformal_{args.arch}{RESULT_SUFFIX}.json"
     out.write_text(json.dumps({
         "arch": args.arch,
         "test_n": int(len(labels)),

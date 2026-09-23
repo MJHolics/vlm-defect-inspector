@@ -1,0 +1,18 @@
+{
+  "arch": "resnet18",
+  "pretrained": true,
+  "img_size": 224,
+  "n_params_M": 11.178,
+  "fp32_size_mb": 44.79,
+  "best_epoch": 17,
+  "val_accuracy": 0.9739,
+  "test_accuracy": 0.9118,
+  "test_per_class": {
+    "clean": 1.0,
+    "defect": 0.7961
+  },
+  "vlm_v4_test_accuracy": 0.9593,
+  "train_seconds": 434.6,
+  "device": "cuda",
+  "checkpoint": "models\\checkpoints\\xray_clahe\\resnet18.pt"
+}

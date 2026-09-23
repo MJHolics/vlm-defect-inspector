@@ -4,8 +4,11 @@ VLM Defect Inspector의 "구조화 JSON 리포트" 주제를 LLM 후처리로 �
 아니라 **RL 계열(DPO)** 까지 다룬다는 것을 작은 모델로 정직하게 실측한다.
 
 문제: 결함 분류 질문에 모델이 **유효한 JSON**(필수필드 defect_type·severity·confidence·evidence)으로
-답하게 만든다. chosen = 간결·유효 JSON, rejected = 산문/깨진 JSON. DPO로 선호를 정렬한 뒤,
-held-out 프롬프트에서 **JSON 유효율·필드 충족률을 base→DPO로 비교**한다.
+답하게 만든다. chosen = 간결·유효 JSON, rejected = 산문/깨진 JSON. DPO로 선호를 정렬한 뒤 두 층위로 측정:
+  (1) 행동 지표 — **JSON 유효율·필드 충족률을 base→DPO로 비교**(실제 생성물 채점).
+  (2) DPO-native 지표 — held-out 프롬프트에서 **선호정확도·implicit reward margin**
+      (r=beta·(logπ_policy−logπ_ref)). DPO가 직접 최적화하는 양이라, 선호를 암기 아닌
+      일반화로 내면화했는지 검증한다.
 
 설계 원칙(KD·head_to_head 트랙과 동일): 순수 로직은 데이터·모델 없이 자기점검(--smoke),
 실측은 단일 GPU에서 LoRA 4-bit로. 합성 데이터임을 숨기지 않는다(정직한 데모).
@@ -96,6 +99,25 @@ def parse_score(text: str) -> tuple[bool, float]:
     return True, hit / len(REQUIRED_FIELDS)
 
 
+# ─────────────── DPO-native 지표 (선호정확도·reward margin) 순수 집계 ───────────────
+# DPO의 implicit reward: r(x,y) = beta·(logπ_policy(y|x) − logπ_ref(y|x)).
+# margin = r(x, chosen) − r(x, rejected). 이 margin의 부호가 선호 방향, 크기가 분리 강도.
+# JSON 유효율(행동 지표)과 달리, 이 둘은 DPO가 *직접* 최적화하는 양이라 학습이 실제로
+# 선호를 내면화했는지를 held-out 프롬프트에서 검증한다.
+
+def preference_accuracy(margins) -> float:
+    """held-out 선호정확도 = mean[margin>0], 동률(==0)은 0.5로 계수(무학습=참조와 동일 시)."""
+    if not margins:
+        return 0.0
+    wins = sum(1.0 if m > 0 else (0.5 if m == 0 else 0.0) for m in margins)
+    return wins / len(margins)
+
+
+def mean_margin(margins) -> float:
+    """평균 reward margin. 0 = 참조와 구분 못 함(학습 전), 양수 = chosen을 선호."""
+    return sum(margins) / len(margins) if margins else 0.0
+
+
 # ───────────────────────── smoke (순수 로직) ─────────────────────────
 
 def _smoke() -> int:
@@ -111,11 +133,51 @@ def _smoke() -> int:
     # 깨진 JSON·필드 누락·산문 각각 무효 처리되는지.
     assert parse_score("그냥 설명입니다")[0] is False
     assert parse_score('{"defect_type":"x"}')[1] == 0.25
-    print("smoke OK — 선호쌍 생성·JSON 파싱·필드 채점 순수 로직 정상")
+    # DPO-native 지표 집계 로직 검증(동률 0.5 계수·평균 margin).
+    assert preference_accuracy([0.5, -0.2, 0.0, 1.0]) == 0.625
+    assert abs(mean_margin([0.5, -0.2, 0.0, 1.0]) - 0.325) < 1e-9
+    assert preference_accuracy([]) == 0.0 and mean_margin([]) == 0.0
+    assert preference_accuracy([0.0, 0.0]) == 0.5  # 참조와 동일(학습 전) = 선호정확도 0.5
+    print("smoke OK — 선호쌍 생성·JSON 파싱·필드 채점·DPO 선호지표 집계 순수 로직 정상")
     return 0
 
 
 # ───────────────────────── 학습·평가 (GPU) ─────────────────────────
+
+def _seq_logprob(model, tok, prompt_msgs, completion, device) -> float:
+    """완성(completion) 토큰들의 로그확률 합 = logπ(completion | prompt). 프롬프트는 마스킹."""
+    import torch
+    prompt_ids = tok.apply_chat_template(
+        prompt_msgs, add_generation_prompt=True, return_tensors="pt",
+        return_dict=True)["input_ids"].to(device)
+    comp_ids = tok(completion, return_tensors="pt",
+                   add_special_tokens=False).input_ids.to(device)
+    input_ids = torch.cat([prompt_ids, comp_ids], dim=1)
+    with torch.no_grad():
+        logits = model(input_ids).logits  # [1, T, V]
+    logprobs = torch.log_softmax(logits.float(), dim=-1)
+    plen, clen = prompt_ids.shape[1], comp_ids.shape[1]
+    # 위치 t-1의 로짓이 토큰 t를 예측 → 완성 토큰은 [plen-1 : plen-1+clen] 위치가 담당.
+    idx = torch.arange(plen - 1, plen - 1 + clen, device=device)
+    tok_lp = logprobs[0, idx, :].gather(-1, comp_ids[0].unsqueeze(-1)).squeeze(-1)
+    return float(tok_lp.sum().item())
+
+
+def eval_preference(peft_model, tok, eval_pairs, beta, device):
+    """held-out 선호정확도·평균 reward margin. 정책=어댑터 ON, 참조=어댑터 OFF(같은 base)."""
+    margins = []
+    for p in eval_pairs:
+        pm, ch, rj = p["prompt"], p["chosen"][0]["content"], p["rejected"][0]["content"]
+        lp_pol_c = _seq_logprob(peft_model, tok, pm, ch, device)
+        lp_pol_r = _seq_logprob(peft_model, tok, pm, rj, device)
+        with peft_model.disable_adapter():  # 어댑터 끄면 곧 참조 모델(DPO ref).
+            lp_ref_c = _seq_logprob(peft_model, tok, pm, ch, device)
+            lp_ref_r = _seq_logprob(peft_model, tok, pm, rj, device)
+        r_c = beta * (lp_pol_c - lp_ref_c)
+        r_r = beta * (lp_pol_r - lp_ref_r)
+        margins.append(r_c - r_r)
+    return preference_accuracy(margins), mean_margin(margins)
+
 
 def run(model_name, epochs, n_train, n_eval, beta, pipeline_smoke):
     import torch
@@ -180,8 +242,12 @@ def run(model_name, epochs, n_train, n_eval, beta, pipeline_smoke):
 
     after_vr, after_cr = eval_model(trainer.model, "DPO")
 
+    # DPO-native 지표: held-out 프롬프트에서 선호를 실제로 내면화했는지(정책 vs 참조).
+    pref_acc, pref_margin = eval_preference(trainer.model, tok, eval_pairs, beta, device)
+    print(f"  [DPO] held-out 선호정확도 {pref_acc:.3f} · 평균 reward margin {pref_margin:+.3f}")
+
     if pipeline_smoke:
-        print("pipeline-smoke OK — DPO 2-step 학습·평가 전 경로 동작")
+        print("pipeline-smoke OK — DPO 2-step 학습·평가·선호지표 전 경로 동작")
         return
 
     RESULTS.mkdir(parents=True, exist_ok=True)
@@ -190,13 +256,21 @@ def run(model_name, epochs, n_train, n_eval, beta, pipeline_smoke):
         "# DPO 구조화 JSON 정렬 — base vs DPO (실측)\n\n"
         f"- 모델: `{model_name}` · 4-bit QLoRA + DPO(beta={beta}) · "
         f"train {n_train}쌍 · eval {n_eval}프롬프트 · epochs {epochs}\n\n"
+        "### 행동 지표 (생성물 채점, greedy)\n\n"
         "| 지표 | base | DPO | Δ |\n|---|---|---|---|\n"
         f"| JSON 유효율 | {base_vr:.3f} | {after_vr:.3f} | {after_vr-base_vr:+.3f} |\n"
         f"| 필드 충족률 | {base_cr:.3f} | {after_cr:.3f} | {after_cr-base_cr:+.3f} |\n\n"
+        "### DPO-native 지표 (held-out 선호, 정책 vs 참조 implicit reward)\n\n"
+        "| 지표 | 학습 전(참조=정책) | DPO | 의미 |\n|---|---|---|---|\n"
+        f"| 선호정확도 | 0.500 | {pref_acc:.3f} | margin>0 비율(동률 0.5) |\n"
+        f"| 평균 reward margin | 0.000 | {pref_margin:+.3f} | r(chosen)−r(rejected) |\n\n"
         "> 합성 선호쌍(chosen=유효 JSON / rejected=산문·깨진 JSON·필드누락) 기반의 정직한 데모. "
-        "SFT(QLoRA)에 더해 RL 계열(DPO)로 출력 형식을 정렬할 수 있음을 작은 모델로 실측.\n",
+        "SFT(QLoRA)에 더해 RL 계열(DPO)로 출력 형식을 정렬할 수 있음을 작은 모델로 실측. "
+        "학습 전에는 정책=참조라 margin=0·선호정확도=0.5(구성상). held-out(seed 999, 미학습 프롬프트)에서 "
+        "측정하므로 암기가 아닌 선호의 일반화를 본다.\n",
         encoding="utf-8")
-    print(f"\n▶ base {base_vr:.3f} → DPO {after_vr:.3f} (JSON 유효율) | 저장: {md.relative_to(ROOT)}")
+    print(f"\n▶ JSON 유효율 base {base_vr:.3f} → DPO {after_vr:.3f} · "
+          f"held-out 선호정확도 {pref_acc:.3f} | 저장: {md.relative_to(ROOT)}")
 
 
 def main():

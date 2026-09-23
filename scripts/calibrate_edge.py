@@ -30,9 +30,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from scripts.conformal_edge import _stratified_halves  # noqa: E402  (stratified 반분 재사용)
-from scripts.train_edge_cnn import CLASSES, _build_model, _load_split  # noqa: E402
-
-CKPT_DIR = ROOT / "models" / "checkpoints" / "edge_cnn"
+from scripts.train_edge_cnn import CKPT_DIR, CLASSES, RESULT_SUFFIX, _build_model, _load_split  # noqa: E402,F401
 OUT_DIR = ROOT / "data" / "results" / "calibration"
 _MEAN = [0.485, 0.456, 0.406]
 _STD = [0.229, 0.224, 0.225]
@@ -219,14 +217,14 @@ def main() -> None:
             ax.set_xlabel("평균 confidence"); ax.set_ylabel("정확도"); ax.legend(); ax.grid(alpha=0.3)
         fig.suptitle(f"신뢰성 다이어그램 · {args.arch} (NEU test)")
         fig.tight_layout(rect=(0, 0, 1, 0.95))
-        plot_path = OUT_DIR / f"calibration_{args.arch}.png"
+        plot_path = OUT_DIR / f"calibration_{args.arch}{RESULT_SUFFIX}.png"
         fig.savefig(plot_path, dpi=120); plt.close(fig)
         plot_rel = str(plot_path.relative_to(ROOT))
     except Exception as e:  # matplotlib 없거나 폰트 문제 — 수치는 유지.
         print(f"  (플롯 생략: {e})")
         plot_rel = None
 
-    out = OUT_DIR / f"calibration_{args.arch}.json"
+    out = OUT_DIR / f"calibration_{args.arch}{RESULT_SUFFIX}.json"
     out.write_text(json.dumps({
         "arch": args.arch, "test_n": int(len(labels)), "repeats": args.repeats,
         "n_bins": args.n_bins, "temperature": {"mean": T_mean, "std": T_std},

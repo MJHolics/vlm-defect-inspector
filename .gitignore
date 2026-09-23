@@ -53,3 +53,11 @@ data/audit/
 # OS
 .DS_Store
 Thumbs.db
+
+# GDXray 원본·패치 데이터셋(외부 공개 데이터, 스크립트로 재생성) — 커밋하지 않는다
+data/gdxray/
+data/gdxray_patches/
+data/gdxray_patches_clahe/
+data/gdxray_processed/
+data/gdxray_processed_clahe/
+data/gdxray_ood/

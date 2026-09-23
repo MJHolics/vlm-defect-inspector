@@ -48,6 +48,8 @@
   3-seed로 보고 — 단일 seed의 가짜 양성(+1.85%p)을 회피.
 - **OOD**: 생성 confidence의 한계(AUROC 0.68)를 먼저 드러내고, 전용 특징공간 점수로 메운다(0.97).
 - **Conformal**: 주변 커버리지는 보장하되 *클래스별*은 아님(patches 0.79)을 명시하고 다음 단계를 가리킨다.
+- **DPO**: 합성 선호쌍이라 태스크가 쉬워 margin이 크게 벌어짐을 밝히고, *margin 절대값은 비교 불가·
+  held-out 일반화(선호정확도 1.000)가 신호*임을 구분한다(자세히는 [RL 후처리(DPO)](#rl-후처리dpo--출력-형식을-선호로-정렬) 절).
 - 모든 수치는 **공개 데이터 · 고정 test(270건, 누수 0) · 실측**이다 — 자체 임의 수치 없음.
 
 > 세 기둥의 공통 원칙: **"태스크에 맞는 모델을 고르고, 그 선택을 데이터로 검증하고, 결과를 꾸미지 않는다."**
@@ -102,6 +104,34 @@ QLoRA는 **4-bit NF4 양자화 + LoRA 어댑터**만 학습해 **~8GB VRAM** 으
 ```
 
 성능 손실은 풀 파인튜닝 대비 1~3%p 이내. 비용·접근성 측면에서 실용적인 선택이다.
+
+---
+
+## RL 후처리(DPO) — 출력 형식을 "선호"로 정렬
+
+SFT(QLoRA)는 모델이 *답하게* 만든다. 하지만 리포트가 **유효 JSON**이어야 하는 건 정답 하나가 아니라
+**선호**(유효 JSON을 산문·깨진 JSON보다 선호)로 걸어야 한다. 이를 보상모델 없이 선호쌍만으로 정렬하는
+게 **DPO**(Direct Preference Optimization)다. SFT에 더해 **RL 계열 후처리**까지 작은 모델로 정직하게 실측한다.
+
+- **설정:** `Qwen2.5-0.5B-Instruct` · 4-bit QLoRA + DPO(β=0.1) · 선호쌍 120개(chosen=필드 완비 JSON /
+  rejected=산문·깨진 JSON·필드누락) · held-out eval 24개(학습에 안 쓴 seed 999) · 3 epochs · RTX 4080 Super.
+- **두 층위로 측정** — 행동(생성물 채점) + DPO-native(정책 vs 참조 implicit reward):
+
+| 지표 | base | DPO | 의미 |
+|------|:---:|:---:|------|
+| JSON 유효율 (greedy) | 0.333 | **1.000** | 실제 생성물이 파싱되는 비율 |
+| 필수필드 충족률 | 0.000 | **1.000** | defect_type·severity·confidence·evidence |
+| held-out 선호정확도 | 0.500 | **1.000** | margin>0 비율(학습 전 참조=정책이라 0.5) |
+| held-out 평균 reward margin | 0.000 | **+7.648** | r(chosen)−r(rejected), r=β·(logπ_policy−logπ_ref) |
+
+- **핵심:** 선호정확도·margin을 *학습에 안 쓴* held-out에서 재므로, 암기가 아니라 **선호의 일반화**를 본다.
+  학습 로그의 `rewards/margins`도 0.09 → 8.55, `rewards/accuracies` 0.5 → 1.0으로 상승.
+- **정직한 한계:** rejected가 *구조적으로* 깨진 JSON이라 태스크가 쉽다 → train loss가 ~0.0002로 붕괴하고
+  margin이 크게 벌어진다. **margin 절대값은 설정(β·logprob 스케일)에 의존해 비교 불가** — 의미 있는 신호는
+  *부호와 held-out 일반화*다. 이건 7B 본체 정렬이 아니라 "SFT 외에 RL 후처리 기법도 다룬다"는 정직한 데모이며,
+  실제 리포트 JSON은 이미 QLoRA로 100% 파싱된다(핵심 성과 표).
+- 재현: `python scripts/dpo_structured.py --smoke`(순수 로직) → `--pipeline-smoke`(2-step GPU) →
+  `--epochs 3`(전체 실측, `data/results/dpo_structured.md` 생성). 순수 로직은 `tests/test_dpo.py`로 검증.
 
 ---
 
@@ -432,6 +462,29 @@ MobileNetV3의 depthwise conv·hard-swish·SE 블록은 활성값 분포가 채�
 **아키텍처 판단:** 운영 권장은 **MobileNetV3-S fp32(6 MB, CPU 562 img/s)를 인라인 분류기로,
 ResNet18-INT8을 메모리 빠듯한 엣지의 대안**으로 둔다. 양산 GPU 타깃이라면 TensorRT INT8이 다음 단계지만,
 Windows 재현성을 위해 여기선 ONNX Runtime로 측정했다. 산출물 `data/results/edge_deploy_*.json`.
+
+### 엣지 제약 환경 실측 — 코어 수·메모리를 줄이고 arm64에서 돌려 봤다 (2026-09-21)
+
+위 벤치는 제한 없는 x86 데스크톱 CPU에서 쟀다. 엣지 보드는 코어·메모리가 훨씬 작으므로, Docker로 **코어 수(`--cpus` 1·2·4)와 메모리(`--memory`)를 제한**해
+같은 ONNX 4종을 다시 쟀다(`scripts/benchmark_edge_constrained.py`, 단건 batch 1, 200회 p50, 스레드=코어 수).
+
+| 모델 | 1코어 | 2코어 | 4코어 | 피크 RSS | 메모리 제한 통과선 |
+|---|---:|---:|---:|---:|---:|
+| MobileNetV3-S fp32 | 1.16ms | 0.71ms | 0.70ms | 78MB | 64MB에서도 OOM 없음 |
+| MobileNetV3-S INT8 | 4.08ms | 2.83ms | 2.21ms | 76MB | 64MB에서도 OOM 없음 |
+| ResNet18 fp32 | 23.9ms | 12.0ms | 6.73ms | 177MB | **128MB에서 OOM**(160MB 통과) |
+| ResNet18 INT8 | 17.9ms | 10.1ms | 6.30ms | 99MB | 64MB에서도 OOM 없음 |
+
+**발견 1 — ResNet18의 INT8 이득은 속도가 아니라 메모리다.** 1코어에서 INT8이 fp32보다 1.33배 빠르지만 코어가 늘면 1.19배(2코어)·1.07배(4코어)로 줄어 사실상 사라진다.
+반면 메모리는 피크 RSS가 177→99MB로 줄고, **fp32는 128MB 제한에서 죽는데 INT8은 64MB에서도 돈다.** 메모리가 빠듯한 보드에서 INT8을 쓰는 이유는 지연이 아니라 "올라가느냐 못 올라가느냐"다.
+**발견 2 — MobileNetV3 INT8은 x86에서 3~4배 느리다**(1.16→4.08ms). 앞서 정확도 붕괴(99.6→43.3%)에 이어 속도까지 손해다 — 깊이별 conv에 INT8 커널이 x86에서 덜 최적화돼 있다.
+**발견 3 — 작은 모델은 코어를 늘려도 이득이 없다**(MobileNetV3 fp32는 2코어에서 이미 포화 0.71→0.70ms). 코어를 더 붙일 게 아니라 배칭·파이프라인 병렬화로 처리량을 얻어야 한다.
+
+**arm64 이식성**: `--platform linux/arm64`(QEMU 에뮬레이션)로 같은 ONNX를 돌려 aarch64 런타임에서 **예측 클래스가 x86과 일치**함을 확인했다(고정 입력 1개 기준: fp32는 로짓까지 완전 동일, INT8은 최대 0.03~0.09 차이).
+
+**이 측정이 말하지 않는 것**: 실 보드(Jetson·라즈베리파이) 지연이 아니다. `--cpus`는 x86 코어 시간을 깎는 CFS 쿼터라 ARM 코어의 IPC·캐시·메모리 대역폭·NEON을 모른다.
+arm64 에뮬레이션은 **정확성만** 봤고 지연은 의미가 없다. GPU/NPU(TensorRT·Jetson)는 쓰지 않았다(ONNX Runtime CPU). 메모리 제한 통과선은 cgroup OOM 여부이며 그 상태의 지연은 재지 않았다
+(64MB 제한에서 RSS 76~78MB로 찍힌 것은 RSS가 회수 가능한 mmap 페이지를 포함하기 때문). arm64 정확성은 무작위 입력 1개라 테스트셋 정확도는 아니다.
 
 **라이브 데모:** 이 경량 CNN(MobileNetV3-S fp32 ONNX, 6 MB)을 그대로 Gradio로 띄운 데모가 `space/`에
 있다 — CPU만으로 도는 덕에 무료 Hugging Face Spaces에 배포 가능하다(7B VLM은 6 GB라 불가). 이미지를

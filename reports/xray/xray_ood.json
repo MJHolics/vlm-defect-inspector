@@ -1,0 +1,64 @@
+{
+  "physical_gate": {
+    "rows": [
+      {
+        "ood_set": "air(빈 지그)",
+        "auroc_patch_std": 0.5682510504201681,
+        "auroc_patch_mean": 0.9325525210084034,
+        "mean_id_median": 175.015869140625,
+        "mean_ood_median": 56.3739013671875
+      },
+      {
+        "ood_set": "NEU(광학 오투입)",
+        "auroc_patch_std": 0.4357298474945534,
+        "auroc_patch_mean": 0.6730547774665422,
+        "mean_id_median": 175.015869140625,
+        "mean_ood_median": 125.14910888671875
+      }
+    ],
+    "threshold_mean": 43.73162841796875,
+    "id_pass_rate": 0.9894957983193278,
+    "air_block_rate": 0.35
+  },
+  "ckpt": "models/checkpoints/xray_orig/resnet18.pt",
+  "split_dir": "data/gdxray_processed",
+  "classes": [
+    "clean",
+    "defect"
+  ],
+  "gate": 0.8,
+  "test_series": [
+    "C0031",
+    "C0034",
+    "C0042",
+    "C0043",
+    "C0051",
+    "C0065"
+  ],
+  "id": {
+    "n": 476,
+    "conf_mean": 0.853971004486084,
+    "gate_pass_rate": 0.707983193277311,
+    "maha_median": 39.03449873736139
+  },
+  "ood": [
+    {
+      "ood_set": "air(빈 지그)",
+      "n": 400,
+      "conf_mean": 0.9470844268798828,
+      "gate_pass_rate": 0.9875,
+      "auroc_softmax": 0.28309873949579833,
+      "auroc_mahalanobis": 0.734905462184874,
+      "maha_median": 320.1423349517469
+    },
+    {
+      "ood_set": "NEU(광학 오투입)",
+      "n": 270,
+      "conf_mean": 0.7723603248596191,
+      "gate_pass_rate": 0.45925925925925926,
+      "auroc_softmax": 0.6686858076563958,
+      "auroc_mahalanobis": 0.68588546529723,
+      "maha_median": 213.6278109304588
+    }
+  ]
+}

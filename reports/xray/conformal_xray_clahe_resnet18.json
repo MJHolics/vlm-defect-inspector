@@ -1,0 +1,261 @@
+{
+  "arch": "resnet18",
+  "test_n": 476,
+  "top1_accuracy": 0.9706,
+  "repeats": 100,
+  "alpha": 0.1,
+  "main": {
+    "lac": {
+      "coverage": 0.9001,
+      "coverage_std": 0.0287,
+      "avg_set_size": 0.9069,
+      "avg_set_size_std": 0.0291,
+      "singleton_rate": 0.9069,
+      "singleton_rate_std": 0.0291,
+      "ambiguous_rate": 0.0,
+      "ambiguous_rate_std": 0.0,
+      "empty_rate": 0.0931,
+      "empty_rate_std": 0.0291,
+      "per_class_coverage": {
+        "clean": 0.9011,
+        "defect": 0.8987
+      }
+    },
+    "aps": {
+      "coverage": 1.0,
+      "coverage_std": 0.0,
+      "avg_set_size": 1.9332,
+      "avg_set_size_std": 0.0221,
+      "singleton_rate": 0.0668,
+      "singleton_rate_std": 0.0221,
+      "ambiguous_rate": 0.9332,
+      "ambiguous_rate_std": 0.0221,
+      "empty_rate": 0.0,
+      "empty_rate_std": 0.0,
+      "per_class_coverage": {
+        "clean": 1.0,
+        "defect": 1.0
+      }
+    },
+    "lac_mondrian": {
+      "coverage": 0.9021,
+      "coverage_std": 0.0289,
+      "avg_set_size": 0.9092,
+      "avg_set_size_std": 0.0297,
+      "singleton_rate": 0.9092,
+      "singleton_rate_std": 0.0297,
+      "ambiguous_rate": 0.0,
+      "ambiguous_rate_std": 0.0,
+      "empty_rate": 0.0908,
+      "empty_rate_std": 0.0297,
+      "per_class_coverage": {
+        "clean": 0.9053,
+        "defect": 0.8979
+      }
+    }
+  },
+  "sweep": {
+    "0.01": {
+      "lac": {
+        "coverage": 0.9918,
+        "coverage_std": 0.0083,
+        "avg_set_size": 1.1639,
+        "avg_set_size_std": 0.1016,
+        "singleton_rate": 0.8361,
+        "singleton_rate_std": 0.1016,
+        "ambiguous_rate": 0.1639,
+        "ambiguous_rate_std": 0.1016,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "clean": 0.9973,
+          "defect": 0.9847
+        }
+      },
+      "aps": {
+        "coverage": 1.0,
+        "coverage_std": 0.0,
+        "avg_set_size": 2.0,
+        "avg_set_size_std": 0.0,
+        "singleton_rate": 0.0,
+        "singleton_rate_std": 0.0,
+        "ambiguous_rate": 1.0,
+        "ambiguous_rate_std": 0.0,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "clean": 1.0,
+          "defect": 1.0
+        }
+      },
+      "lac_mondrian": {
+        "coverage": 0.9911,
+        "coverage_std": 0.0086,
+        "avg_set_size": 1.2251,
+        "avg_set_size_std": 0.1026,
+        "singleton_rate": 0.7749,
+        "singleton_rate_std": 0.1026,
+        "ambiguous_rate": 0.2251,
+        "ambiguous_rate_std": 0.1026,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "clean": 0.9925,
+          "defect": 0.9894
+        }
+      }
+    },
+    "0.05": {
+      "lac": {
+        "coverage": 0.9516,
+        "coverage_std": 0.0189,
+        "avg_set_size": 0.9696,
+        "avg_set_size_std": 0.0225,
+        "singleton_rate": 0.9696,
+        "singleton_rate_std": 0.0225,
+        "ambiguous_rate": 0.0,
+        "ambiguous_rate_std": 0.0,
+        "empty_rate": 0.0304,
+        "empty_rate_std": 0.0225,
+        "per_class_coverage": {
+          "clean": 0.9705,
+          "defect": 0.9268
+        }
+      },
+      "aps": {
+        "coverage": 1.0,
+        "coverage_std": 0.0,
+        "avg_set_size": 1.9834,
+        "avg_set_size_std": 0.0139,
+        "singleton_rate": 0.0166,
+        "singleton_rate_std": 0.0139,
+        "ambiguous_rate": 0.9834,
+        "ambiguous_rate_std": 0.0139,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "clean": 1.0,
+          "defect": 1.0
+        }
+      },
+      "lac_mondrian": {
+        "coverage": 0.9524,
+        "coverage_std": 0.019,
+        "avg_set_size": 0.9742,
+        "avg_set_size_std": 0.0201,
+        "singleton_rate": 0.9741,
+        "singleton_rate_std": 0.0199,
+        "ambiguous_rate": 0.0001,
+        "ambiguous_rate_std": 0.0008,
+        "empty_rate": 0.0258,
+        "empty_rate_std": 0.02,
+        "per_class_coverage": {
+          "clean": 0.9541,
+          "defect": 0.9501
+        }
+      }
+    },
+    "0.1": {
+      "lac": {
+        "coverage": 0.9001,
+        "coverage_std": 0.0287,
+        "avg_set_size": 0.9069,
+        "avg_set_size_std": 0.0291,
+        "singleton_rate": 0.9069,
+        "singleton_rate_std": 0.0291,
+        "ambiguous_rate": 0.0,
+        "ambiguous_rate_std": 0.0,
+        "empty_rate": 0.0931,
+        "empty_rate_std": 0.0291,
+        "per_class_coverage": {
+          "clean": 0.9011,
+          "defect": 0.8987
+        }
+      },
+      "aps": {
+        "coverage": 1.0,
+        "coverage_std": 0.0,
+        "avg_set_size": 1.9332,
+        "avg_set_size_std": 0.0221,
+        "singleton_rate": 0.0668,
+        "singleton_rate_std": 0.0221,
+        "ambiguous_rate": 0.9332,
+        "ambiguous_rate_std": 0.0221,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "clean": 1.0,
+          "defect": 1.0
+        }
+      },
+      "lac_mondrian": {
+        "coverage": 0.9021,
+        "coverage_std": 0.0289,
+        "avg_set_size": 0.9092,
+        "avg_set_size_std": 0.0297,
+        "singleton_rate": 0.9092,
+        "singleton_rate_std": 0.0297,
+        "ambiguous_rate": 0.0,
+        "ambiguous_rate_std": 0.0,
+        "empty_rate": 0.0908,
+        "empty_rate_std": 0.0297,
+        "per_class_coverage": {
+          "clean": 0.9053,
+          "defect": 0.8979
+        }
+      }
+    },
+    "0.2": {
+      "lac": {
+        "coverage": 0.7986,
+        "coverage_std": 0.0389,
+        "avg_set_size": 0.8049,
+        "avg_set_size_std": 0.0387,
+        "singleton_rate": 0.8049,
+        "singleton_rate_std": 0.0387,
+        "ambiguous_rate": 0.0,
+        "ambiguous_rate_std": 0.0,
+        "empty_rate": 0.1951,
+        "empty_rate_std": 0.0387,
+        "per_class_coverage": {
+          "clean": 0.7437,
+          "defect": 0.8705
+        }
+      },
+      "aps": {
+        "coverage": 1.0,
+        "coverage_std": 0.0,
+        "avg_set_size": 1.8336,
+        "avg_set_size_std": 0.0303,
+        "singleton_rate": 0.1664,
+        "singleton_rate_std": 0.0303,
+        "ambiguous_rate": 0.8336,
+        "ambiguous_rate_std": 0.0303,
+        "empty_rate": 0.0,
+        "empty_rate_std": 0.0,
+        "per_class_coverage": {
+          "clean": 1.0,
+          "defect": 1.0
+        }
+      },
+      "lac_mondrian": {
+        "coverage": 0.8013,
+        "coverage_std": 0.0376,
+        "avg_set_size": 0.8058,
+        "avg_set_size_std": 0.0378,
+        "singleton_rate": 0.8058,
+        "singleton_rate_std": 0.0378,
+        "ambiguous_rate": 0.0,
+        "ambiguous_rate_std": 0.0,
+        "empty_rate": 0.1942,
+        "empty_rate_std": 0.0378,
+        "per_class_coverage": {
+          "clean": 0.7991,
+          "defect": 0.8041
+        }
+      }
+    }
+  },
+  "plot": "data\\results\\conformal\\conformal_resnet18.png",
+  "note": "test를 stratified 반분(calib/eval)해 보정·평가, N회 반복 평균. test는 학습·모델선택에 미사용(교환성 충족)."
+}

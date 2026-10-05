@@ -1,0 +1,122 @@
+{
+ "mobilenet_v3_small": {
+  "rule": {
+   "stat": "median",
+   "alpha": 0.3
+  },
+  "dev": {
+   "false_alarm": 0.29401281502106086,
+   "miss": 0.25233715806296453
+  },
+  "test": {
+   "false_alarm": 0.23111199718125267,
+   "miss": 0.21599856887060248
+  },
+  "test_normals_only": {
+   "false_alarm": 0.24812426987860234,
+   "miss": 0.228186485151788
+  },
+  "per_category_test": {
+   "hazelnut": {
+    "false_alarm": 0.058,
+    "miss": 0.198
+   },
+   "leather": {
+    "false_alarm": 0.437,
+    "miss": 0.045
+   },
+   "metal_nut": {
+    "false_alarm": 0.195,
+    "miss": 0.216
+   },
+   "pill": {
+    "false_alarm": 0.331,
+    "miss": 0.244
+   },
+   "screw": {
+    "false_alarm": 0.212,
+    "miss": 0.797
+   },
+   "tile": {
+    "false_alarm": 0.039,
+    "miss": 0.033
+   },
+   "toothbrush": {
+    "false_alarm": 0.312,
+    "miss": 0.199
+   },
+   "transistor": {
+    "false_alarm": 0.236,
+    "miss": 0.169
+   },
+   "wood": {
+    "false_alarm": 0.225,
+    "miss": 0.033
+   },
+   "zipper": {
+    "false_alarm": 0.267,
+    "miss": 0.225
+   }
+  }
+ },
+ "resnet18": {
+  "rule": {
+   "stat": "median",
+   "alpha": 0.3
+  },
+  "dev": {
+   "false_alarm": 0.20711631327193544,
+   "miss": 0.20376865965575644
+  },
+  "test": {
+   "false_alarm": 0.18689601889338733,
+   "miss": 0.15417054543149425
+  },
+  "test_normals_only": {
+   "false_alarm": 0.17499275264743816,
+   "miss": 0.1882680703029324
+  },
+  "per_category_test": {
+   "hazelnut": {
+    "false_alarm": 0.081,
+    "miss": 0.132
+   },
+   "leather": {
+    "false_alarm": 0.043,
+    "miss": 0.006
+   },
+   "metal_nut": {
+    "false_alarm": 0.116,
+    "miss": 0.075
+   },
+   "pill": {
+    "false_alarm": 0.314,
+    "miss": 0.212
+   },
+   "screw": {
+    "false_alarm": 0.27,
+    "miss": 0.729
+   },
+   "tile": {
+    "false_alarm": 0.079,
+    "miss": 0.075
+   },
+   "toothbrush": {
+    "false_alarm": 0.271,
+    "miss": 0.14
+   },
+   "transistor": {
+    "false_alarm": 0.292,
+    "miss": 0.093
+   },
+   "wood": {
+    "false_alarm": 0.159,
+    "miss": 0.036
+   },
+   "zipper": {
+    "false_alarm": 0.244,
+    "miss": 0.041
+   }
+  }
+ }
+}

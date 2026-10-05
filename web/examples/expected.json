@@ -1,0 +1,161 @@
+{
+ "rule": {
+  "stat": "min",
+  "margin": 1.5
+ },
+ "teach": [
+  "teach_1.jpg",
+  "teach_2.jpg",
+  "teach_3.jpg",
+  "teach_4.jpg",
+  "teach_5.jpg"
+ ],
+ "test": [
+  {
+   "file": "test_1.jpg",
+   "truth": "정상"
+  },
+  {
+   "file": "test_2.jpg",
+   "truth": "결함"
+  },
+  {
+   "file": "test_3.jpg",
+   "truth": "결함"
+  },
+  {
+   "file": "test_4.jpg",
+   "truth": "정상"
+  },
+  {
+   "file": "test_5.jpg",
+   "truth": "결함"
+  },
+  {
+   "file": "test_6.jpg",
+   "truth": "결함"
+  }
+ ],
+ "models": {
+  "mobilenet_v3_small": {
+   "loo": [
+    5.050345420837402,
+    5.96980094909668,
+    4.9266276359558105,
+    6.793078899383545,
+    5.905818939208984
+   ],
+   "threshold": 7.389941453933716,
+   "results": [
+    {
+     "score": 4.511938095092773,
+     "peak": [
+      26,
+      13
+     ],
+     "differs": false
+    },
+    {
+     "score": 55.01676940917969,
+     "peak": [
+      8,
+      12
+     ],
+     "differs": true
+    },
+    {
+     "score": 48.00838088989258,
+     "peak": [
+      23,
+      26
+     ],
+     "differs": true
+    },
+    {
+     "score": 4.822551727294922,
+     "peak": [
+      8,
+      23
+     ],
+     "differs": false
+    },
+    {
+     "score": 38.0413703918457,
+     "peak": [
+      13,
+      23
+     ],
+     "differs": true
+    },
+    {
+     "score": 16.38266944885254,
+     "peak": [
+      17,
+      15
+     ],
+     "differs": true
+    }
+   ]
+  },
+  "resnet18": {
+   "loo": [
+    1.8872002363204956,
+    2.186910390853882,
+    1.9354621171951294,
+    4.424242973327637,
+    2.0962021350860596
+   ],
+   "threshold": 2.8308003544807434,
+   "results": [
+    {
+     "score": 1.5087631940841675,
+     "peak": [
+      25,
+      11
+     ],
+     "differs": false
+    },
+    {
+     "score": 13.074520111083984,
+     "peak": [
+      9,
+      12
+     ],
+     "differs": true
+    },
+    {
+     "score": 14.19430923461914,
+     "peak": [
+      23,
+      27
+     ],
+     "differs": true
+    },
+    {
+     "score": 1.5032610893249512,
+     "peak": [
+      14,
+      25
+     ],
+     "differs": false
+    },
+    {
+     "score": 10.832658767700195,
+     "peak": [
+      13,
+      23
+     ],
+     "differs": true
+    },
+    {
+     "score": 9.300373077392578,
+     "peak": [
+      17,
+      14
+     ],
+     "differs": true
+    }
+   ]
+  }
+ }
+}

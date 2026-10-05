@@ -1,0 +1,14 @@
+{
+ "imgsz": 320,
+ "epochs": 100,
+ "map50": 0.737,
+ "map50_95": 0.3886,
+ "per_class_ap50": {
+  "crazing": 0.52,
+  "inclusion": 0.8133,
+  "patches": 0.9255,
+  "pitted_surface": 0.773,
+  "rolled-in_scale": 0.5208,
+  "scratches": 0.8692
+ }
+}

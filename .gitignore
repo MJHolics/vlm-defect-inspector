@@ -61,3 +61,7 @@ data/gdxray_patches_clahe/
 data/gdxray_processed/
 data/gdxray_processed_clahe/
 data/gdxray_ood/
+
+# 검출기 학습 산출물·변환 데이터(스크립트로 다시 만든다)
+data/neu_det_yolo/
+models/detector/

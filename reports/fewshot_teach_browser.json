@@ -1,0 +1,53 @@
+{
+ "date": "2026-10-05",
+ "env": "Chrome(PC, 16 논리 코어), onnxruntime-web 1.22.0, wasm 1스레드, 입력 256, 가려진 탭에서 실행",
+ "backbone": [
+  {
+   "name": "mobilenet_v3_small",
+   "onnx_mb": 0.77,
+   "dim": 72,
+   "wasm_ms": 7.6,
+   "webgpu_ms": 15.1,
+   "maxabs_vs_torch": 5.2e-06
+  },
+  {
+   "name": "resnet18",
+   "onnx_mb": 11.13,
+   "dim": 384,
+   "wasm_ms": 103.6,
+   "webgpu_ms": 10.0,
+   "maxabs_vs_torch": 8.6e-07
+  }
+ ],
+ "nearest_distance_1024_patches": [
+  {
+   "dim": 72,
+   "shots": 5,
+   "js_loop_ms": 731,
+   "onnx_wasm_ms": 24.3,
+   "onnx_webgpu_ms": 21.0
+  },
+  {
+   "dim": 72,
+   "shots": 40,
+   "js_loop_ms": 5621,
+   "onnx_wasm_ms": 198.9,
+   "onnx_webgpu_ms": 6.5
+  },
+  {
+   "dim": 384,
+   "shots": 5,
+   "js_loop_ms": 3801,
+   "onnx_wasm_ms": 115.2,
+   "onnx_webgpu_ms": 5.7
+  },
+  {
+   "dim": 384,
+   "shots": 40,
+   "js_loop_ms": 31551,
+   "onnx_wasm_ms": 929.4,
+   "onnx_webgpu_ms": 22.0
+  }
+ ],
+ "note": "거리 계산 입력은 난수(시간만 잼). 휴대폰에서는 재지 않았다."
+}

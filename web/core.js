@@ -106,3 +106,45 @@ export function heatRGBA(map, out, threshold, w = GRID, h = GRID) {
   }
   return px;
 }
+
+// reports/fewshot_teach_rule.json 의 test 10종 평균. 성적서 한계 문구에 그대로 적는다.
+export const MEASURED = {
+  mobilenet_v3_small: { falseAlarm: 0.248, miss: 0.228 },
+  resnet18: { falseAlarm: 0.175, miss: 0.188 },
+};
+
+/** 칸 좌표 → 사진 안 위치(%)와 말. */
+export function whereOf(pk, w = GRID, h = GRID) {
+  const x = (pk.x + 0.5) / w, y = (pk.y + 0.5) / h;
+  const col = ['왼쪽', '가운데', '오른쪽'][Math.min(2, Math.floor(x * 3))];
+  const row = ['위', '가운데', '아래'][Math.min(2, Math.floor(y * 3))];
+  const word = col === '가운데' && row === '가운데' ? '한가운데' : row === '가운데' ? col : col === '가운데' ? row : `${col} ${row}`;
+  return { xPct: Math.round(x * 100), yPct: Math.round(y * 100), word };
+}
+
+/** 검사 결과 → 성적서에 적을 값. 새 판단을 하지 않고 이미 나온 숫자를 문장으로 옮긴다.
+ *  info = { id, issued, shots, aug, loo, rule, model, ep } */
+export function certificate(res, info) {
+  const f = (v) => Number(v).toPrecision(3);
+  const where = whereOf(res.peak);
+  const base = Math.min(...info.loo);
+  const reasons = [
+    `정상 사진 ${info.shots}장을 가르쳤습니다` + (info.aug ? `(한 장마다 조금 돌리고 민 사본 ${info.aug}장을 더했습니다).` : '.'),
+    `기준은 ${f(res.threshold)}입니다. 가르친 사진을 한 장씩 빼고 나머지와 견준 점수 중 가장 작은 값(${f(base)})의 ${info.rule.margin}배입니다.`,
+    res.differs
+      ? `가장 다른 곳의 점수는 ${f(res.score)}로 기준의 ${res.ratio.toFixed(2)}배입니다. 위치는 사진의 ${where.word}(왼쪽에서 ${where.xPct}%, 위에서 ${where.yPct}%)입니다.`
+      : `가장 다른 곳의 점수도 ${f(res.score)}로 기준의 ${res.ratio.toFixed(2)}배, 기준 안입니다.`,
+  ];
+  const m = MEASURED[info.model];
+  const limits = ['가르친 사진과 얼마나 다른지만 봅니다. 결함의 종류, 치수, 합격 여부는 판정하지 않습니다.'];
+  if (m) limits.push(`정상 5장으로 잡은 기준은 물건에 따라 빗나갑니다. 공개 데이터 10종 평균으로 정상을 다르다고 한 비율 ${Math.round(m.falseAlarm * 100)}%, 결함을 놓친 비율 ${Math.round(m.miss * 100)}%였습니다.`);
+  if (info.shots < 5) limits.push(`가르친 사진이 ${info.shots}장입니다. 5장보다 적으면 기준이 더 흔들립니다.`);
+  return {
+    id: info.id, issued: info.issued,
+    verdict: res.differs ? '가르친 것과 다름' : '가르친 것과 같음',
+    differs: res.differs, ratio: res.ratio, score: res.score, threshold: res.threshold,
+    where: res.differs ? where : null,
+    model: `${info.model} · ${info.ep}`,
+    reasons, limits,
+  };
+}

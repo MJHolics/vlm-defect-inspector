@@ -823,11 +823,13 @@ python scripts/eval_anomaly.py --category screw     # heavy/light/PaDiM 비교 �
 ```bash
 python scripts/build_teach_web.py            # 모델(ONNX)·예시 사진·대조 정답 → web/
 cd web && python -m http.server 8792         # http://127.0.0.1:8792  (?selftest=1 로 파이썬 대조)
-node --test web/tests                        # 순수 함수 8개
+node --test web/tests                        # 순수 함수 11개
 ```
 
 들어가면 예시 병 사진으로 가르치기 5장 → 검사 6장이 저절로 돈다. 「내 물건으로 해 보기」는 카메라, 「사진으로 해 보기」는 예시·내 사진으로 같은 일을 한다.
 「말로 하기」를 켜면 "이게 정상", "검사"로 조작한다(음성은 브라우저 음성 인식 서버로 나간다. 사진은 나가지 않는다).
+결과가 나오면 「이 결과로 검사 성적서」가 한 장짜리 문서를 그 자리에서 만든다. 표시된 사진, 판정, 근거(가르친 장수·기준값·기준 대비 배수·위치), 기준으로 삼은 정상 사진, 이번 방문의 검사 기록, 그리고 이 판정이 말하지 않는 것(결함 종류·치수·합격 여부, 공개 데이터에서 잰 오경보·놓침 비율)을 적는다.
+PDF는 서버 없이 브라우저 인쇄로 낸다. 성적서 문장은 `core.js`의 `certificate()`가 이미 나온 숫자로만 조립한다.
 
 ### 몇 장이면 되나 (`scripts/fewshot_teach_bench.py`, 시드 3개 평균)
 

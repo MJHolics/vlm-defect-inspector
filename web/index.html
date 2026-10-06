@@ -77,6 +77,33 @@
   details th:first-child, details td:first-child { text-align: left; }
   a { color: var(--accent); }
   video { display: none; }
+
+  /* 검사 성적서 — 흰 종이 한 장. 인쇄하면 이것만 나온다. */
+  .cert { position: fixed; inset: 0; z-index: 10; overflow: auto; background: rgba(5, 8, 11, .86); padding: 12px; }
+  .certbar { max-width: 760px; margin: 0 auto 10px; display: flex; gap: 8px; justify-content: flex-end; }
+  .sheet { max-width: 760px; margin: 0 auto; background: #fff; color: #111827; border-radius: 6px; padding: clamp(16px, 4vw, 34px); font-size: 13.5px; line-height: 1.6; }
+  .sheet h2 { margin: 0 0 10px; font-size: 22px; letter-spacing: -0.02em; }
+  .sheet h3 { margin: 16px 0 4px; font-size: 13.5px; }
+  .sheet dl { display: grid; grid-template-columns: auto 1fr auto 1fr; gap: 3px 12px; margin: 0; padding: 8px 0; border-top: 1px solid #d1d5db; border-bottom: 1px solid #d1d5db; font-size: 12.5px; }
+  .sheet dt { color: #6b7280; } .sheet dd { margin: 0; overflow-wrap: anywhere; }
+  .certbody { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 18px; margin-top: 14px; }
+  .certbody canvas { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .certv { font-size: 22px; font-weight: 800; color: #15803d; }
+  .sheet[data-kind="ng"] .certv { color: #b91c1c; }
+  .sheet ul { margin: 0; padding-left: 18px; }
+  .certshots { display: flex; flex-wrap: wrap; gap: 5px; }
+  .certshots canvas { width: 62px; height: 62px; border-radius: 3px; }
+  .sheet table { border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  .sheet td { border: 1px solid #d1d5db; padding: 2px 10px; }
+  .sheet .fine { color: #6b7280; font-size: 12px; }
+  @media (max-width: 560px) { .certbody { grid-template-columns: minmax(0, 1fr); } .sheet dl { grid-template-columns: auto 1fr; } }
+  @media print {
+    main, .certbar { display: none !important; }
+    html, body { background: #fff; } body { padding: 0; }
+    .cert { position: static; padding: 0; background: none; overflow: visible; }
+    .sheet { max-width: none; border-radius: 0; padding: 0; }
+    .certbody { grid-template-columns: 260px 1fr; }
+  }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -101,6 +128,7 @@
         <button class="primary" id="btnCamera">내 물건으로 해 보기(카메라)</button>
         <button id="btnPhotos">사진으로 해 보기</button>
         <button id="btnDemo" hidden>시연 재생으로 돌아가기</button>
+        <button id="btnCert" hidden>이 결과로 검사 성적서</button>
       </div>
 
       <div id="live" hidden>
@@ -116,7 +144,7 @@
           <button id="btnReset">처음부터</button>
         </div>
         <p class="note" id="heard"></p>
-        <p class="note">물건이 없으면 아래 예시 병 사진을 눌러 가르치고 검사해 볼 수 있습니다(앞의 5장이 멀쩡한 병). 「말로 하기」를 켜면 음성은 브라우저의 음성 인식 서버로 전송됩니다. 사진은 어디로도 보내지 않습니다.</p>
+        <p class="note">물건이 없으면 아래 예시 병 사진을 눌러 가르치고 검사해 볼 수 있습니다(앞의 5장이 멀쩡한 병). 결과가 나오면 「이 결과로 검사 성적서」로 한 장짜리 문서를 만들어 인쇄하거나 PDF로 저장할 수 있습니다. 「말로 하기」를 켜면 음성은 브라우저의 음성 인식 서버로 전송됩니다. 사진은 어디로도 보내지 않습니다.</p>
         <div class="examples" id="examples"></div>
       </div>
       <p class="note" id="note"></p>
@@ -155,6 +183,40 @@
     <p>휴대폰 카메라로 직접 찍은 사진으로는 아직 재지 않았습니다. 예시 사진: MVTec AD bottle (CC BY-NC-SA 4.0). 코드: <a href="https://github.com/MJHolics/vlm-defect-inspector">github.com/MJHolics/vlm-defect-inspector</a></p>
   </details>
 </main>
+
+<div class="cert" id="cert" hidden>
+  <div class="certbar">
+    <button class="primary" id="btnCertPrint">인쇄 · PDF로 저장</button>
+    <button id="btnCertClose">닫기</button>
+  </div>
+  <article class="sheet" id="certSheet">
+    <h2>검사 성적서</h2>
+    <dl>
+      <dt>성적서 번호</dt><dd id="certId"></dd><dt>발행</dt><dd id="certIssued"></dd>
+      <dt>검사 방식</dt><dd id="certSource"></dd><dt>모델</dt><dd id="certModel"></dd>
+    </dl>
+    <div class="certbody">
+      <canvas id="certImg" width="512" height="512"></canvas>
+      <div>
+        <div class="fine">판정</div>
+        <div class="certv" id="certVerdict"></div>
+        <div id="certRatio"></div>
+        <h3>판정 근거</h3>
+        <ul id="certReasons"></ul>
+      </div>
+    </div>
+    <h3>기준으로 삼은 정상 사진</h3>
+    <div class="certshots" id="certShots"></div>
+    <div id="certLogBox" hidden>
+      <h3>검사 기록</h3>
+      <p class="fine" id="certLogSum" style="margin:0 0 4px"></p>
+      <table><tbody id="certLog"></tbody></table>
+    </div>
+    <h3>이 성적서가 말하지 않는 것</h3>
+    <ul id="certLimits"></ul>
+    <p class="fine">이 화면 안에서 만든 문서입니다. 사진과 판정은 어디에도 저장되거나 전송되지 않았습니다.</p>
+  </article>
+</div>
 <video id="video" playsinline muted></video>
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort.all.min.js"></script>
 <script type="module" src="app.js"></script>

@@ -1,5 +1,5 @@
 // 찍어서 가르치는 검사기 — 화면·카메라·모델 호출. 판정 계산은 core.js(순수 함수, node 테스트 대상).
-import { SIZE, GRID, toCHW, smooth3, peak, thresholdFrom, verdict, concat, heatRGBA } from './core.js';
+import { SIZE, GRID, toCHW, smooth3, peak, thresholdFrom, verdict, concat, heatRGBA, certificate } from './core.js';
 
 const RULE = { stat: 'min', margin: 1.5 };   // reports/fewshot_teach_rule.json: dev 5종에서 고른 값
 const AUG = 3;                                // 가르친 사진 한 장을 돌리고 밀어 3장 더 만든다(±15°, ±5%)
@@ -146,9 +146,9 @@ let lastResult = null;
 let demoRun = 0;              // 시연 재생을 끊을 때 올린다
 let busy = false;
 
-function drawBase(canvas) {
-  ctx.imageSmoothingQuality = 'high';
-  ctx.drawImage(canvas, 0, 0, VIEW, VIEW);
+function drawBase(canvas, g = ctx) {
+  g.imageSmoothingQuality = 'high';
+  g.drawImage(canvas, 0, 0, VIEW, VIEW);
 }
 
 function drawGuide() {
@@ -159,21 +159,21 @@ function drawGuide() {
   ctx.restore();
 }
 
-function drawResult(res) {
-  drawBase(res.canvas);
+function drawResult(res, g = ctx) {
+  drawBase(res.canvas, g);
   const heat = new ImageData(heatRGBA(res.map, VIEW, res.threshold), VIEW, VIEW);
   const layer = document.createElement('canvas');
   layer.width = layer.height = VIEW;
   layer.getContext('2d').putImageData(heat, 0, 0);
-  ctx.drawImage(layer, 0, 0);
+  g.drawImage(layer, 0, 0);
   if (res.differs) {
     const cx = (res.peak.x + 0.5) * VIEW / GRID, cy = (res.peak.y + 0.5) * VIEW / GRID;
-    ctx.save();
-    ctx.lineWidth = 5; ctx.strokeStyle = '#fff';
-    ctx.beginPath(); ctx.arc(cx, cy, 34, 0, Math.PI * 2); ctx.stroke();
-    ctx.lineWidth = 3; ctx.strokeStyle = '#ff3b4e';
-    ctx.beginPath(); ctx.arc(cx, cy, 34, 0, Math.PI * 2); ctx.stroke();
-    ctx.restore();
+    g.save();
+    g.lineWidth = 5; g.strokeStyle = '#fff';
+    g.beginPath(); g.arc(cx, cy, 34, 0, Math.PI * 2); g.stroke();
+    g.lineWidth = 3; g.strokeStyle = '#ff3b4e';
+    g.beginPath(); g.arc(cx, cy, 34, 0, Math.PI * 2); g.stroke();
+    g.restore();
   }
 }
 
@@ -208,6 +208,7 @@ function renderPanel() {
   $('btnTeach').disabled = busy || n >= MAX_SHOTS || (!!lastResult && !still);   // 결과를 보는 중에는 「다음 물건」부터
   $('btnAlso').hidden = !(mode === 'live' && lastResult && lastResult.differs);
   $('btnAgain').hidden = !(mode === 'live' && (still || lastResult));
+  $('btnCert').hidden = !lastResult;
   const r = lastResult;
   const ratio = r ? r.ratio : 0;
   $('gaugeFill').style.width = `${Math.min(100, ratio / 3 * 100)}%`;
@@ -227,12 +228,60 @@ function explain(res) {
 
 async function showResult(canvas) {
   const res = await teacher.inspect(canvas);
+  res.shots = teacher.shots.map((s) => s.canvas);      // 성적서용: 이 판정에 쓴 정상 사진과 기준
+  res.loo = [...teacher.loo];
   lastResult = res;
+  if (mode === 'live') log.push({ at: new Date(), differs: res.differs, ratio: res.ratio });
   drawResult(res);
   const [t, w] = explain(res);
   setBanner(res.differs ? 'ng' : 'ok', t, w);
   renderPanel();
   return res;
+}
+
+// ───────────────────────── 검사 성적서 ─────────────────────────
+// 서버 없이 이 화면에서 만든다. PDF는 브라우저의 인쇄(「PDF로 저장」)로 낸다.
+const log = [];               // 직접 해 보기에서 한 검사(이번 방문 동안만)
+const stamp = (d) => new Intl.DateTimeFormat('sv-SE', { dateStyle: 'short', timeStyle: 'medium' }).format(d);
+
+function certId(d) {
+  const r = crypto.getRandomValues(new Uint8Array(3));
+  return `TI-${stamp(d).slice(0, 10).replaceAll('-', '')}-${[...r].map((v) => v.toString(16).padStart(2, '0')).join('').toUpperCase()}`;
+}
+
+function openCert(res = lastResult) {
+  if (!res) return null;
+  const now = new Date();
+  const c = certificate(res, { id: certId(now), issued: stamp(now), shots: res.shots.length, aug: teacher.aug,
+    loo: res.loo, rule: RULE, model: engine.name, ep: engine.ep });
+  drawResult(res, $('certImg').getContext('2d'));
+  $('certId').textContent = c.id;
+  $('certIssued').textContent = c.issued;
+  $('certModel').textContent = c.model;
+  $('certSource').textContent = mode === 'demo' ? '시연 재생(예시 병 사진)' : '직접 해 보기';
+  $('certVerdict').textContent = c.verdict;
+  $('certSheet').dataset.kind = c.differs ? 'ng' : 'ok';
+  $('certRatio').textContent = `기준의 ${c.ratio.toFixed(2)}배` + (c.where ? ` · ${c.where.word}` : '');
+  const fill = (id, items) => { $(id).replaceChildren(...items.map((t) => Object.assign(document.createElement('li'), { textContent: t }))); };
+  fill('certReasons', c.reasons);
+  fill('certLimits', c.limits);
+  $('certShots').replaceChildren(...res.shots.map((s) => {
+    const t = document.createElement('canvas');
+    t.width = t.height = 96;
+    t.getContext('2d').drawImage(s, 0, 0, 96, 96);
+    return t;
+  }));
+  const rows = mode === 'live' ? log.slice(-10) : [];
+  $('certLogBox').hidden = rows.length < 2;
+  $('certLogSum').textContent = `이번 방문에서 검사 ${log.length}건, 그중 다름 ${log.filter((r) => r.differs).length}건`;
+  $('certLog').replaceChildren(...rows.map((r) => {
+    const tr = document.createElement('tr');
+    for (const t of [stamp(r.at).slice(11), r.differs ? '다름' : '같음', `${r.ratio.toFixed(2)}배`]) tr.append(Object.assign(document.createElement('td'), { textContent: t }));
+    return tr;
+  }));
+  $('cert').hidden = false;
+  $('cert').scrollTop = 0;
+  return c;
 }
 
 // ───────────────────────── 시연 재생(들어오면 저절로) ─────────────────────────
@@ -292,6 +341,7 @@ async function startLive(withCamera) {
   $('caption').textContent = '';
   $('tag').textContent = '직접 해 보기';
   $('live').hidden = false; $('btnDemo').hidden = false; $('btnCamera').hidden = true; $('btnPhotos').hidden = true;
+  log.length = 0;
   setBanner('teach', '멀쩡한 것을 먼저 보여 주세요', `점선 안에 물건을 놓고 「이게 정상」을 ${GOAL_SHOTS}번 누릅니다. 매번 같은 자리, 같은 방향으로.`);
   ctx.fillStyle = '#05080b'; ctx.fillRect(0, 0, VIEW, VIEW); drawGuide();
   renderPanel();
@@ -374,6 +424,7 @@ function toggleVoice() {
     const said = e.results[e.results.length - 1][0].transcript.trim();
     $('heard').textContent = `들은 말: "${said}"`;
     if (/처음|다시/.test(said)) $('btnReset').click();
+    else if (/성적서/.test(said)) openCert();
     else if (/검사/.test(said)) doInspect();
     else if (/정상/.test(said)) doTeach(/이것도/.test(said));
   };
@@ -381,7 +432,7 @@ function toggleVoice() {
   recog.onend = () => { if (recog) recog.start(); };
   recog.start();
   $('btnVoice').textContent = '말로 하기 끄기';
-  $('heard').textContent = '듣는 중 — "이게 정상", "검사", "처음부터"';
+  $('heard').textContent = '듣는 중 — "이게 정상", "검사", "성적서", "처음부터"';
 }
 
 // ───────────────────────── 대조(?selftest=1) ─────────────────────────
@@ -425,7 +476,7 @@ async function main() {
   setBanner('teach', '준비 중', '모델을 불러옵니다.');
   try { await engine.init(); } catch (e) { setBanner('ng', '열 수 없습니다', e.message); return; }
   teacher = new Teacher(engine);
-  window.__teach = { engine, teacher, selftest, runDemo, startLive, useStill, doTeach, doInspect, loadCanvas, get lastResult() { return lastResult; } };
+  window.__teach = { engine, teacher, selftest, runDemo, startLive, useStill, doTeach, doInspect, loadCanvas, openCert, log, get lastResult() { return lastResult; } };
   renderPanel();
   $('btnCamera').onclick = () => startLive(true);
   $('btnPhotos').onclick = () => startLive(false);
@@ -436,6 +487,9 @@ async function main() {
   $('btnAgain').onclick = again;
   $('btnReset').onclick = () => { teacher.reset(); again(); };
   $('btnVoice').onclick = toggleVoice;
+  $('btnCert').onclick = () => openCert();
+  $('btnCertClose').onclick = () => { $('cert').hidden = true; };
+  $('btnCertPrint').onclick = () => window.print();
   $('file').onchange = async (e) => {
     const f = e.target.files[0];
     if (!f) return;

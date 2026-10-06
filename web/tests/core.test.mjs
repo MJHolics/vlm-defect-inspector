@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { smooth3, thresholdFrom, verdict, peak, concat, upsample, toCHW, heatRGBA } from '../core.js';
+import { smooth3, thresholdFrom, verdict, peak, concat, upsample, toCHW, heatRGBA, whereOf, certificate } from '../core.js';
 
 const fx = JSON.parse(readFileSync(new URL('./fixture.json', import.meta.url)));
 const close = (a, b, tol = 1e-4) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
@@ -54,4 +54,34 @@ test('덧칠: 문턱의 0.7배 아래는 투명, 3배부터는 가장 진하다(
   assert.equal(heatRGBA(m, 32, 1.0)[3], 0);
   assert.equal(heatRGBA(m.fill(3), 32, 1.0)[3], 150);
   assert.equal(heatRGBA(m.fill(9), 32, 1.0)[3], 150);
+});
+
+test('위치를 말로: 구역 아홉 개', () => {
+  assert.deepEqual(whereOf({ x: 0, y: 0 }), { xPct: 2, yPct: 2, word: '왼쪽 위' });
+  assert.equal(whereOf({ x: 16, y: 16 }).word, '한가운데');
+  assert.equal(whereOf({ x: 31, y: 16 }).word, '오른쪽');
+  assert.equal(whereOf({ x: 16, y: 31 }).word, '아래');
+  assert.equal(whereOf({ x: 31, y: 31 }).word, '오른쪽 아래');
+});
+
+test('성적서: 다르면 위치를 적고, 같으면 위치를 적지 않는다', () => {
+  const info = { id: 'TI-1', issued: 't', shots: 5, aug: 3, loo: [4, 2, 3], rule: { stat: 'min', margin: 1.5 }, model: 'resnet18', ep: 'webgpu' };
+  const ng = certificate({ peak: { x: 28, y: 3 }, score: 7.5, threshold: 3, ...verdict(7.5, 3) }, info);
+  assert.equal(ng.verdict, '가르친 것과 다름');
+  assert.equal(ng.where.word, '오른쪽 위');
+  assert.match(ng.reasons[1], /기준은 3\.00입니다.*가장 작은 값\(2\.00\)의 1\.5배/);
+  assert.match(ng.reasons[2], /기준의 2\.50배.*오른쪽 위\(왼쪽에서 89%, 위에서 11%\)/);
+  assert.match(ng.limits[1], /18%.*19%/);
+  const ok = certificate({ peak: { x: 28, y: 3 }, score: 2.4, threshold: 3, ...verdict(2.4, 3) }, info);
+  assert.equal(ok.verdict, '가르친 것과 같음');
+  assert.equal(ok.where, null);
+  assert.match(ok.reasons[2], /기준 안/);
+});
+
+test('성적서: 5장보다 적게 가르쳤으면 한계에 적는다', () => {
+  const info = { id: 'TI-1', issued: 't', shots: 3, aug: 0, loo: [2, 3, 4], rule: { stat: 'min', margin: 1.5 }, model: 'mobilenet_v3_small', ep: 'wasm' };
+  const c = certificate({ peak: { x: 1, y: 1 }, score: 1, threshold: 3, ...verdict(1, 3) }, info);
+  assert.equal(c.limits.length, 3);
+  assert.match(c.limits[1], /25%.*23%/);
+  assert.doesNotMatch(c.reasons[0], /사본/);
 });

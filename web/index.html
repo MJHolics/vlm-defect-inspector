@@ -78,6 +78,22 @@
   a { color: var(--accent); }
   video { display: none; }
 
+  /* 쓰는 장면 — 세 컷. 말풍선이 차례로 켜진다. */
+  .scene { margin: 0 0 14px; }
+  .scene h2 { font-size: 13px; color: var(--dim); font-weight: 600; margin: 0 0 8px; letter-spacing: .02em; }
+  .scene ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .scene li { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .scene svg { display: block; width: 100%; height: auto; background: #0e141b; }
+  .scene span { display: block; padding: 7px 9px 9px; font-size: 12.5px; line-height: 1.45; color: var(--dim); }
+  .scene span b { color: var(--text); }
+  .scene text { font-family: inherit; font-weight: 700; }
+  .scene .say { animation: say 9s infinite both; transform-box: fill-box; transform-origin: 30% 100%; }
+  .scene li:nth-child(2) .say { animation-delay: 3s; }
+  .scene li:nth-child(3) .say { animation-delay: 6s; }
+  @keyframes say { 0% { opacity: .25; transform: scale(.92); } 4%, 33% { opacity: 1; transform: scale(1); } 38%, 100% { opacity: .25; transform: scale(.92); } }
+  @media (prefers-reduced-motion: reduce) { .scene .say { animation: none; } }
+  @media (max-width: 560px) { .scene span { font-size: 11.5px; padding: 6px 7px 8px; } .scene span b { display: block; } }
+
   /* 검사 성적서 — 흰 종이 한 장. 인쇄하면 이것만 나온다. */
   .cert { position: fixed; inset: 0; z-index: 10; overflow: auto; background: rgba(5, 8, 11, .86); padding: 12px; }
   .certbar { max-width: 760px; margin: 0 auto 10px; display: flex; gap: 8px; justify-content: flex-end; }
@@ -114,6 +130,74 @@
     <p>부품 종류가 자주 바뀌는 작업대를 떠올리고 만들었습니다. <b>멀쩡한 것 5장</b>만 보여 주면, 다음 물건에서 <b>다른 곳</b>을 짚어 줍니다.
       결함 사진도, 학습도, 서버도 필요 없습니다. 계산은 전부 이 브라우저 안에서 돕니다.</p>
   </header>
+
+  <section class="scene" aria-label="쓰는 장면">
+    <h2>이렇게 쓰는 물건으로 구상했습니다 — 장갑을 낀 채, 화면에 손대지 않고</h2>
+    <ol>
+      <li>
+        <svg viewBox="0 0 200 140" role="img" aria-label="장갑 낀 손이 멀쩡한 너트를 거치된 휴대폰 앞에 들어 보이며 이게 정상이라고 말한다">
+          <defs>
+            <symbol id="sc-glove" viewBox="0 0 60 74">
+              <rect x="15" y="46" width="28" height="28" rx="3" fill="#a8571f"/>
+              <rect x="9" y="12" width="40" height="42" rx="13" fill="#f08a3c"/>
+              <rect x="43" y="18" width="13" height="26" rx="6.5" fill="#f08a3c" transform="rotate(22 49 31)"/>
+              <path d="M19 22v12M29 20v14M39 22v12" stroke="#a8571f" stroke-width="2" stroke-linecap="round"/>
+            </symbol>
+            <symbol id="sc-nut" viewBox="0 0 40 40">
+              <polygon points="20,2 35.6,11 35.6,29 20,38 4.4,29 4.4,11" fill="#9fb0c3" stroke="#5d6f84" stroke-width="1.5"/>
+              <circle cx="20" cy="20" r="8" fill="#0e141b" stroke="#5d6f84" stroke-width="1.5"/>
+            </symbol>
+            <symbol id="sc-nut-ng" viewBox="0 0 40 40">
+              <polygon points="20,2 35.6,11 35.6,29 20,38 4.4,29 4.4,11" fill="#9fb0c3" stroke="#5d6f84" stroke-width="1.5"/>
+              <circle cx="20" cy="20" r="8" fill="#0e141b" stroke="#5d6f84" stroke-width="1.5"/>
+              <path d="M35.6 13l-7 3 4 3-5 3" fill="none" stroke="#0e141b" stroke-width="2.2" stroke-linejoin="round"/>
+            </symbol>
+            <symbol id="sc-phone" viewBox="0 0 56 96">
+              <path d="M18 78h20l6 18H12z" fill="#243140"/>
+              <rect x="2" y="2" width="52" height="80" rx="7" fill="#1b2530" stroke="#3a4b5e" stroke-width="2"/>
+              <rect x="7" y="8" width="42" height="62" rx="3" fill="#05080b"/>
+            </symbol>
+          </defs>
+          <rect x="0" y="120" width="200" height="20" fill="#243140"/>
+          <use href="#sc-phone" x="132" y="26" width="56" height="96"/>
+          <use href="#sc-nut" x="147" y="40" width="26" height="26"/>
+          <g fill="#5bc0ff"><rect x="143" y="76" width="6" height="6" rx="1"/><rect x="151" y="76" width="6" height="6" rx="1"/><rect x="159" y="76" width="6" height="6" rx="1"/></g>
+          <g fill="none" stroke="#3a4b5e"><rect x="167.5" y="76.5" width="5" height="5" rx="1"/><rect x="175.5" y="76.5" width="5" height="5" rx="1"/></g>
+          <use href="#sc-glove" x="42" y="66" width="60" height="74"/>
+          <use href="#sc-nut" x="48" y="42" width="44" height="44"/>
+          <g class="say"><path d="M10 6h96a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8H52l-10 10 1-10H10a8 8 0 0 1-8-8V14a8 8 0 0 1 8-8z" fill="#e8eef5"/><text x="58" y="28" text-anchor="middle" font-size="17" fill="#0b0f14">“이게 정상”</text></g>
+        </svg>
+        <span><b>① 가르치기</b> 멀쩡한 부품을 다섯 번</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 200 140" role="img" aria-label="장갑 낀 손이 다음 너트를 들고 검사라고 말한다">
+          <rect x="0" y="120" width="200" height="20" fill="#243140"/>
+          <use href="#sc-phone" x="132" y="26" width="56" height="96"/>
+          <use href="#sc-nut-ng" x="147" y="40" width="26" height="26"/>
+          <path d="M141 72h38" stroke="#5bc0ff" stroke-width="2" stroke-linecap="round"/>
+          <use href="#sc-glove" x="42" y="66" width="60" height="74"/>
+          <use href="#sc-nut-ng" x="48" y="42" width="44" height="44"/>
+          <g class="say"><path d="M10 6h66a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8H52l-10 10 1-10H10a8 8 0 0 1-8-8V14a8 8 0 0 1 8-8z" fill="#e8eef5"/><text x="43" y="28" text-anchor="middle" font-size="17" fill="#0b0f14">“검사”</text></g>
+        </svg>
+        <span><b>② 검사</b> 다음 부품을 들고 한 마디</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 200 140" role="img" aria-label="휴대폰 화면이 너트의 다른 곳을 빨갛게 짚고, 옆에 한 장짜리 성적서가 나온다">
+          <rect x="0" y="120" width="200" height="20" fill="#243140"/>
+          <use href="#sc-phone" x="22" y="26" width="56" height="96"/>
+          <use href="#sc-nut-ng" x="33" y="38" width="34" height="34"/>
+          <circle cx="62" cy="52" r="9" fill="none" stroke="#ff3b4e" stroke-width="2.5"/>
+          <rect x="31" y="78" width="38" height="12" rx="3" fill="#ff3b4e"/><text x="50" y="87.5" text-anchor="middle" font-size="9" fill="#fff">다른 곳</text>
+          <path d="M88 76h20m-7-7 7 7-7 7" fill="none" stroke="#8b9bb0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="120" y="50" width="58" height="72" rx="2" fill="#fff"/>
+          <rect x="126" y="58" width="22" height="22" fill="#cfd8e3"/><circle cx="142" cy="66" r="5" fill="none" stroke="#ff3b4e" stroke-width="1.8"/>
+          <path d="M153 60h19M153 67h19M153 74h12M126 88h46M126 95h46M126 102h46M126 109h30" stroke="#9aa6b5" stroke-width="2" stroke-linecap="round"/>
+          <g class="say"><path d="M82 6h80a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8h-10l1 10-11-10H82a8 8 0 0 1-8-8V14a8 8 0 0 1 8-8z" fill="#e8eef5"/><text x="122" y="28" text-anchor="middle" font-size="17" fill="#0b0f14">“성적서”</text></g>
+        </svg>
+        <span><b>③ 결과</b> 다른 곳 표시, 성적서 한 장</span>
+      </li>
+    </ol>
+  </section>
 
   <div class="grid">
     <section>

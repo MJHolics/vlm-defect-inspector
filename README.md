@@ -8,7 +8,13 @@
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![🤗 Live Demo](https://img.shields.io/badge/🤗_Live_Demo-HF_Spaces-yellow)](https://huggingface.co/spaces/appleholics/metal-defect-inspector)
 
+<a href="https://mjholics.github.io/vlm-defect-inspector/"><img src="web/docs/demo.gif" width="300" align="right" alt="찍어서 가르치는 검사기 — 정상 5장을 가르치고 다른 곳을 짚은 뒤 성적서를 만드는 화면"></a>
+
+▶ **[찍어서 가르치는 검사기 (브라우저에서 바로)](https://mjholics.github.io/vlm-defect-inspector/)** — 멀쩡한 것 5장을 보여 주면 다음 물건에서 다른 곳을 짚고 성적서를 만듭니다. 설치·서버 없이 휴대폰에서도 돕니다. 오른쪽은 그 화면의 시연 재생을 녹화한 것입니다([mp4](web/docs/demo.mp4)).
+
 ▶ **[라이브 데모 (Hugging Face Spaces)](https://huggingface.co/spaces/appleholics/metal-defect-inspector)** — 결함 이미지를 올리면 CPU에서 수 ms 만에 유형·심각도·신뢰도를 판정합니다 (엣지 CNN).
+
+<br clear="right">
 
 ---
 
@@ -814,7 +820,9 @@ python scripts/eval_anomaly.py --category screw     # heavy/light/PaDiM 비교 �
 
 ## 찍어서 가르치는 검사기 — 정상 5장으로 브라우저에서 (`web/`)
 
-![결과 화면](web/docs/result.jpg)
+<img src="web/docs/demo.gif" width="300" alt="시연 재생 녹화 — 가르치기 5장, 검사, 성적서"> <img src="web/docs/result.jpg" width="300" alt="결과 화면">
+
+바로 해 보기: https://mjholics.github.io/vlm-defect-inspector/ · 왼쪽은 시연 재생 22초 녹화(`scripts/record_teach_demo.mjs`, 헤드리스 Chrome 390px)
 
 부품 종류가 자주 바뀌는 작업대를 떠올리고 만든 화면이다. 멀쩡한 것 5장을 보여 주면 다음 물건에서 다른 곳을 짚는다.
 위 무지도 트랙은 정상 320장·wide_resnet50_2 기준이라, 조건을 "몇 장·작은 모델·브라우저"로 옮겨 다시 쟀다.

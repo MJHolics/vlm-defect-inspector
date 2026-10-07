@@ -32,27 +32,38 @@ class Engine {
     throw new Error('모델을 불러오지 못했습니다');
   }
 
+  /** 한 세션에 run을 겹쳐 부르지 않게 줄을 세운다(재생과 직접 해 보기가 엇갈리는 순간). */
+  serial(fn) {
+    const next = (this.queue ?? Promise.resolve()).then(fn, fn);
+    this.queue = next.catch(() => {});
+    return next;
+  }
+
   /** 256×256 캔버스 → 패치 특징 (1024 × dim). */
-  async features(canvas) {
+  features(canvas) {
     const rgba = canvas.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, SIZE, SIZE).data;
-    const t0 = performance.now();
-    const out = (await this.backbone.run({ image: new ort.Tensor('float32', toCHW(rgba), [1, 3, SIZE, SIZE]) })).patches;
-    const data = out.getData ? await out.getData() : out.data;
-    this.featMs = performance.now() - t0;
-    return Float32Array.from(data);
+    return this.serial(async () => {
+      const t0 = performance.now();
+      const out = (await this.backbone.run({ image: new ort.Tensor('float32', toCHW(rgba), [1, 3, SIZE, SIZE]) })).patches;
+      const data = out.getData ? await out.getData() : out.data;
+      this.featMs = performance.now() - t0;
+      return Float32Array.from(data);
+    });
   }
 
   /** 패치별로 뱅크에서 가장 가까운 것까지의 제곱거리 (1024). */
-  async distances(q, bank) {
+  distances(q, bank) {
     const d = this.dim ?? q.length / (GRID * GRID);
-    const t0 = performance.now();
-    const out = (await this.knn.run({
-      q: new ort.Tensor('float32', q, [q.length / d, d]),
-      bank: new ort.Tensor('float32', bank, [bank.length / d, d]),
-    })).d;
-    const data = out.getData ? await out.getData() : out.data;
-    this.knnMs = performance.now() - t0;
-    return Float32Array.from(data);
+    return this.serial(async () => {
+      const t0 = performance.now();
+      const out = (await this.knn.run({
+        q: new ort.Tensor('float32', q, [q.length / d, d]),
+        bank: new ort.Tensor('float32', bank, [bank.length / d, d]),
+      })).d;
+      const data = out.getData ? await out.getData() : out.data;
+      this.knnMs = performance.now() - t0;
+      return Float32Array.from(data);
+    });
   }
 }
 
@@ -102,36 +113,43 @@ function seeded(seed) {           // mulberry32 — 같은 사진이면 같은 �
 // ───────────────────────── 가르친 것(뱅크)과 판정 ─────────────────────────
 class Teacher {
   constructor(engine, aug = AUG) { this.engine = engine; this.aug = aug; this.reset(); }
-  reset() { this.shots = []; this.loo = []; this.threshold = null; }
+  reset() { this.shots = []; this.loo = []; this.threshold = null; this.epoch = (this.epoch ?? 0) + 1; }
   get ready() { return this.shots.length >= MIN_SHOTS; }
 
   async teach(canvas) {
     if (this.shots.length >= MAX_SHOTS) throw new Error(`가르칠 수 있는 사진은 ${MAX_SHOTS}장까지입니다`);
+    const epoch = this.epoch;
     const rnd = seeded(1000 + this.shots.length);
     const feats = [await this.engine.features(canvas)];
     for (let i = 0; i < this.aug; i++) feats.push(await this.engine.features(jittered(canvas, rnd)));
+    if (epoch !== this.epoch) return false;   // 계산하는 사이 처음부터 다시 시작됐다 — 이 사진은 버린다
     this.shots.push({ canvas, own: feats[0], all: concat(feats) });
     await this.calibrate();
+    return true;
   }
 
   /** 한 장씩 빼고 나머지에 대 본 점수 → 문턱. */
   async calibrate() {
     this.loo = []; this.threshold = null;
     if (!this.ready) return;
-    const all = this.shots.map((s) => s.all);
-    for (let i = 0; i < this.shots.length; i++) {
-      const d = await this.engine.distances(this.shots[i].own, concat(all, i));
-      this.loo.push(peak(smooth3(d)).value);
+    const epoch = this.epoch, shots = [...this.shots], loo = [];
+    const all = shots.map((s) => s.all);
+    for (let i = 0; i < shots.length; i++) {
+      const d = await this.engine.distances(shots[i].own, concat(all, i));
+      loo.push(peak(smooth3(d)).value);
     }
-    this.threshold = thresholdFrom(this.loo, RULE);
+    if (epoch !== this.epoch || shots.length !== this.shots.length) return;
+    this.loo = loo;
+    this.threshold = thresholdFrom(loo, RULE);
   }
 
   async inspect(canvas) {
     if (!this.ready) throw new Error(`정상 사진을 ${MIN_SHOTS}장 이상 가르쳐야 합니다`);
+    const bank = concat(this.shots.map((s) => s.all)), threshold = this.threshold;   // 기다리는 사이 비워져도 이 판정은 지금 것으로
     const q = await this.engine.features(canvas);
-    const map = smooth3(await this.engine.distances(q, concat(this.shots.map((s) => s.all))));
+    const map = smooth3(await this.engine.distances(q, bank));
     const pk = peak(map);
-    return { canvas, map, peak: pk, score: pk.value, threshold: this.threshold, ...verdict(pk.value, this.threshold) };
+    return { canvas, map, peak: pk, score: pk.value, threshold, ...verdict(pk.value, threshold) };
   }
 }
 
@@ -227,7 +245,9 @@ function explain(res) {
 }
 
 async function showResult(canvas) {
+  const epoch = teacher.epoch;
   const res = await teacher.inspect(canvas);
+  if (epoch !== teacher.epoch) return null;            // 계산하는 사이 화면이 바뀌었다
   res.shots = teacher.shots.map((s) => s.canvas);      // 성적서용: 이 판정에 쓴 정상 사진과 기준
   res.loo = [...teacher.loo];
   lastResult = res;
